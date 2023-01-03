@@ -1,0 +1,35 @@
+#example-menu{
+    background-color: lightgray;
+}
+
+#menu{
+    background-color: lightgray;
+    font-size: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: royalblue;
+}
+
+#podmenu{
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+h1{
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: lightgray;
+    padding: 50px;
+    text-indent: 40%;
+    background-image: url(https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_960_720.jpg);
+    background-position: center;
+}
+
+body{
+    background-image: url(https://images.pexels.com/photos/2582935/pexels-photo-2582935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#orbit{
+    background-color: lightgray;
+}
