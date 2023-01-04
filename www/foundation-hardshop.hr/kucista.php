@@ -10,14 +10,9 @@
       </div>
       <?php 
           
-          echo '<p style="color: red;">ASUS GeForce TUF-RTX4080, 16 GB GDDR6X</p>';
+          echo '<p style="color: red;">NZXT H1 V2 matt crno, 750W 80+ Gold, 140 mm vodeno hlađenje, mini ITX</p>';
 
-          echo '<p style="color: red;">ASUS GeForce DUAL-RTX3070, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">ASUS AMD Radeon DUAL-RX6600XT, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">GIGABYTE AMD Radeon RX 6650 XT EAGLE, 8GB GDDR6</p>';
-
+          echo '<p style="color: red;">FRACTAL DESIGN Define 7 Dark TG, tempered glass, 3x 140 mm fan, USB-C, bez napajanja</p>';
 
         ?>
     </div>

@@ -10,14 +10,9 @@
       </div>
       <?php 
           
-          echo '<p style="color: red;">ASUS GeForce TUF-RTX4080, 16 GB GDDR6X</p>';
+          echo '<p style="color: red;">SSD 2 TB, SAMSUNG 990 PRO, M.2 2280, PCIe 4.0 x4 NVMe 2.0, 3-bit MLC V-NAND, MZ-V9P2T0BW</p>';
 
-          echo '<p style="color: red;">ASUS GeForce DUAL-RTX3070, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">ASUS AMD Radeon DUAL-RX6600XT, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">GIGABYTE AMD Radeon RX 6650 XT EAGLE, 8GB GDDR6</p>';
-
+          echo '<p style="color: red;">SSD 2 TB, CORSAIR MP600, M.2 2280, PCIe 4.0 x4 NVMe, 3D TLC NAND, aluminium heatsink, CSSD-F2000GBMP600</p>';
 
         ?>
     </div>

@@ -10,14 +10,9 @@
       </div>
       <?php 
           
-          echo '<p style="color: red;">ASUS GeForce TUF-RTX4080, 16 GB GDDR6X</p>';
+          echo '<p style="color: red;">SILVERSTONE SST-ST1200-PTS, 1200 W, modularno, 120 mm, 80+ Platinum</p>';
 
-          echo '<p style="color: red;">ASUS GeForce DUAL-RTX3070, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">ASUS AMD Radeon DUAL-RX6600XT, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">GIGABYTE AMD Radeon RX 6650 XT EAGLE, 8GB GDDR6</p>';
-
+          echo '<p style="color: red;">FRACTAL DESIGN Ion+ 2 Platinum 860W, modularno, 80+ Platinum</p>';
 
         ?>
     </div>

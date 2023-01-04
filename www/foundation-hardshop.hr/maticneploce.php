@@ -10,14 +10,9 @@
       </div>
       <?php 
           
-          echo '<p style="color: red;">ASUS GeForce TUF-RTX4080, 16 GB GDDR6X</p>';
+          echo '<p style="color: red;">ASROCK X670E PG Lightning, socket AM5, DDR5, HDMI, DP, ATX</p>';
 
-          echo '<p style="color: red;">ASUS GeForce DUAL-RTX3070, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">ASUS AMD Radeon DUAL-RX6600XT, 8 GB GDDR6</p>';
-
-          echo '<p style="color: red;">GIGABYTE AMD Radeon RX 6650 XT EAGLE, 8GB GDDR6</p>';
-
+          echo '<p style="color: red;">ASUS ROG STRIX Z690-F Gaming WIFI, socket 1700, DDR5, HDMI, DP, Wi-Fi 6E, BT 5.2, ATX</p>';
 
         ?>
     </div>

@@ -10,14 +10,14 @@
     <a href='index.php' id="menu">HardShop</a>
     </li>
       <li><a href="grafickekartice.php" id="podmenu">Grafičke kartice</a></li>
-      <li><a href="#0">Procesori</a></li>
-      <li><a href="#0">Matične ploče</a></li>
-      <li><a href="#0">Radna memorija</a></li>
-      <li><a href="#0">Solid state diskovi (SSD)</a></li>
-      <li><a href="#0">Tvrdi diskovi (HDD)</a></li>
-      <li><a href="#0">Napajanja</a></li>
-      <li><a href="#0">Hladnjaci</a></li>
-      <li><a href="#0">Kućišta</a></li>
+      <li><a href="procesori.php" id="podmenu">Procesori</a></li>
+      <li><a href="maticneploce.php" id="podmenu">Matične ploče</a></li>
+      <li><a href="ram.php" id="podmenu">Radna memorija</a></li>
+      <li><a href="ssd.php" id="podmenu">Solid state diskovi (SSD)</a></li>
+      <li><a href="hdd.php" id="podmenu">Tvrdi diskovi (HDD)</a></li>
+      <li><a href="psu.php" id="podmenu">Napajanja</a></li>
+      <li><a href="hladnjaci.php" id="podmenu">Hladnjaci</a></li>
+      <li><a href="kucista.php" id="podmenu">Kućišta</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
