@@ -9,7 +9,7 @@
       <li>
     <a href='index.php' id="menu">HardShop</a>
     </li>
-      <li><a href="grafickekartice.php" id="podmenu">Grafičke kartice</a></li>
+      <li><a href="grafickekartice.php?grafickakartica=GTX 1080" id="podmenu">Grafičke kartice</a></li>
       <li><a href="procesori.php" id="podmenu">Procesori</a></li>
       <li><a href="maticneploce.php" id="podmenu">Matične ploče</a></li>
       <li><a href="ram.php" id="podmenu">Radna memorija</a></li>
