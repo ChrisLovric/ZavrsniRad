@@ -24,12 +24,5 @@
     <ul class="menu" id="example-menu">
       <li><input type="pretraži" placeholder="Pretraži"></li>
       <li><button type="button" class="button">Pretraži</button></li>
-    </ul>
-    <div class="selector user-registration">
-        <a href="registracija.php" class="header-small-menu user-register" title="Registrirajte se"><span>Registrirajte se</span></a>
-      </div>
-      <div class="selector user-auth">
-        <a href="prijava.php" class="header-small-menu user-auth user-login" title="Prijava"><span>Prijava</span></a>
-      </div>
-      
+    </ul>    
     </div>
