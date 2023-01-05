@@ -1,0 +1,39 @@
+h1{
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: lightgray;
+    padding: 10px;
+    text-indent: 45%;
+}
+
+h2{
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: lightgray;
+    padding: 10px;
+    text-indent: 85%;
+}
+
+body{
+    background-image: url('https://cdn.pixabay.com/photo/2014/05/27/23/32/matrix-356024_960_720.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#prijava{
+    font-size: 25px;
+    color: white;
+    padding: 10px;
+    text-indent: 85%;
+    
+}
+
+#podnozje{
+    font-size: 15px;
+    color: ivory;
+    padding: 50px;
+}
+
+#izbornik{
+    background-color: darkgray;
+}
