@@ -7,7 +7,10 @@
     <div class="mask d-flex align-items-center h-100" style="background-color: rgba(255,255,255,.6);">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5" div style="background-color: <?php echo $_GET['boja']; ?>">
+          <h1>
+           <a href='index.php'>HardShop</a>
+            </h1>
             <div class="card gradient-custom" style="border-radius: 1rem;">
               <div class="card-body p-5 text-white">
 

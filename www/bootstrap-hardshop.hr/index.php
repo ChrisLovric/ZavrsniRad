@@ -6,7 +6,6 @@
 <body>
 <link rel="stylesheet" href="css/app.css" />
     <h1>HardShop</h1>
-    
     <div class="align-items-end" id="prijava">
     <div class="text-center py-5">
 <div>
@@ -19,7 +18,7 @@
 </div>  
 </div>
 
-<div id="izbornik">
+<div>
 <?php require_once 'izbornik.php'; ?>
 </div>
 

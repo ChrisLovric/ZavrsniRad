@@ -8,10 +8,13 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <h1>
+           <a href='index.php'>HardShop</a>
+            </h1>
             <div class="card gradient-custom" style="border-radius: 1rem;">
               <div class="card-body p-5 text-white">
 
-                <div class="my-md-5">
+                <div class="my-md-1">
 
                   <div class="text-center pt-1">
                     <i class="fas fa-user-astronaut fa-3x"></i>
