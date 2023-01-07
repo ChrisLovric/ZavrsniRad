@@ -15,21 +15,21 @@
                         <div class="navbar-end">
                             <div class="tabs is-right">
                                 <ul>
-                                    <li class="is-active"><a>Home</a></li>
-                                    <li><a href="">Examples</a></li>
-                                    <li><a href="">Features</a></li>
-                                    <li><a href="">Team</a></li>
-                                    <li><a href="">Help</a></li>
-                                    <li><a href="">Help</a></li>
-                                    <li><a href="">Help</a></li>
-                                    <li><a href="">Help</a></li>
-                                    <li><a href="">Help</a></li>
-<div>
-<button class="btn btn-light btn-lg btn-rounded px-5" type="submit"><?php include_once 'prijava.php'; ?></button>
-</div><br>
-<button class="btn btn-light btn-lg btn-rounded px-5" type="submit"><?php include_once 'registracija.php'; ?></button>
-</div>
-</div>
+                                    <li><a href="grafickekartice.php">Grafičke kartice</a></li>
+                                    <li><a href="procesori.php">Procesori</a></li>
+                                    <li><a href="maticneploce.php">Matične ploče</a></li>
+                                    <li><a href="ram.php">Radna memorija</a></li>
+                                    <li><a href="ssd.php">SSD</a></li>
+                                    <li><a href="hdd.php">HDD</a></li>
+                                    <li><a href="napajanja.php">Napajanja</a></li>
+                                    <li><a href="hladnjaci.php">Hladnjaci</a></li>
+                                    <li><a href="kucista.php">Kućišta</a></li>
+                                    <div>
+                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once 'prijava.php'; ?></button>
+                                    </div>
+                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once 'registracija.php'; ?></button>
+                                    </div>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
