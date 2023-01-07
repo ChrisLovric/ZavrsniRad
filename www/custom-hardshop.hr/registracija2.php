@@ -43,19 +43,38 @@
             <div class="hero-body is-justify-content-center is-align-items-center">
                 <div class="columns is-flex is-flex-direction-column box">
                     <div class="column">
+                        <label for="email">Ime i prezime</label>
+                        <input class="input is-primary" type="text" placeholder="...">
+                    </div>
+                    <div class="column">
                         <label for="email">Email adresa</label>
                         <input class="input is-primary" type="text" placeholder="...">
                     </div>
                     <div class="column">
-                        <label for="Name">Lozinka</label>
-                        <input class="input is-primary" type="password" placeholder="...">
-                        <a href="forget.html" class="is-size-7 has-text-primary">Zaboravljena lozinka?</a>
+                        <label for="email">Lozinka</label>
+                        <input class="input is-primary" type="text" placeholder="...">
                     </div>
                     <div class="column">
-                        <button class="button is-primary is-fullwidth" type="submit">Prijava</button>
+                        <label for="email">Ponovite lozinku</label>
+                        <input class="input is-primary" type="text" placeholder="...">
+                    </div>
+                    <div class="column">
+                        <label for="email">Adresa za dostavu</label>
+                        <input class="input is-primary" type="text" placeholder="...">
+                    </div>
+                    <div class="column">
+                        <label for="email">Adresa za račun</label>
+                        <input class="input is-primary" type="text" placeholder="...">
+                    </div>
+                    <div class="column">
+                        <label for="Name">Broj telefona</label>
+                        <input class="input is-primary" type="password" placeholder="...">
+                    </div>
+                    <div class="column">
+                        <button class="button is-primary is-fullwidth" type="submit">Registrirajte se</button>
                     </div>
                     <div class="has-text-centered">
-                        <p class="is-size-7"> Nemate račun? <a href="#" class="has-text-primary">Registrirajte se</a>
+                        <p class="is-size-7"> Već imate račun? <a href="#" class="has-text-primary">Prijavite se</a>
                         </p>
                     </div>
                 </div>
