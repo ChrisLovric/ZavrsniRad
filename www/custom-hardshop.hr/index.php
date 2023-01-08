@@ -19,7 +19,9 @@
 <?php include_once 'podnozje.php'; ?>
 </div>
     </section>
-    <script src="../js/bulma.js"></script>
+    <div>
+        <?php include_once 'skripte.php'; ?>
+    </div>
 </body>
 
 </html>

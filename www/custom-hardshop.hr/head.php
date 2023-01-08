@@ -11,7 +11,7 @@
         html,
         body {
             font-family: 'Open Sans';
-            background-image: url('https://picsum.photos/1700');
+            background-color: ivory;
         }
 
         img {
