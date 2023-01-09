@@ -10,7 +10,7 @@
         <style>
         html,
         body {
-            background-color: ivory;
+            background-color: <?php echo $_GET['boja'] ?>;
         }
         </style>
     </head>

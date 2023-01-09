@@ -25,9 +25,9 @@
                                     <li><a href="hladnjaci.php">Hladnjaci</a></li>
                                     <li><a href="kucista.php">Kućišta</a></li>
                                     <div>
-                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once 'prijava.php'; ?></button>
+                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once "prijava.php"; ?></button>
                                     </div>
-                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once 'registracija.php'; ?></button>
+                                    <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once "registracija.php"; ?></button>
                                     </div>
                                     </div>
                                 </ul>
