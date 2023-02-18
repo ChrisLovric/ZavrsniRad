@@ -24,9 +24,7 @@
                                     <li><a href="napajanja.php">Napajanja</a></li>
                                     <li><a href="hladnjaci.php">Hladnjaci</a></li>
                                     <li><a href="kucista.php">Kućišta</a></li>
-                                    <div>
                                     <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once "prijava.php"; ?></button>
-                                    </div>
                                     <button class="button is-link is-light is-outlined is-rounded" type="submit"><?php include_once "registracija.php"; ?></button>
                                     </div>
                                     </div>
