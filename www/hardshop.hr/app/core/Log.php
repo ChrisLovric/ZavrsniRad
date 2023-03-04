@@ -1,8 +1,10 @@
 <?php
 
-class Log{
+class Log
+{
 
-    public static function info($sto){
+    public static function info($sto)
+    {
         echo '<pre>';
         print_r($sto);
         echo '</pre>';
