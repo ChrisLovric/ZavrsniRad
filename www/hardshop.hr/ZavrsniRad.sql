@@ -4,17 +4,19 @@ drop database if exists webshop;
 create database webshop default charset utf8;
 use webshop;
 
-create table korisnik(
+create table operater(
     sifra int not null primary key auto_increment,
     ime varchar(50) not null,
     prezime varchar(50) not null,
     email varchar(50) not null,
-    lozinka char(61) not null
+    lozinka char(61) not null,
+    uloga varchar(20) not null
 );
 
-insert into korisnik (ime,prezime,email,lozinka)
+insert into operater (ime,prezime,email,lozinka,uloga)
 values
-('Hardshop','Korisnik','korisnik@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6');
+('Hardshop','Operater','operater@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','operater'),
+('Admin','Operater','admin@hardshop.hr','L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','admin');
 
 create table kupac(
     sifra int not null primary key auto_increment,

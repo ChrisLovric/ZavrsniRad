@@ -4,6 +4,6 @@ class TestController
 {
     public function lozinka()
     {
-        echo password_hash('passwrod',PASSWORD_BCRYPT);
+        echo password_hash('password',PASSWORD_BCRYPT);
     }
 }

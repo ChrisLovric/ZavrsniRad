@@ -45,4 +45,19 @@ class App
 
         return $config[$kljuc];
     }
+
+    public static function auth()
+    {
+        return isset($_SESSION['auth']);
+    }
+
+    public static function operater()
+    {
+        return $_SESSION['auth']->ime . ' ' . $_SESSION['auth']->prezime;
+    }
+
+    public static function admin()
+    {
+        return $_SESSION['auth']->uloga==='admin';
+    }
 }

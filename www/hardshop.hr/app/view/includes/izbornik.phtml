@@ -11,12 +11,32 @@
       <?=App::config('nazivApp');?>
       </a>  
     </li>
+    <?php if(App::auth()): ?>
+        <li><a href="<?=App::config('url');?>nadzornaploca/index">Nadzorna ploča</a></li>
+        <?php if(App::admin()): ?>
+          <li><a href="<?=App::config('url');?>operater/index">Operateri</a></li>
+          <?php else: ?>
+            <li>
+              <a href="Narudžbe"></a>
+              <ul class="vertical menu">
+                  <li><a href="#">Kupci</a></li>
+                  <li><a href="#">Proizvodi</a></li>
+                  <li><a href="#">Plaćanje</a></li>
+                  <li><a href="#">Detalji narudžbe</a></li>
+              </ul>
+            </li>
+          <?php endif; ?>
+      <?php endif; ?>
     <li><a href="<?=App::config('url');?>index/kontakt">Kontakt</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
+      <?php if(!App::auth()): ?>
         <li><a href="<?=App::config('url');?>index/prijava">Prijava</a></li>
+        <?php else: ?>
+          <li><a href="<?=App::config('url');?>index/odjava">Odjava <?php echo App::operater() ?></a></li>
+      <?php endif; ?>
     </ul>
   </div>
 </div>

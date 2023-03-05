@@ -20,15 +20,18 @@ class PrijavaController extends Controller
             return;
         }
 
-        $korisnik=Korisnik::autoriziraj($_POST['email'],$_POST['password']);
+        $operater=Operater::autoriziraj($_POST['email'],$_POST['password']);
 
-        if($korisnik==null){
+        if($operater==null){
             $this->view->render('prijava',[
                 'poruka'=>'Kombinacija email i lozinka se ne podudaraju',
                 'email'=>$_POST['email']
             ]);
             return;
         }
+
+        $_SESSION['auth']=$operater;
+        header('location:' . App::config('url')) . 'nadzornaploca/index';
     }
     
 }
