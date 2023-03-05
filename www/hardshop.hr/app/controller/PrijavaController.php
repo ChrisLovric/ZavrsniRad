@@ -19,5 +19,16 @@ class PrijavaController extends Controller
             ]);
             return;
         }
+
+        $korisnik=Korisnik::autoriziraj($_POST['email'],$_POST['password']);
+
+        if($korisnik==null){
+            $this->view->render('prijava',[
+                'poruka'=>'Kombinacija email i lozinka se ne podudaraju',
+                'email'=>$_POST['email']
+            ]);
+            return;
+        }
     }
+    
 }
