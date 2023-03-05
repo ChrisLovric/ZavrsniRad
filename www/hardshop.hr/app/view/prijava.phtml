@@ -1,0 +1,11 @@
+<form class="log-in-fomr" method="post" action="<?=App::config('url');?>prijava/autorizacija">
+    <h4 class="text-center">Unesite pristupne podatke</h4>
+    <label>Email
+        <input type="email" name="email" placeholder="netko@nesto.com" value="<?=$email?>"> 
+    </label>
+    <label>Lozinka
+    <input type="password" name="password" placeholder="Lozinka">
+    </label>
+    <p><input type="submit" class="button expanded" value="Prijava"></input></p>
+    <?=$poruka?>
+</form>

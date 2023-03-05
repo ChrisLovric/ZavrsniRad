@@ -4,17 +4,20 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->view->render('index',[
-            'iznos'=>10,
-            'podaci'=>[
-                11,12,13,14
-            ]
-        ]);
+        $this->view->render('index');
     }
 
     public function kontakt()
     {
         $this->view->render('kontakt');
+    }
+
+    public function prijava()
+    {
+        $this->view->render('prijava',[
+            'poruka'=>'',
+            'email'=>''
+        ]);
     }
 
     public function api()
@@ -27,6 +30,6 @@ class IndexController extends Controller
                     'prezime'=>'Matic'
                 ]
             ]
-                ]);
+        ]);
     }
 }
