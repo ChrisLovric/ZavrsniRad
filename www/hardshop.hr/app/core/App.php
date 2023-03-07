@@ -60,4 +60,9 @@ class App
     {
         return $_SESSION['auth']->uloga==='admin';
     }
+
+    public static function dev()
+    {
+        return App::config('dev');
+    }
 }

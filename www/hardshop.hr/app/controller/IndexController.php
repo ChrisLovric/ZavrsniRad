@@ -7,11 +7,6 @@ class IndexController extends Controller
         $this->view->render('index');
     }
 
-    public function kontakt()
-    {
-        $this->view->render('kontakt');
-    }
-
     public function prijava()
     {
         $this->view->render('prijava',[
@@ -25,6 +20,11 @@ class IndexController extends Controller
         unset($_SESSION['auth']);
         session_destroy();
         header('location:' . App::config('url'));
+    }
+
+    public function kontakt()
+    {
+        $this->view->render('kontakt');
     }
 
     public function api()
