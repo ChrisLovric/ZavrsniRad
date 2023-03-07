@@ -71,7 +71,7 @@ alter table detaljinarudzbe add foreign key (proizvod) references proizvod(sifra
 
 insert into kupac (ime,prezime,email,lozinka,adresazaracun,adresazadostavu,brojtelefona)
 values
-('Renato','Jukić','rjukic@gmail.com','QuRMf4#rB5buCt#I','Fiorello la Guardia 14, 51000 Rijeka','Fiorello la Guardia 14, 51000','+385 51 211835'),
+('Renato','Jukić','rjukic@gmail.com','QuRMf4#rB5buCt#I','Fiorello la Guardia 14, 51000 Rijeka','Fiorello la Guardia 14, 51000 Rijeka','+385 51 211835'),
 ('Franjo','Balen','fbalen@gmail.com','f!LQHs+h5UT6af+B','Industrijska 28, 34000 Požega','Industrijska 28, 34000 Požega','034 27 34 65');
 
 

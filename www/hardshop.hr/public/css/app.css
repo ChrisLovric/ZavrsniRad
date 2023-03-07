@@ -1,3 +1,17 @@
 #program{
     min-height: 400px;
 }
+
+.button.expanded{
+    background-color: darkgreen;
+}
+
+.fi-pencil{
+    margin-left: 15px;
+    font-size: 20px;
+    color: darkgreen;
+}
+
+thead > tr > th{
+    text-align: center;
+}

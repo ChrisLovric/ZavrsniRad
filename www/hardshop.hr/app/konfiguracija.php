@@ -5,6 +5,7 @@ $dev=$_SERVER['SERVER_ADDR']==='192.168.0.131' ? true : false;
 if($dev){
 return [
     'dev'=>$dev,
+    'formatBroja'=>'###,##0.00',
     'url'=>'http://hardshop.hr/',
     'nazivApp'=>'Hardshop',
     'baza'=>[
@@ -16,6 +17,7 @@ return [
 }else{
     return[
     'dev'=>$dev,
+    'formatBroja'=>'###,##0.00',
     'url'=>'http://polaznik37.edunova.hr/',
     'nazivApp'=>'Hardshop',
     'baza'=>[

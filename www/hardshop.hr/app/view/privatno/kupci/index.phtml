@@ -1,0 +1,33 @@
+<a href="" class="button expanded">
+    Dodaj novog kupca
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Email</th>
+            <th>Adresa za račun</th>
+            <th>Adresa za dostavu</th>
+            <th>Broj telefona</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($podaci as $red): ?>
+            <tr>
+                <td><?=$red->ime?></td>
+                <td><?=$red->prezime?></td>
+                <td><?=$red->email?></td>
+                <td><?=$red->adresazaracun?></td>
+                <td><?=$red->adresazadostavu?></td>
+                <td><?=$red->brojtelefona?></td>
+                <td>
+                    <a href=""><i class="fi-pencil"></i></a>
+                    <a href=""><i class="fi-trash"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+    </tbody>
+</table>
