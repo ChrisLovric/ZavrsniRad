@@ -20,6 +20,14 @@ class App
         }else{
             $metoda=$dijelovi[1];
         }
+
+        $parametar='';
+        if(!isset($dijelovi[2]) || $dijelovi[2]===''){
+            $parametar='';
+        }else{
+            $parametar=$dijelovi[2];
+        }
+
         if(!(class_exists($controller) && method_exists($controller,$metoda))){
             echo 'Ne postoji ' . $controller . '-&gt;' . $metoda;
             return;
@@ -27,6 +35,11 @@ class App
 
             $instanca=new $controller();
             $instanca->$metoda();
+            if(strlen($parametar)>0){
+                $instanca->$metoda($parametar);
+            }else{
+                $instanca->$metoda();
+            }
     }
 
     public static function config($kljuc)

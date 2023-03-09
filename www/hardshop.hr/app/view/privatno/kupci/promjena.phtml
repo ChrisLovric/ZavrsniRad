@@ -1,0 +1,34 @@
+<form action="" method="post">
+    <fieldset>
+        <legend>Izmjena podataka o kupcu</legend>
+
+        <label for="ime">Ime</label>
+        <input type="text" id="ime" name="ime" value="<?=$e->ime?>">
+
+        <label for="prezime">Prezime</label>
+        <input type="text" id="prezime" name="prezime" value="<?=$e->prezime?>">
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="<?=$e->email?>">
+
+        <label for="adresazaracun">Adresa za račun</label>
+        <input type="text" id="adresazaracun" name="adresazaracun" value="<?=$e->adresazaracun?>">
+
+        <label for="adresazadostavu">Adresa za dostavu</label>
+        <input type="text" id="adresazadostavu" name="adresazadostavu" value="<?=$e->adresazadostavu?>">
+
+        <label for="brojtelefona">Broj telefona</label>
+        <input type="text" id="brojtelefona" name="brojtelefona" value="<?=$e->brojtelefona?>">
+
+        <hr>
+        <?=$poruka?>
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?=App::config('url')?>kupac/index" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="Dodaj">
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -11,6 +11,11 @@ class Request
         }else if(isset($_SERVER['REQUEST_URI'])){
             $ruta=$_SERVER['REQUEST_URI'];
         }
+
+        if(strpos($ruta,'?')>=0){
+            $ruta=explode('?',$ruta)[0];
+        }
+
         return $ruta;
     }
 }

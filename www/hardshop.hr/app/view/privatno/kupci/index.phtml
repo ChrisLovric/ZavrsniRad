@@ -1,4 +1,4 @@
-<a href="" class="button expanded">
+<a href="<?=App::config('url')?>kupac/novi" class="button expanded">
     Dodaj novog kupca
 </a>
 
@@ -24,7 +24,7 @@
                 <td><?=$red->adresazadostavu?></td>
                 <td><?=$red->brojtelefona?></td>
                 <td>
-                    <a href=""><i class="fi-pencil"></i></a>
+                    <a href="<?=App::config('url')?>kupac/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
                     <a href=""><i class="fi-trash"></i></a>
                 </td>
             </tr>
