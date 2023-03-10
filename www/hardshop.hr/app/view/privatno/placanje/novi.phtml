@@ -1,0 +1,20 @@
+<form action="" method="post">
+    <fieldset>
+        <legend>Unos nove vrste plaćanja</legend>
+
+        <label for="vrstaplacanja">Vrsta plaćanja</label>
+        <input type="text" id="vrstaplacanja" name="vrstaplacanja" value="<?=$e->vrstaplacanja?>">
+
+        <hr>
+        <h1><?=$poruka?></h1>
+
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?=App::config('url')?>placanje/index" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="Dodaj">
+            </div>
+        </div>
+    </fieldset>
+</form>

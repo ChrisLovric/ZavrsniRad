@@ -7,8 +7,8 @@
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
     <li>
-      <a style="font-weight: bold;" href="<?=App::config('url');?>">
-      <?=App::config('nazivApp');?>
+      <a href="<?=App::config('url');?>">
+      <h3><?=App::config('nazivApp');?></h3>
       </a>  
     </li>
     <?php if(App::auth()): ?>
@@ -22,7 +22,7 @@
                   <li><a href="<?=App::config('url')?>kupac/index">Kupci</a></li>
                   <li><a href="#">Narudžbe</a></li>
                   <li><a href="<?=App::config('url')?>proizvod/index">Proizvodi</a></li>
-                  <li><a href="#">Plaćanje</a></li>
+                  <li><a href="<?=App::config('url')?>placanje/index">Plaćanje</a></li>
                   <li><a href="#">Detalji narudžbe</a></li>
               </ul>
             </li>

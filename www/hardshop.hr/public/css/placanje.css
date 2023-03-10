@@ -1,0 +1,30 @@
+.fi-pencil{
+    margin-right: 13px;
+    font-size: 20px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    font-size: 20px;
+    color: darkred;
+}
+
+thead{
+    background-color: transparent;
+    color: bisque;
+}
+
+td{
+    background-color: transparent;
+    background-image: url(../img/back.jpg);
+    background-size: 170%;
+    color: bisque;
+}
+
+thead > tr > th{
+    text-align: center;
+}
+
+tbody > tr > td:nth-child(2){
+    text-align: center;
+}

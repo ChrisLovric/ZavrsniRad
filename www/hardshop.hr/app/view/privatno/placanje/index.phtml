@@ -1,0 +1,23 @@
+<a href="<?=App::config('url')?>placanje/novi" class="button expanded">
+    Dodaj novu vrstu plaćanja
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Vrsta plaćanja</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($podaci as $red): ?>
+            <tr>
+                <td><?=$red->vrstaplacanja?></td>
+                <td>
+                    <a href="<?=App::config('url')?>placanje/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
+                    <a href=""><i class="fi-trash"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+    </tbody>
+</table>
