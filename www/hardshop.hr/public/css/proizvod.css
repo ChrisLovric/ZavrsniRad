@@ -9,7 +9,7 @@ thead > tr > th{
 }
 
 .fi-pencil{
-    margin-right: 15px;
+    margin-right: 13px;
     font-size: 20px;
     color: darkgreen;
 }
@@ -19,6 +19,22 @@ thead > tr > th{
     color: darkred;
 }
 
+tbody > tr > td:nth-child(3){
+    text-align: right;
+}
+
+.fi-check{
+    font-size: 25px;
+    color: darkgreen;
+    margin-left: 30px;
+}
+
+.fi-x{
+    font-size: 25px;
+    color: darkred;
+    margin-left: 30px;
+}
+
 thead{
     background-color: lightblue;
 }
@@ -26,4 +42,3 @@ thead{
 td{
     background-color: lightblue;
 }
-

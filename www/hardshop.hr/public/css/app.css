@@ -2,16 +2,30 @@
     min-height: 400px;
 }
 
-.button.expanded{
+.success.button.expanded{
     background-color: darkgreen;
+    color: beige;
 }
 
-.fi-pencil{
-    margin-left: 15px;
-    font-size: 20px;
-    color: darkgreen;
+.alert.button.expanded{
+    background-color: darkred;
+    color: beige;
 }
 
-thead > tr > th{
-    text-align: center;
+body{
+    background-color: royalblue;
+}
+
+#example-menu{
+    background-color: royalblue;
+}
+
+.top-bar ul{
+    background-color: royalblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.top-bar a{
+    color: antiquewhite;
+    font-size: 25px;
 }

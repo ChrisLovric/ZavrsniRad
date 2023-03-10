@@ -2,6 +2,7 @@
 
 abstract class AdminController extends AutorizacijaController
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -9,4 +10,5 @@ abstract class AdminController extends AutorizacijaController
             $this->view->render('privatno' . DIRECTORY_SEPARATOR . 'nadzornaPloca');
         }
     }
+
 }

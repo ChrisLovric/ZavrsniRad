@@ -12,7 +12,8 @@ class OperaterController extends AdminController
         }
 
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$operateri
+            'podaci'=>$operateri,
+            'css'=>'operateri.css'
         ]);
     }
 }

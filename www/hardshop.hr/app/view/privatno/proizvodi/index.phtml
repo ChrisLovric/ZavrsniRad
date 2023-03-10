@@ -1,0 +1,31 @@
+<a href="<?=App::config('url')?>proizvod/novi" class="button expanded">
+    Dodaj novi proizvod
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Proizvođač</th>
+            <th>Jedinična cijena</th>
+            <th>Opis</th>
+            <th>Dostupnost</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($podaci as $red): ?>
+            <tr>
+                <td><?=$red->naziv?></td>
+                <td><?=$red->proizvodjac?></td>
+                <td><?=$red->jedinicnacijena?></td>
+                <td><?=$red->opis?></td>
+                <td><i class="fi-<?=$red->dostupnost?>"></i></td>
+                <td>
+                    <a href="<?=App::config('url')?>proizvod/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
+                    <a href=""><i class="fi-trash"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+    </tbody>
+</table>
