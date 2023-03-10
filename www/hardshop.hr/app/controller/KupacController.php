@@ -194,7 +194,7 @@ class KupacController extends AutorizacijaController
             return false;
         }
 
-        if(strlen(trim($s))>50){
+        if(strlen(trim($s))>100){
             $this->poruka='Adresa za račun ne smije imati više od 100 znakova';
             return false;
         }
@@ -210,7 +210,7 @@ class KupacController extends AutorizacijaController
             return false;
         }
 
-        if(strlen(trim($s))>50){
+        if(strlen(trim($s))>100){
             $this->poruka='Adresa za dostavu ne smije imati više od 100 znakova';
             return false;
         }
@@ -226,7 +226,7 @@ class KupacController extends AutorizacijaController
             return false;
         }
 
-        if(strlen(trim($s))>50){
+        if(strlen(trim($s))>20){
             $this->poruka='Broj telefona ne smije imati više od 20 znakova';
             return false;
         }

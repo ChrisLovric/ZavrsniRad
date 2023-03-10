@@ -77,8 +77,8 @@ values
 
 insert into placanje (vrstaplacanja)
 values
-('gotovina'),
-('kartica');
+('Gotovina'),
+('Kartica');
 
 
 insert into proizvod (naziv,proizvodjac,jedinicnacijena,opis,dostupnost)

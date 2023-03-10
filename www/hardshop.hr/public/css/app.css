@@ -5,27 +5,131 @@
 .success.button.expanded{
     background-color: darkgreen;
     color: beige;
+    border-radius: 15px;
+}
+
+.button.expanded{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: darkgreen;
+    border-radius: 15px;
 }
 
 .alert.button.expanded{
     background-color: darkred;
     color: beige;
+    border-radius: 15px;
 }
 
 body{
-    background-color: royalblue;
+    background-image: url(../img/back.jpg);
+    background-size: 130%;
+    background-color: transparent;
+    color: bisque;
 }
 
 #example-menu{
-    background-color: royalblue;
+    background-color: transparent;
 }
 
 .top-bar ul{
-    background-color: royalblue;
+    background-color: transparent;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .top-bar a{
     color: antiquewhite;
     font-size: 25px;
+}
+
+label{
+    color: bisque;
+}
+
+legend{
+    color: bisque;
+}
+
+h1{
+    color: bisque;
+    font-size: 25px;
+}
+
+h2{
+    color: bisque;
+    font-size: 15px;
+}
+
+h3{
+    color: mediumaquamarine;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h4{
+    color: bisque;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+input#ime{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#prezime{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#email{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#adresazaracun{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#adresazadostavu{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#brojtelefona{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#vrstaplacanja{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#naziv{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#proizvodjac{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#jedinicnacijena{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#opis{
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+input#lozinka{
+    background-color: lightgray;
+    border-radius: 15px;
 }

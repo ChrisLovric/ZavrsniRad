@@ -2,12 +2,6 @@ thead > tr > th{
     text-align: center;
 }
 
-.button.expanded{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: darkgreen;
-}
-
 .fi-pencil{
     margin-right: 13px;
     font-size: 20px;
@@ -23,22 +17,26 @@ tbody > tr > td:nth-child(3){
     text-align: right;
 }
 
-.fi-check{
-    font-size: 25px;
+.fi-checkbox{
+    font-size: 30px;
     color: darkgreen;
     margin-left: 30px;
 }
 
-.fi-x{
+.fi-minus{
     font-size: 25px;
     color: darkred;
     margin-left: 30px;
 }
 
 thead{
-    background-color: lightblue;
+    background-color: transparent;
+    color: bisque;
 }
 
 td{
-    background-color: lightblue;
+    background-color: transparent;
+    background-image: url(../img/back.jpg);
+    background-size: 250%;
+    color: bisque;
 }

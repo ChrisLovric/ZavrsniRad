@@ -3,7 +3,6 @@
 }
 
 .fi-pencil{
-    margin-left: 15px;
     font-size: 20px;
     color: darkgreen;
 }
@@ -13,9 +12,17 @@ thead > tr > th{
 }
 
 thead{
-    background-color: lightblue;
+    background-color: transparent;
+    color: bisque;
 }
 
 td{
-    background-color: lightblue;
+    background-color: transparent;
+    background-image: url(../img/back.jpg);
+    background-size: 200%;
+    color: bisque;
+}
+
+tbody > tr > td:nth-child(4){
+    text-align: center;
 }

@@ -1,10 +1,10 @@
 <form class="log-in-fomr" method="post" action="<?=App::config('url');?>prijava/autorizacija">
     <h4 class="text-center">Unesite pristupne podatke</h4>
-    <label>Email
-        <input type="email" name="email" placeholder="netko@nesto.com" value="<?=$email?>"> 
+    <label>Email (operater/admin@hardshop.com)
+        <input type="email" name="email" placeholder="netko@nesto.com" value="<?=$email?>" id="email"> 
     </label>
-    <label>Lozinka
-    <input type="password" name="password" placeholder="Lozinka">
+    <label>Lozinka (password)
+    <input type="password" name="password" placeholder="Lozinka" id="lozinka">
     </label>
     <p><input type="submit" class="button expanded" value="Prijava"></input></p>
     <?=$poruka?>

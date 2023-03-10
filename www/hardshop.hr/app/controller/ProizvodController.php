@@ -188,7 +188,7 @@ class ProizvodController extends AutorizacijaController
 
         $jedinicnacijena=$this->nf->parse($this->e->jedinicnacijena);
         if(!$jedinicnacijena){
-            $this->poruka='Jedinična cijena nije u dobrom formatu';
+            $this->poruka='Jedinična cijena nije u dobrom formatu (Format mora biti 0.000,00)';
             return false;
         }
 
@@ -232,7 +232,7 @@ class ProizvodController extends AutorizacijaController
             $p->naziv;
             $p->proizvodjac;
             $p->jedinicnacijena=$this->formatIznosa($p->jedinicnacijena);
-            $p->dostupnost=$p->dostupnost ? 'check' : 'x';
+            $p->dostupnost=$p->dostupnost ? 'checkbox' : 'minus';
         }
         return $proizvodi;
     }
