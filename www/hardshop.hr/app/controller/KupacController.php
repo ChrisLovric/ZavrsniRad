@@ -86,6 +86,7 @@ class KupacController extends AutorizacijaController
     }
 
     $this->e->sifra=$sifra;
+    //$this->pripremiZaBazu();
     Kupac::update((array)$this->e);
     $this->view->render($this->viewPutanja . 'promjena',[
         'e'=>$this->e,
@@ -112,7 +113,7 @@ class KupacController extends AutorizacijaController
 
     private function kontrolaPromjena()
     {
-        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmail() && 
+        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmailPromjena() && 
         $this->kontrolaAdresazaracun() && $this->kontrolaAdresazadostavu() && $this->kontrolaBrojtelefona();
     }
 
@@ -158,6 +159,22 @@ class KupacController extends AutorizacijaController
 
         if(Kupac::postojiIstiMailUBazi($s)){
             $this->poruka='Unesena email adresa već postoji u bazi';
+            return false;
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Email adresa ne smije imati više od 50 znakova';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function kontrolaEmailPromjena()
+    {
+        $s=$this->e->email;
+        if(strlen(trim($s))===0){
+            $this->poruka='Email obavezan';
             return false;
         }
 

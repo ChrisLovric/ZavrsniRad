@@ -34,7 +34,6 @@ class App
         }
 
             $instanca=new $controller();
-            $instanca->$metoda();
             if(strlen($parametar)>0){
                 $instanca->$metoda($parametar);
             }else{
