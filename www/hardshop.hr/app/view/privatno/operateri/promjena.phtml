@@ -1,0 +1,28 @@
+<form action="" method="post">
+    <fieldset>
+        <legend>Izmjena podataka operatera</legend>
+
+        <label for="ime">Ime</label>
+        <input type="text" id="ime" name="ime" value="<?=$e->ime?>">
+
+        <label for="prezime">Prezime</label>
+        <input type="text" id="prezime" name="prezime" value="<?=$e->prezime?>">
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="<?=$e->email?>">
+
+        <label for="uloga">Uloga</label>
+        <input type="text" id="uloga" name="uloga" value="<?=$e->uloga?>">
+
+        <hr>
+        <h1><?=$poruka?></h1>
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?=App::config('url')?>operater/index" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="Spremi">
+            </div>
+        </div>
+    </fieldset>
+</form>

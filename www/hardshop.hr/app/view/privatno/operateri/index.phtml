@@ -1,22 +1,27 @@
-<a href="novi" class="button expanded">Dodaj novog operatera</a>
+<a href="<?=App::config('url')?>operater/novi" class="button success expanded">
+Dodaj novog operatera
+</a>
 
 <table>
     <thead>
         <tr>
-            <th>Ime i prezime</th>
+            <th>Ime</th>
+            <th>Prezime</th>
             <th>Email</th>
             <th>Uloga</th>
             <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach($podaci as $p): ?>
+        <?php foreach($podaci as $red): ?>
             <tr>
-                <td><?=$p->ime?> <?=$p->prezime?></td>
-                <td><?=$p->email?></td>
-                <td><?=$p->uloga?></td>
+                <td><?=$red->ime?></td>
+                <td><?=$red->prezime?></td>
+                <td><?=$red->email?></td>
+                <td><?=$red->uloga?></td>
                 <td>
-                    <a href="promijeni?id=<?=$p->sifra?>"><i class="fi-pencil"></i></a>
+                <a href="<?=App::config('url')?>operater/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
+                <a href=""><i class="fi-trash"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
