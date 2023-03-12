@@ -23,6 +23,8 @@ body{
 thead{
     background-color: transparent;
     color: bisque;
+    font-size: 22px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 td{
@@ -32,7 +34,6 @@ td{
 
 #example-menu{
     background-color: transparent;
-
 }
 
 .top-bar ul{
@@ -191,3 +192,10 @@ input#lozinka{
     left: 25%;
 }
 
+input#uloga{
+    background-color: lightgray;
+    border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}

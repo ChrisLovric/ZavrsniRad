@@ -15,8 +15,8 @@ create table operater(
 
 insert into operater (ime,prezime,email,lozinka,uloga)
 values
-('Hardshop','Operater','operater@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','operater'),
-('Admin','Operater','admin@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','admin');
+('Hardshop','Operater','operater@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','Operater'),
+('Admin','Operater','admin@hardshop.hr','$2a$12$L7EtqiUPKWRr3GhrjRcm0ezDAblEeeZIZBuc.T41xFI6vCnPACMR6','Admin');
 
 create table kupac(
     sifra int not null primary key auto_increment,
