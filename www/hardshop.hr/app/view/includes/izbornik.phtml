@@ -5,7 +5,7 @@
 
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
+    <ul class="dropdown menu" data-dropdown-menu id="dropdown-menu">
     <li>
       <a href="<?=App::config('url');?>">
       <h3><?=App::config('nazivApp');?></h3>
@@ -18,7 +18,7 @@
           <?php else: ?>
             <li>
               <a href="#">Podaci o kupovini</a>
-              <ul class="vertical menu">
+              <ul class="vertical menu" id="vertical-menu">
                   <li><a href="<?=App::config('url')?>kupac/index">Kupci</a></li>
                   <li><a href="#">Narudžbe</a></li>
                   <li><a href="<?=App::config('url')?>proizvod/index">Proizvodi</a></li>

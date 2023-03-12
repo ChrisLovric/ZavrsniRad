@@ -8,13 +8,6 @@
     border-radius: 15px;
 }
 
-.button.expanded{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: darkgreen;
-    border-radius: 15px;
-}
-
 .alert.button.expanded{
     background-color: darkred;
     color: beige;
@@ -23,13 +16,23 @@
 
 body{
     background-image: url(../img/back.jpg);
-    background-size: 130%;
+    background-size: 100%;
+    color: bisque;
+}
+
+thead{
     background-color: transparent;
+    color: bisque;
+}
+
+td{
+    background-color: rgb(30, 30, 30);
     color: bisque;
 }
 
 #example-menu{
     background-color: transparent;
+
 }
 
 .top-bar ul{
@@ -42,17 +45,35 @@ body{
     font-size: 25px;
 }
 
+#dropdown-menu li:hover a{
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0 transparent;
+    color: bisque;
+    border-radius: 15px;
+}
+
+#vertical-menu{
+    background-image: url(../img/back.jpg);
+    color: bisque;
+}
+
+#vertical-menu li:hover a{
+    color: darkgreen;
+}
+
 label{
     color: bisque;
+    text-align: center;
 }
 
 legend{
     color: bisque;
+    text-align: center;
 }
 
 h1{
     color: bisque;
     font-size: 25px;
+    text-align: center;
 }
 
 h2{
@@ -77,59 +98,96 @@ h4{
 input#ime{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#prezime{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#email{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#adresazaracun{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#adresazadostavu{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#brojtelefona{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#vrstaplacanja{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#naziv{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#proizvodjac{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#jedinicnacijena{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#opis{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
 
 input#lozinka{
     background-color: lightgray;
     border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
 }
+
