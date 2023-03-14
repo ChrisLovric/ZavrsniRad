@@ -4,20 +4,25 @@
 
 .success.button.expanded{
     background-color: darkgreen;
-    color: beige;
+    color: bisque;
     border-radius: 15px;
 }
 
 .alert.button.expanded{
     background-color: darkred;
-    color: beige;
+    color: bisque;
     border-radius: 15px;
 }
 
 body{
-    background-image: url(../img/back.jpg);
-    background-size: 100%;
+    background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
+    background-size: 120%;
     color: bisque;
+}
+
+table{
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 thead{
@@ -42,7 +47,7 @@ td{
 }
 
 .top-bar a{
-    color: antiquewhite;
+    color: bisque;
     font-size: 25px;
 }
 
@@ -53,8 +58,9 @@ td{
 }
 
 #vertical-menu{
-    background-image: url(../img/back.jpg);
+    background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
     color: bisque;
+    border-radius: 15px;
 }
 
 #vertical-menu li:hover a{
@@ -80,6 +86,7 @@ h1{
 h2{
     color: bisque;
     font-size: 15px;
+    text-align: center;
 }
 
 h3{
@@ -94,6 +101,11 @@ h4{
     font-size: 35px;
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h5{
+    text-align: center;
+    font-size: 35px;
 }
 
 input#ime{
@@ -199,3 +211,4 @@ input#uloga{
     position: relative;
     left: 25%;
 }
+
