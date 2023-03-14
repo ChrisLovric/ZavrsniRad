@@ -85,6 +85,17 @@ class PlacanjeController extends AutorizacijaController
 
     }
 
+    public function brisanje($sifra=0)
+    {
+        $sifra=(int)$sifra;
+        if($sifra===0){
+            header('location: ' . App::config('url') . 'index/odjava');
+            return;
+        }
+        Placanje::delete($sifra);
+        header('location: ' . App::config('url') . 'placanje/index');
+    }
+
     private function pozoviView($parametri)
     {
         $this->view->render($this->viewPutanja . 'novi', $parametri);
