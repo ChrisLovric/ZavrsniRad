@@ -29,7 +29,7 @@
                         <a onclick="return confirm('Potvrdi za brisanje kupca <?=$red->ime?> <?=$red->prezime?>');"
                         href="<?=App::config('url')?>kupac/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
                     <?php else: ?>
-                        <i title="Kupac se ne može obrisati"
+                        <i title="Kupca nije moguće brisati jer se nalazi u narudžbi"
                         class="fi-trash" style="color: gray"></i>
                     <?php endif; ?>
                 </td>
