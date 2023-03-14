@@ -5,7 +5,11 @@ class Operater
     public static function read()
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('select * from operater order by ime asc');
+        $izraz=$veza->prepare('
+        
+        select * from operater order by ime asc
+        
+        ');
 
         $izraz->execute();
         return $izraz->fetchAll();
@@ -14,7 +18,11 @@ class Operater
     public static function autoriziraj($email,$password)
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('select * from operater where email=:email');
+        $izraz=$veza->prepare('
+        
+        select * from operater where email=:email
+        
+        ');
 
         $izraz->execute([
             'email'=>$email
@@ -38,7 +46,11 @@ class Operater
     public static function readOne($sifra)
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('select * from operater where sifra=:sifra');
+        $izraz=$veza->prepare('
+        
+        select * from operater where sifra=:sifra
+        
+        ');
         $izraz->execute([
             'sifra'=>$sifra
         ]);
@@ -48,8 +60,11 @@ class Operater
     public static function create($parametri)
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('insert into operater(ime,prezime,email,uloga)
+        $izraz=$veza->prepare('
+        
+        insert into operater(ime,prezime,email,uloga)
         values (:ime,:prezime,:email,:uloga);
+
         ');
         $izraz->execute($parametri);
     }
@@ -57,16 +72,37 @@ class Operater
     public static function update($parametri)
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('update operater set ime=:ime,prezime=:prezime,email=:email,uloga=:uloga 
+        $izraz=$veza->prepare('
+        
+        update operater set ime=:ime,prezime=:prezime,email=:email,uloga=:uloga 
         where sifra=:sifra
+
         ');
         $izraz->execute($parametri);
+    }
+
+    public static function delete($sifra)
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        delete from operater where sifra=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra'=>$sifra
+        ]);
+        $izraz->execute();
     }
 
     public static function postojiIstiMailUBazi($s)
     {
         $veza=DB::getInstance();
-        $izraz=$veza->prepare('select sifra from operater where email=:email');
+        $izraz=$veza->prepare('
+        
+        select sifra from operater where email=:email
+        
+        ');
         $izraz->execute([
             'email'=>$s
         ]);

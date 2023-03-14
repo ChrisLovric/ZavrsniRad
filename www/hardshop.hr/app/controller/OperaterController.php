@@ -89,6 +89,17 @@ class OperaterController extends AdminController
 
     }
 
+    public function brisanje($sifra=0)
+    {
+        $sifra=(int)$sifra;
+        if($sifra===0){
+            header('location: ' . App::config('url') . 'index/odjava');
+            return;
+        }
+        Operater::delete($sifra);
+        header('location: ' . App::config('url') . 'operater/index');
+    }
+
     private function pozoviView($parametri)
     {
         $this->view->render($this->viewPutanja . 'novi', $parametri);
