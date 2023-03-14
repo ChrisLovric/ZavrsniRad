@@ -95,6 +95,17 @@ class KupacController extends AutorizacijaController
 
     }
 
+    public function brisanje($sifra=0)
+    {
+        $sifra=(int)$sifra;
+        if($sifra===0){
+            header('location: ' . App::config('url') . 'index/odjava');
+            return;
+        }
+        Kupac::delete($sifra);
+        header('location: ' . App::config('url') . 'kupac/index');
+    }
+
     private function pozoviView($parametri)
     {
         $this->view->render($this->viewPutanja . 'novi', $parametri);
