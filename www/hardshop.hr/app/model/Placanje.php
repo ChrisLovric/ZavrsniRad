@@ -13,7 +13,7 @@ class Placanje
         from placanje a
         left join narudzba b on a.sifra=b.placanje
         group by	a.vrstaplacanja
-        order by a.vrstaplacanja asc;
+        order by    a.vrstaplacanja asc;
         
         ');
 

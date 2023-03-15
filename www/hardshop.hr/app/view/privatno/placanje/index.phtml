@@ -1,4 +1,4 @@
-<a href="<?=App::config('url')?>placanje/novi" class="button success expanded">
+<a href="<?=App::config('url')?>placanje/novi" class="small button">
     Dodaj novu vrstu plaćanja
 </a>
 
@@ -15,7 +15,7 @@
                 <td><?=$red->vrstaplacanja?></td>
                 <td>
                     <a href="<?=App::config('url')?>placanje/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
-                    <?php if($red->narudzba===0): ?>
+                    <?php if($red->narudzba==0): ?>
                         <a onclick="return confirm('Potvrdi za brisanje vrste plaćanja <?=$red->vrstaplacanja?>');"
                         href="<?=App::config('url')?>placanje/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
                     <?php else: ?>

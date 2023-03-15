@@ -1,4 +1,4 @@
-<a href="<?=App::config('url')?>kupac/novi" class="button success expanded">
+<a href="<?=App::config('url')?>kupac/novi" class="small button">
     Dodaj novog kupca
 </a>
 
@@ -25,7 +25,7 @@
                 <td><?=$red->brojtelefona?></td>
                 <td>
                     <a href="<?=App::config('url')?>kupac/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
-                    <?php if($red->narudzba===0): ?>
+                    <?php if($red->narudzba==0): ?>
                         <a onclick="return confirm('Potvrdi za brisanje kupca <?=$red->ime?> <?=$red->prezime?>');"
                         href="<?=App::config('url')?>kupac/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
                     <?php else: ?>

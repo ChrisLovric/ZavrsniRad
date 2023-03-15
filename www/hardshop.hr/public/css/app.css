@@ -14,6 +14,24 @@
     border-radius: 15px;
 }
 
+.small.button{
+    background-color: darkgreen;
+    color: bisque;
+    border-radius: 15px;
+    position: relative;
+    top: 10px;
+    left: 500px;
+}
+
+.large.button{
+    background-color: darkgreen;
+    color: bisque;
+    border-radius: 15px;
+    position: relative;
+    top: 10px;
+    left: 520px;
+}
+
 body{
     background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
     background-size: 120%;

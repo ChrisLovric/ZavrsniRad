@@ -17,10 +17,10 @@ class Proizvod
         from proizvod a
         left join detaljinarudzbe b on a.sifra=b.proizvod
         group by 	a.naziv,
-			            a.proizvodjac,
-			            a.jedinicnacijena,
-			            a.opis,
-			            a.dostupnost
+			        a.proizvodjac,
+			        a.jedinicnacijena,
+			        a.opis,
+			        a.dostupnost
         order by a.naziv asc;
         
         ');

@@ -2,15 +2,13 @@
   <button class="menu-icon" type="button" data-toggle="example-menu"></button>
   <div class="title-bar-title">Izbornik</div>
 </div>
-
+<li><a href="<?=App::config('url');?>">
+      <img src="<?=App::config('url')?>public/img/logo.png"></a>
+</li>
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu id="dropdown-menu">
-    <li>
-      <a href="<?=App::config('url');?>">
-      <h3><?=App::config('nazivApp');?></h3>
-      </a>  
-    </li>
+
     <?php if(App::auth()): ?>
         <li><a href="<?=App::config('url');?>nadzornaploca/index">Nadzorna ploča</a></li>
         <?php if(App::admin()): ?>
@@ -40,4 +38,5 @@
       <?php endif; ?>
     </ul>
   </div>
+</div>
 </div>
