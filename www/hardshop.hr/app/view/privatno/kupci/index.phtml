@@ -24,14 +24,10 @@
                 <td><?=$red->adresazadostavu?></td>
                 <td><?=$red->brojtelefona?></td>
                 <td>
-                    <a href="<?=App::config('url')?>kupac/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
-                    <?php if($red->narudzba==0): ?>
-                        <a onclick="return confirm('Potvrdi za brisanje kupca <?=$red->ime?> <?=$red->prezime?>');"
-                        href="<?=App::config('url')?>kupac/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
-                    <?php else: ?>
-                        <i title="Kupca nije moguće brisati jer se nalazi u narudžbi"
-                        class="fi-trash" style="color: gray"></i>
-                    <?php endif; ?>
+                <?php 
+                $par=['kupac', $red->ime . ' ' . $red->prezime, $red->narudzba==0];
+                include BP_APP . 'view/includes/promjenabrisanje.phtml';
+                ?>
                 </td>
             </tr>
             <?php endforeach; ?>

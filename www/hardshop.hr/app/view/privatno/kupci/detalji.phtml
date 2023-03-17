@@ -1,0 +1,26 @@
+<form action="" method="post">
+    <fieldset class="fieldset">
+        <legend><?=$legend?></legend>
+
+        <?php 
+        echo App::inputText('ime',$e->ime);
+        echo App::inputText('prezime',$e->prezime);
+        echo App::inputText('email',$e->email);
+        echo App::inputText('adresazaracun',$e->adresazaracun);
+        echo App::inputText('adresazadostavu',$e->adresazadostavu);
+        echo App::inputText('brojtelefona',$e->brojtelefona);
+        ?>
+
+        <hr>
+        <h1><?=$poruka?></h1>
+
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?=App::config('url')?>kupac/index" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="<?=$akcija?>">
+            </div>
+        </div>
+    </fieldset>
+</form>

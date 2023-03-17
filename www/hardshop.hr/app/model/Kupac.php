@@ -84,15 +84,75 @@ class Kupac
         $izraz->execute();
     }
 
-    public static function postojiIstiMailUBazi($s)
+    public static function postojiIstiMail($email,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from kupac where email=:email 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['email']=$email;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
+    }
+
+    public static function postojiIstiBrojTelefona($brojtelefona,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from kupac where brojtelefona=:brojtelefona 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['brojtelefona']=$brojtelefona;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
+    }
+
+    public static function postojiIstiEmailUBazi($s)
     {
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        select sifra from kupac where email=:email');
+        select sifra from kupac where email=:email
         
+        ');
         $izraz->execute([
             'email'=>$s
+        ]);
+        $sifra=$izraz->fetchColumn();
+        return $sifra>0;
+    }
+
+    public static function postojiIstiBrojUBazi($s)
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra from kupac where brojtelefona=:brojtelefona
+        
+        ');
+        $izraz->execute([
+            'brojtelefona'=>$s
         ]);
         $sifra=$izraz->fetchColumn();
         return $sifra>0;

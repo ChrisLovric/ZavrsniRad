@@ -1,0 +1,55 @@
+<?php
+
+class xxxxxxx 
+extends AutorizacijaController
+implements ViewSucelje
+{
+    private $viewPutanja = 'privatno' . 
+    DIRECTORY_SEPARATOR . 'xxxx' . 
+    DIRECTORY_SEPARATOR;
+    private $e;
+    private $poruka='';
+
+    public function index()
+    {        
+     $this->view->render($this->viewPutanja . 
+            'index',[
+                'podaci'=>XXXX::read()
+            ]);   
+    }
+    public function novi()
+    {
+
+    }
+
+    public function promjena($sifra=0)
+    {
+
+    }
+
+
+    public function brisanje($sifra=0)
+    {
+        $sifra=(int)$sifra;
+        if($sifra===0){
+            header('location: ' . App::config('url') . 'index/odjava');
+            return;
+        }
+        XXXX::delete($sifra);
+        header('location: ' . App::config('url') . 'predavac/index');
+    }
+
+
+    public function pocetniPodaci()
+    {
+
+    }
+    public function pripremiZaView()
+    {
+
+    }
+    public function pripremiZaBazu()
+    {
+
+    }
+}

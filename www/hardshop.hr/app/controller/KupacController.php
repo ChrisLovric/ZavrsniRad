@@ -1,23 +1,15 @@
 <?php
 
-class KupacController extends AutorizacijaController
+class KupacController extends AutorizacijaController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'kupci' . DIRECTORY_SEPARATOR;
-    private $nf;
     private $e;
     private $poruka='';
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->nf=new NumberFormatter('hr-HR',NumberFormatter::DECIMAL);
-        $this->nf->setPattern(App::config('formatBroja'));
-    }
 
     public function index()    
     {
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Kupac::read()),
+            'podaci'=>Kupac::read(),
             'css'=>'kupac.css'
         ]);
         
@@ -26,73 +18,237 @@ class KupacController extends AutorizacijaController
     public function novi()
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            $this->pozoviView([
-                'e'=>$this->pocetniPodaci(),
-                'poruka'=>$this->poruka
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Unos novog kupca',
+                'akcija'=>'Spremi',
+                'poruka'=>'Unesite sve obavezne podatke',
+                'e'=>$this->pocetniPodaci()
             ]);
             return;
         }
         $this->pripremiZaView();
-        if(!$this->kontrolaNovi()){
-            $this->pozoviView([
-                'e'=>$this->e,
-                'poruka'=>$this->poruka
+
+        try {
+            $this->kontrolaNovi();
+            $this->pripremiZaBazu();
+            Kupac::create((array)$this->e);
+            header('location:' . App::config('url') . 'kupac');
+        } catch (\Exception $th) {
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Postoje greške kod unosa novog kupca',
+                'akcija'=>'Spremi',
+                'poruka'=>$this->poruka,
+                'e'=>$this->e
             ]);
-            return;
         }
-        //$this->pripremiZaBazu();
-        Kupac::create((array)$this->e);
-        $this->pozoviView([
-            'e'=>$this->pocetniPodaci(),
-            'poruka'=>'Uspješno spremljeno'
-        ]);
     }
 
-    public function promjena($sifra='')
+    public function promjena($sifra=0)
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            if(strlen(trim($sifra))===0){
-                header('location: ' . App::config('url') . 'index/odjava');
+            $this->provjeraIntParametra($sifra);
+
+            $this->e=Kupac::readOne($sifra);
+
+            if($this->e==null){
+                header('location:' . App::config('url') . 'index/odjava');
                 return;
             }
 
-        $sifra=(int)$sifra;
-        if($sifra===0){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->e=Kupac::readOne($sifra);
-
-        if($this->e==null){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>'Izmijenite podatke po želji'
-        ]);
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Izmjena detalja kupca',
+                'akcija'=>'Spremi',
+                'poruka'=>'Izmijenite željene podatke',
+                'e'=>$this->e
+            ]);
         return;
     }
 
     $this->pripremiZaView();
-    if(!$this->kontrolaPromjena()){
-        $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>$this->poruka
+
+    try {
+        $this->e->sifra=$sifra;
+        $this->kontrola();
+        $this->pripremiZaBazu();
+        Kupac::update((array)$this->e);
+        header('location:' . App::config('url') . 'kupac');
+    }catch (\Exception $th) {
+        $this->view->render($this->viewPutanja . 'detalji',[
+            'legend'=>'Postoje greške kod izmjene detalja kupca',
+            'akcija'=>'Spremi',
+            'poruka'=>$this->poruka . ' ' . $th->getMessage(),
+            'e'=>$this->e
         ]);
-        return;
     }
 
-    $this->e->sifra=$sifra;
-    //$this->pripremiZaBazu();
-    Kupac::update((array)$this->e);
-    $this->view->render($this->viewPutanja . 'promjena',[
-        'e'=>$this->e,
-        'poruka'=>'Uspješna izmjena podataka'
-    ]);
+    }
 
+
+    public function kontrolaNovi()
+    {
+        $this->kontrolaIme();
+        $this->kontrolaPrezime();
+        $this->kontrolaEmailNovi();
+        $this->kontrolaAdresaRacun();
+        $this->kontrolaAdresaDostava();
+        $this->kontrolaBrojTelefonaNovi();
+        
+    }
+
+    public function kontrola()
+    {
+        $this->kontrolaIme();
+        $this->kontrolaPrezime();
+        $this->kontrolaEmailIsti();
+        $this->kontrolaAdresaRacun();
+        $this->kontrolaAdresaDostava();
+        $this->kontrolaBrojTelefonaIsti();
+    }
+
+    private function kontrolaIme()
+    {
+        $s=$this->e->ime;
+        if(strlen(trim($s))===0){
+            $this->poruka='Ime obavezno';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Ime ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaPrezime()
+    {
+        $s=$this->e->prezime;
+        if(strlen(trim($s))===0){
+            $this->poruka='Prezime obavezno';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Prezime ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaEmailNovi()
+    {
+        $s=$this->e->email;
+        if(strlen(trim($s))===0){
+            $this->poruka='Email adresa obavezna';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Email adresa ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+
+        if(Kupac::postojiIstiEmailUBazi($s)){
+            $this->poruka='Email adresa već postoji u bazi';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaEmailIsti()
+    {
+        $s=$this->e->email;
+        if(strlen(trim($s))===0){
+            $this->poruka='Email obavezan';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Email ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+
+        if(isset($this->e->sifra)){
+            if(!Kupac::postojiIstiMail($this->e->email,$this->e->sifra)){
+                $this->poruka='Unesena email adresa već postoji u bazi';
+                throw new Exception();
+            }
+        }else{
+            if(!Kupac::postojiIstiMail($this->e->email)){
+                $this->poruka='Unesena email adresa već postoji u bazi';
+                throw new Exception();
+            }
+        }
+    }
+
+    private function kontrolaAdresaRacun()
+    {
+        $s=$this->e->adresazaracun;
+        if(strlen(trim($s))===0){
+            $this->poruka='Adresa za račun obavezna';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>100){
+            $this->poruka='Adresa za račun ne smije imati više od 100 znakova';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaAdresaDostava()
+    {
+        $s=$this->e->adresazadostavu;
+        if(strlen(trim($s))===0){
+            $this->poruka='Adresa za dostavu obavezna';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>100){
+            $this->poruka='Adresa za dostavu ne smije imati više od 100 znakova';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaBrojTelefonaNovi()
+    {
+        $s=$this->e->brojtelefona;
+        if(strlen(trim($s))===0){
+            $this->poruka='Broj telefona obavezan';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>20){
+            $this->poruka='Broj telefona ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+
+        if(Kupac::postojiIstiBrojUBazi($s)){
+            $this->poruka='Broj telefona već postoji u bazi';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaBrojTelefonaIsti()
+    {
+        $s=$this->e->brojtelefona;
+        if(strlen(trim($s))===0){
+            $this->poruka='Broj telefona obavezan';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>20){
+            $this->poruka='Broj telefona ne smije imati više od 20 znakova';
+            throw new Exception();
+        }
+
+        if(isset($this->e->brojtelefona)){
+            if(!Kupac::postojiIstiBrojTelefona($this->e->brojtelefona,$this->e->sifra)){
+                $this->poruka='Uneseni broj telefona već postoji u bazi';
+                throw new Exception();
+            }
+        }else{
+            if(!Kupac::postojiIstiBrojTelefona($this->e->brojtelefona)){
+                $this->poruka='Uneseni broj telefona već postoji u bazi';
+                throw new Exception();
+            }
+        }
     }
 
     public function brisanje($sifra=0)
@@ -106,146 +262,17 @@ class KupacController extends AutorizacijaController
         header('location: ' . App::config('url') . 'kupac/index');
     }
 
-    private function pozoviView($parametri)
-    {
-        $this->view->render($this->viewPutanja . 'novi', $parametri);
-    }
-
-    private function pripremiZaView()
+    public function pripremiZaView()
     {
         $this->e=(object)$_POST;
     }
 
-    private function kontrolaNovi()
+    public function pripremiZaBazu()
     {
-        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmail() && 
-        $this->kontrolaAdresazaracun() && $this->kontrolaAdresazadostavu() && $this->kontrolaBrojtelefona();
+        
     }
 
-    private function kontrolaPromjena()
-    {
-        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmailPromjena() && 
-        $this->kontrolaAdresazaracun() && $this->kontrolaAdresazadostavu() && $this->kontrolaBrojtelefona();
-    }
-
-    private function kontrolaIme()
-    {
-        $s=$this->e->ime;
-        if(strlen(trim($s))===0){
-            $this->poruka='Ime obavezno';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Ime ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaPrezime()
-    {
-        $s=$this->e->prezime;
-        if(strlen(trim($s))===0){
-            $this->poruka='Prezime obavezno';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Prezime ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaEmail()
-    {
-        $s=$this->e->email;
-        if(strlen(trim($s))===0){
-            $this->poruka='Email obavezan';
-            return false;
-        }
-
-        if(Kupac::postojiIstiMailUBazi($s)){
-            $this->poruka='Unesena email adresa već postoji u bazi';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Email adresa ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaEmailPromjena()
-    {
-        $s=$this->e->email;
-        if(strlen(trim($s))===0){
-            $this->poruka='Email obavezan';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Email adresa ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaAdresazaracun()
-    {
-        $s=$this->e->adresazaracun;
-        if(strlen(trim($s))===0){
-            $this->poruka='Adresa za račun obavezna';
-            return false;
-        }
-
-        if(strlen(trim($s))>100){
-            $this->poruka='Adresa za račun ne smije imati više od 100 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaAdresazadostavu()
-    {
-        $s=$this->e->adresazadostavu;
-        if(strlen(trim($s))===0){
-            $this->poruka='Adresa za dostavu obavezna';
-            return false;
-        }
-
-        if(strlen(trim($s))>100){
-            $this->poruka='Adresa za dostavu ne smije imati više od 100 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaBrojtelefona()
-    {
-        $s=$this->e->brojtelefona;
-        if(strlen(trim($s))===0){
-            $this->poruka='Broj telefona obavezan';
-            return false;
-        }
-
-        if(strlen(trim($s))>20){
-            $this->poruka='Broj telefona ne smije imati više od 20 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function pocetniPodaci()
+    public function pocetniPodaci()
     {
         $e=new stdClass();
         $e->ime='';
@@ -255,21 +282,6 @@ class KupacController extends AutorizacijaController
         $e->adresazadostavu='';
         $e->brojtelefona='';
         return $e;
-    }
-
-    private function prilagodiPodatke($kupci)
-    {
-        foreach($kupci as $k){
-            $k->ime;
-            $k->prezime;
-            $k->email;
-            $k->adresazaracun;
-            $k->adresazadostavu;
-            if(strlen($k->ime)>20){
-                $k->ime=substr($k->ime,0,15) . '...' . substr($k->ime,strlen($k->ime)-5);
-            }
-        }
-        return $kupci;
     }
 
 }
