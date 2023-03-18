@@ -2,17 +2,6 @@ thead > tr > th{
     text-align: center;
 }
 
-.fi-pencil{
-    margin-right: 13px;
-    font-size: 20px;
-    color: darkgreen;
-}
-
-.fi-trash{
-    font-size: 20px;
-    color: darkred;
-}
-
 tbody > tr > td:nth-child(3){
     text-align: right;
 }

@@ -32,6 +32,17 @@
     left: 520px;
 }
 
+.fi-pencil{
+    margin-right: 15px;
+    font-size: 20px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    font-size: 20px;
+    color: darkred;
+}
+
 body{
     background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
     background-size: 120%;
@@ -124,6 +135,18 @@ h4{
 h5{
     text-align: center;
     font-size: 35px;
+}
+
+input#da{
+    position: relative;
+    width: 45%;
+    left: 22%;
+}
+
+input#ne{
+    position: relative;
+    width: 3%;
+    right: -1%
 }
 
 input#ime{
