@@ -1,6 +1,6 @@
 <?php
 
-class OperaterController extends AdminController
+class OperaterController extends AdminController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'operateri' . DIRECTORY_SEPARATOR;
     private $e;
@@ -22,70 +22,60 @@ class OperaterController extends AdminController
     public function novi()
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            $this->pozoviView([
-                'e'=>$this->pocetniPodaci(),
-                'poruka'=>$this->poruka
+            $this->view->render($this->viewPutanja . 'novi',[
+                'poruka'=>'Unesite sve obavezne podatke',
+                'e'=>$this->pocetniPodaci()
             ]);
             return;
         }
         $this->pripremiZaView();
-        if(!$this->kontrolaNovi()){
-            $this->pozoviView([
-                'e'=>$this->e,
-                'poruka'=>$this->poruka
+
+        try {
+            $this->kontrolaNovi();
+            $this->pripremiZaBazu();
+            Operater::create((array)$this->e);
+            header('location:' . App::config('url') . 'operater');
+        } catch (\Exception $th) {
+            $this->view->render($this->viewPutanja . 'novi',[
+                'poruka'=>$this->poruka,
+                'e'=>$this->e
             ]);
-            return;
         }
-        Operater::create((array)$this->e);
-        $this->pozoviView([
-            'e'=>$this->pocetniPodaci(),
-            'poruka'=>'Uspješno spremljeno'
-        ]);
     }
 
-    public function promjena($sifra='')
+    public function promjena($sifra=0)
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            if(strlen(trim($sifra))===0){
-                header('location: ' . App::config('url') . 'index/odjava');
+            $this->provjeraIntParametra($sifra);
+
+            $this->e=Operater::readOne($sifra);
+
+            if($this->e==null){
+                header('location:' . App::config('url') . 'index/odjava');
                 return;
             }
 
-        $sifra=(int)$sifra;
-        if($sifra===0){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->e=Operater::readOne($sifra);
-
-        if($this->e==null){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>'Izmijenite podatke po želji'
-        ]);
+            $this->view->render($this->viewPutanja . 'promjena',[
+                'poruka'=>'Izmijenite željene podatke',
+                'e'=>$this->e
+            ]);
         return;
     }
 
     $this->pripremiZaView();
-    if(!$this->kontrolaPromjena()){
-        $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>$this->poruka
-        ]);
-        return;
-    }
 
-    $this->e->sifra=$sifra;
-    Operater::update((array)$this->e);
-    $this->view->render($this->viewPutanja . 'promjena',[
-        'e'=>$this->e,
-        'poruka'=>'Uspješna izmjena podataka'
-    ]);
+    try {
+        $this->e->sifra=$sifra;
+        $this->kontrolaPromjena();
+        $this->pripremiZaBazu();
+        Operater::update((array)$this->e);
+        header('location:' . App::config('url') . 'operater');
+    }catch (\Exception $th) {
+        $this->view->render($this->viewPutanja . 'promjena',[
+            'poruka'=>$this->poruka . ' ' . $th->getMessage(),
+            'e'=>$this->e
+        ]);
+    }
 
     }
 
@@ -100,24 +90,30 @@ class OperaterController extends AdminController
         header('location: ' . App::config('url') . 'operater/index');
     }
 
-    private function pozoviView($parametri)
-    {
-        $this->view->render($this->viewPutanja . 'novi', $parametri);
-    }
-
-    private function pripremiZaView()
+    public function pripremiZaView()
     {
         $this->e=(object)$_POST;
     }
 
+    public function pripremiZaBazu()
+    {
+        
+    }
+
     private function kontrolaNovi()
     {
-        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmail() && $this->kontrolaUloga();
+        $this->kontrolaIme();
+        $this->kontrolaPrezime();
+        $this->kontrolaEmailNovi();
+        $this->kontrolaUloga();
     }
 
     private function kontrolaPromjena()
     {
-        return $this->kontrolaIme() && $this->kontrolaPrezime() && $this->kontrolaEmailPromjena() && $this->kontrolaUloga();
+        $this->kontrolaIme();
+        $this->kontrolaPrezime();
+        $this->kontrolaEmailPromjena();
+        $this->kontrolaUloga();
     }
 
     private function kontrolaIme()
@@ -125,15 +121,13 @@ class OperaterController extends AdminController
         $s=$this->e->ime;
         if(strlen(trim($s))===0){
             $this->poruka='Ime obavezno';
-            return false;
+            throw new Exception();
         }
 
         if(strlen(trim($s))>50){
             $this->poruka='Ime ne smije imati više od 50 znakova';
-            return false;
+            throw new Exception();
         }
-
-        return true;
     }
 
     private function kontrolaPrezime()
@@ -141,36 +135,32 @@ class OperaterController extends AdminController
         $s=$this->e->prezime;
         if(strlen(trim($s))===0){
             $this->poruka='Prezime obavezno';
-            return false;
+            throw new Exception();
         }
 
         if(strlen(trim($s))>50){
             $this->poruka='Prezime ne smije imati više od 50 znakova';
-            return false;
+            throw new Exception();
         }
-
-        return true;
     }
 
-    private function kontrolaEmail()
+    private function kontrolaEmailNovi()
     {
         $s=$this->e->email;
         if(strlen(trim($s))===0){
             $this->poruka='Email obavezan';
-            return false;
+            throw new Exception();
         }
 
         if(Operater::postojiIstiMailUBazi($s)){
             $this->poruka='Unesena email adresa već postoji u bazi';
-            return false;
+            throw new Exception();
         }
 
         if(strlen(trim($s))>50){
             $this->poruka='Email adresa ne smije imati više od 50 znakova';
-            return false;
+            throw new Exception();
         }
-
-        return true;
     }
 
     private function kontrolaEmailPromjena()
@@ -178,15 +168,25 @@ class OperaterController extends AdminController
         $s=$this->e->email;
         if(strlen(trim($s))===0){
             $this->poruka='Email obavezan';
-            return false;
+            throw new Exception();
         }
 
         if(strlen(trim($s))>50){
             $this->poruka='Email adresa ne smije imati više od 50 znakova';
-            return false;
+            throw new Exception();
         }
 
-        return true;
+        if(isset($this->e->sifra)){
+            if(!Operater::postojiIstiMailPromjena($this->e->email,$this->e->sifra)){
+                $this->poruka='Unesena email adresa već postoji u bazi';
+                throw new Exception();
+            }
+        }else{
+            if(!Operater::postojiIstiMailPromjena($this->e->email)){
+                $this->poruka='Unesena email adresa već postoji u bazi';
+                throw new Exception();
+            }
+        }
     }
 
     private function kontrolaUloga()
@@ -194,18 +194,16 @@ class OperaterController extends AdminController
         $s=$this->e->uloga;
         if(strlen(trim($s))===0){
             $this->poruka='Uloga obavezna';
-            return false;
+            throw new Exception();
         }
 
         if(strlen(trim($s))>20){
             $this->poruka='Uloga ne smije imati više od 20 znakova';
-            return false;
+            throw new Exception();
         }
-
-        return true;
     }
 
-    private function pocetniPodaci()
+    public function pocetniPodaci()
     {
         $e=new stdClass();
         $e->ime='';

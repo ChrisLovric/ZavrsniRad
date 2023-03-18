@@ -109,4 +109,26 @@ class Operater
         $sifra=$izraz->fetchColumn();
         return $sifra>0;
     }
+
+    public static function postojiIstiMailPromjena($email,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from operater where email=:email 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['email']=$email;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
+    }
 }
