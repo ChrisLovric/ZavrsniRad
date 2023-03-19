@@ -72,7 +72,7 @@ class Placanje
         $izraz->execute();
     }
 
-    public static function postojiVrstaPlacanjaUBazi($s)
+    public static function postojiVrstaPlacanjaUBaziNovi($s)
     {
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
@@ -85,5 +85,27 @@ class Placanje
         ]);
         $sifra=$izraz->fetchColumn();
         return $sifra>0;
+    }
+
+    public static function postojiVrstaPlacanjaUBaziPromjena($vrstaplacanja,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from placanje where vrstaplacanja=:vrstaplacanja 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['vrstaplacanja']=$vrstaplacanja;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
     }
 }
