@@ -1,6 +1,6 @@
 <?php
 
-class ProizvodController extends AutorizacijaController
+class ProizvodController extends AutorizacijaController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'proizvodi' . DIRECTORY_SEPARATOR;
     private $nf;
@@ -26,75 +26,170 @@ class ProizvodController extends AutorizacijaController
     public function novi()
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            $this->pozoviView([
-                'e'=>$this->pocetniPodaci(),
-                'poruka'=>$this->poruka
+            $this->view->render($this->viewPutanja . 'novi',[
+                'poruka'=>'Unesite sve obavezne podatke',
+                'e'=>$this->pocetniPodaci()
             ]);
             return;
         }
         $this->pripremiZaView();
-        if(!$this->kontrolaNovi()){
-            $this->pozoviView([
-                'e'=>$this->e,
-                'poruka'=>$this->poruka
+
+        try {
+            $this->kontrolaNovi();
+            $this->pripremiZaBazu();
+            Proizvod::create((array)$this->e);
+            header('location:' . App::config('url') . 'proizvod');
+        } catch (\Exception $th) {
+            $this->view->render($this->viewPutanja . 'novi',[
+                'poruka'=>$this->poruka,
+                'e'=>$this->e
             ]);
-            return;
         }
-        $this->pripremiZaBazu();
-        Proizvod::create((array)$this->e);
-        $this->pozoviView([
-            'e'=>$this->pocetniPodaci(),
-            'poruka'=>'Uspješno spremljeno'
-        ]);
     }
 
-    public function promjena($sifra='')
+    public function promjena($sifra=0)
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            if(strlen(trim($sifra))===0){
-                header('location: ' . App::config('url') . 'index/odjava');
+            $this->provjeraIntParametra($sifra);
+
+            $this->e=Proizvod::readOne($sifra);
+
+            if($this->e==null){
+                header('location:' . App::config('url') . 'index/odjava');
                 return;
             }
 
-        $sifra=(int)$sifra;
-        if($sifra===0){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->e=Proizvod::readOne($sifra);
-
-        if($this->e==null){
-            header('location: ' . App::config('url') . 'index/odjava');
-            return;
-        }
-
-        $this->e->jedinicnacijena=$this->nf->format($this->e->jedinicnacijena);
-
-        $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>'Izmijenite podatke po želji'
-        ]);
+            $this->view->render($this->viewPutanja . 'promjena',[
+                'poruka'=>'Izmijenite željene podatke',
+                'e'=>$this->e
+            ]);
         return;
     }
 
     $this->pripremiZaView();
-    if(!$this->kontrolaPromjena()){
+
+    try {
+        $this->e->sifra=$sifra;
+        $this->kontrolaPromjena();
+        $this->pripremiZaBazu();
+        Proizvod::update((array)$this->e);
+        header('location:' . App::config('url') . 'proizvod');
+    }catch (\Exception $th) {
         $this->view->render($this->viewPutanja . 'promjena',[
-            'e'=>$this->e,
-            'poruka'=>$this->poruka
+            'poruka'=>$this->poruka . ' ' . $th->getMessage(),
+            'e'=>$this->e
         ]);
-        return;
     }
 
-    $this->e->sifra=$sifra;
-    $this->pripremiZaBazu();
-    Proizvod::update((array)$this->e);
-    $this->view->render($this->viewPutanja . 'promjena',[
-        'e'=>$this->e,
-        'poruka'=>'Uspješna izmjena podataka'
-    ]);
+    }
 
+    public function kontrolaNovi()
+    {
+        $this->kontrolaNazivNovi();
+        $this->kontrolaProizvodjac();
+        $this->kontrolaJedinicnacijena();
+        $this->kontrolaOpis();
+    }
+
+    public function kontrolaPromjena()
+    {
+        $this->kontrolaNazivIsti();
+        $this->kontrolaProizvodjac();
+        $this->kontrolaJedinicnacijena();
+        $this->kontrolaOpis();
+    }
+
+    private function kontrolaNazivNovi()
+    {
+        $s=$this->e->naziv;
+        if(strlen(trim($s))===0){
+            $this->poruka='Naziv proizvoda obavezan';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+
+        if(Proizvod::postojiIstiProizvodNovi($s)){
+            $this->poruka='Proizvod već postoji u bazi';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaNazivIsti()
+    {
+        $s=$this->e->naziv;
+        if(strlen(trim($s))===0){
+            $this->poruka='Naziv proizvoda obavezan';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+
+        if(isset($this->e->sifra)){
+            if(!Proizvod::postojiIstiProizvodPromjena($this->e->naziv,$this->e->sifra)){
+                $this->poruka='Uneseni proizvod već postoji u bazi';
+                throw new Exception();
+            }
+        }else{
+            if(!Proizvod::postojiIstiProizvodPromjena($this->e->naziv)){
+                $this->poruka='Uneseni proizvod već postoji u bazi';
+                throw new Exception();
+            }
+        }
+    }
+
+    private function kontrolaProizvodjac()
+    {
+        $s=$this->e->proizvodjac;
+        if(strlen(trim($s))===0){
+            $this->poruka='Ime proizvođača obavezno';
+            throw new Exception();
+        }
+
+        if(strlen(trim($s))>50){
+            $this->poruka='Ime proizvođača ne smije imati više od 50 znakova';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaJedinicnacijena()
+    {
+        
+        if(strlen(trim($this->e->jedinicnacijena))===0){
+            $this->poruka='Jedinična cijena obavezna';
+            throw new Exception();
+        }
+
+        $jedinicnacijena=$this->nf->parse($this->e->jedinicnacijena);
+        if(!$jedinicnacijena){
+            $this->poruka='Jedinična cijena nije u dobrom formatu (Format mora biti 0.000,00)';
+            throw new Exception();
+        }
+
+        if($jedinicnacijena<0){
+            $this->poruka='Jedinična cijena morat biti veća od 0,00';
+            throw new Exception();
+        }
+
+        if($jedinicnacijena>5000){
+            $this->poruka='Jedinična cijena ne smije biti veća od 3.000,00';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaOpis()
+    {
+        $s=$this->e->opis;
+        if(strlen(trim($s))===0){
+            $this->poruka='Opis obavezan';
+            throw new Exception();
+        }
     }
 
     public function brisanje($sifra=0)
@@ -113,120 +208,18 @@ class ProizvodController extends AutorizacijaController
         $this->view->render($this->viewPutanja . 'novi', $parametri);
     }
 
-    private function pripremiZaView()
+    public function pripremiZaView()
     {
         $this->e=(object)$_POST;
         $this->e->dostupnost=$this->e->dostupnost==='true' ? true : false;
     }
 
-    private function pripremiZaBazu()
+    public function pripremiZaBazu()
     {
         $this->e->jedinicnacijena=$this->nf->parse($this->e->jedinicnacijena);
     }
 
-    private function kontrolaNovi()
-    {
-        return $this->kontrolaNaziv() && $this->kontrolaProizvodjac() && $this->kontrolaJedinicnacijena() && 
-        $this->kontrolaOpis();
-    }
-
-    private function kontrolaPromjena()
-    {
-        return $this->kontrolaNazivPromjena() && $this->kontrolaProizvodjac() && $this->kontrolaJedinicnacijena() && 
-        $this->kontrolaOpis();
-    }
-
-    private function kontrolaNaziv()
-    {
-        $s=$this->e->naziv;
-        if(strlen(trim($s))===0){
-            $this->poruka='Naziv proizvoda obavezan';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        if(Proizvod::postojiIstiProizvodUBazi($s)){
-            $this->poruka='Proizvod već postoji u bazi';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaNazivPromjena()
-    {
-        $s=$this->e->naziv;
-        if(strlen(trim($s))===0){
-            $this->poruka='Naziv proizvoda obavezan';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaProizvodjac()
-    {
-        $s=$this->e->proizvodjac;
-        if(strlen(trim($s))===0){
-            $this->poruka='Ime proizvođača obavezno';
-            return false;
-        }
-
-        if(strlen(trim($s))>50){
-            $this->poruka='Ime proizvođača ne smije imati više od 50 znakova';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaJedinicnacijena()
-    {
-        
-        if(strlen(trim($this->e->jedinicnacijena))===0){
-            $this->poruka='Jedinična cijena obavezna';
-            return false;
-        }
-
-        $jedinicnacijena=$this->nf->parse($this->e->jedinicnacijena);
-        if(!$jedinicnacijena){
-            $this->poruka='Jedinična cijena nije u dobrom formatu (Format mora biti 0.000,00)';
-            return false;
-        }
-
-        if($jedinicnacijena<0){
-            $this->poruka='Jedinična cijena morat biti veća od 0,00';
-            return false;
-        }
-
-        if($jedinicnacijena>5000){
-            $this->poruka='Jedinična cijena ne smije biti veća od 3.000,00';
-            return false;
-        }
-
-        return true;
-    }
-
-    private function kontrolaOpis()
-    {
-        $s=$this->e->opis;
-        if(strlen(trim($s))===0){
-            $this->poruka='Opis obavezan';
-            return false;
-        }
-        return true;
-    }
-
-    private function pocetniPodaci()
+    public function pocetniPodaci()
     {
         $e=new stdClass();
         $e->naziv='';

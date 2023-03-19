@@ -80,7 +80,7 @@ class Proizvod
         $izraz->execute();
     }
 
-    public static function postojiIstiProizvodUBazi($s)
+    public static function postojiIstiProizvodNovi($s)
     {
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
@@ -93,5 +93,27 @@ class Proizvod
         ]);
         $sifra=$izraz->fetchColumn();
         return $sifra>0;
+    }
+
+    public static function postojiIstiProizvodPromjena($naziv,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from proizvod where naziv=:naziv 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['naziv']=$naziv;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
     }
 }
