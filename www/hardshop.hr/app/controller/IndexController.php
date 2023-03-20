@@ -9,6 +9,12 @@ class IndexController extends Controller
 
     public function prijava()
     {
+        if(App::auth()){
+            $np=new NadzornaplocaController();
+            $np->index();
+            return;
+        }
+
         $this->view->render('prijava',[
             'poruka'=>'',
             'email'=>''
