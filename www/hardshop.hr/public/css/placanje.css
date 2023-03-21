@@ -5,3 +5,14 @@ thead > tr > th:nth-child(2){
 tbody > tr > td:nth-child(2){
     text-align: center;
 }
+
+.fi-pencil{
+    margin-right: 15px;
+    font-size: 20px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    font-size: 20px;
+    color: darkred;
+}

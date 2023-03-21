@@ -1,3 +1,22 @@
-thead > tr > th{
-    text-align: center;
+.fi-pencil{
+    margin-left: 90px;
+    font-size: 25px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    margin-left: 15px;
+    font-size: 25px;
+    color: darkred;
+}
+
+.callout{
+    background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
+    border-radius: 25px;
+    border: transparent;
+}
+
+#img{
+    position: relative;
+    left: 32px;
 }
