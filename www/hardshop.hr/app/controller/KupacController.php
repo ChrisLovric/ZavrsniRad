@@ -23,15 +23,16 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             $stranica=1;
         }
 
-        $uk=Kupac::ukupnoKupaca($uvjet);
+        $ukupnostr=Kupac::ukupnoKupaca($uvjet);
 
-        $zadnjastr=(int)ceil($uk/App::config('brps'));
+        $zadnjastr=(int)ceil($ukupnostr/App::config('brps'));
 
         $this->view->render($this->viewPutanja . 'index',[
             'podaci'=>Kupac::read($uvjet,$stranica),
             'uvjet'=>$uvjet,
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
+            'ukupnostr'=>$ukupnostr,
             'css'=>'kupac.css'
         ]);
         

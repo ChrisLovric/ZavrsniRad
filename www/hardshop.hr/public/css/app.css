@@ -32,17 +32,6 @@
     left: 520px;
 }
 
-.fi-pencil{
-    margin-right: 15px;
-    font-size: 20px;
-    color: darkgreen;
-}
-
-.fi-trash{
-    font-size: 20px;
-    color: darkred;
-}
-
 body{
     background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
     background-size: 120%;
@@ -119,9 +108,9 @@ h2{
 }
 
 h3{
-    color: mediumaquamarine;
-    font-size: 35px;
-    font-weight: bold;
+    color: bisque;
+    font-size: 20px;
+    text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -251,5 +240,25 @@ input#uloga{
     width: 50%;
     position: relative;
     left: 25%;
+}
+
+input#search{
+    background-color: ghostwhite;
+    border-radius: 15px;
+    width: 50%;
+}
+
+ul.pagination li a, ul.pagination li button {
+    display: block;
+    border-radius: 15px;
+    color: bisque;
+    background-color: black;
+    transition: background-color 300ms ease-out;
+}
+
+#current{
+    background-color: darkgreen;
+    border-radius: 15px;
+    color: bisque;
 }
 
