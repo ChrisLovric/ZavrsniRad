@@ -1,37 +1,31 @@
 <a href="<?=App::config('url')?>proizvod/novi" class="small button">
     Dodaj novi proizvod
-</a>
+</a><br><br>
 
-<table>
-    <thead>
-        <tr>
-            <th>Naziv</th>
-            <th>Proizvođač</th>
-            <th>Jedinična cijena (€)</th>
-            <th>Opis</th>
-            <th>Dostupnost</th>
-            <th>Akcija</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($podaci as $red): ?>
-            <tr>
-                <td><?=$red->naziv?></td>
-                <td><?=$red->proizvodjac?></td>
-                <td><?=$red->jedinicnacijena?></td>
-                <td><?=$red->opis?></td>
-                <td><i class="fi-<?=$red->dostupnost?>"></i></td>
-                <td>
-                    <a href="<?=App::config('url')?>proizvod/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
-                    <?php if($red->detaljinarudzbe==0): ?>
-                        <a onclick="return confirm('Potvrdi za brisanje proizvoda <?=$red->naziv?>');"
-                        href="<?=App::config('url')?>proizvod/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
-                    <?php else: ?>
-                        <i title="Proizvod nije moguće brisati jer se nalazi u detaljima narudžbe" 
-                        class="fi-trash" style="color: gray"></i>
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-    </tbody>
-</table>
+<form action="" method="get">
+    <input type="text" name="uvjet" placeholder="Pretraži proizvode"
+    value="<?=$uvjet?>" id="search">
+</form>
+
+<?php include 'stranicenje.phtml' ?>
+
+<div class="grid-x grid-padding-x">
+    <?php foreach($podaci as $red): ?>
+        <div class="large-3 medium-6 small-12 cell">
+            <br><div class="callout">
+                <img src="<?=App::config('url')?>public/img/nepoznato.png" 
+                id="img" alt="<?=$red->naziv?> <?=$red->proizvodjac?>
+                <?=$red->jedinicnacijena?>">
+
+                <hr><h3><?=$red->proizvodjac?><br><?=$red->naziv?> <br> <br><?=$red->jedinicnacijena . ' €'?><br><br>
+                Stanje:<i class="fi-<?=$red->dostupnost?>"></i></h3><hr>
+                <?php
+                    $par=['proizvod', $red->naziv . ' ' . $red->proizvodjac, $red->detaljinarudzbe==0];
+                include BP_APP . 'view/includes/promjenabrisanje.phtml';
+                ?>
+            </div>
+        </div>
+    <?php endforeach;?>
+</div>
+
+<?php include 'stranicenje.phtml' ?>

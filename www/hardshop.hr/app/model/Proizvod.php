@@ -2,8 +2,12 @@
 
 class Proizvod
 {
-    public static function read()
+    public static function read($uvjet='',$stranica=1)
     {
+        $uvjet='%' . $uvjet . '%';
+        $brps=App::config('brps');
+        $pocetak=($stranica * $brps) - $brps;
+
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
@@ -16,16 +20,24 @@ class Proizvod
 		        count(b.sifra) as detaljinarudzbe
         from proizvod a
         left join detaljinarudzbe b on a.sifra=b.proizvod
+        where concat(a.naziv, \' \', a.proizvodjac, \' \', ifnull(a.jedinicnacijena,\'\'))
+        like :uvjet
         group by 	a.naziv,
 			        a.proizvodjac,
 			        a.jedinicnacijena,
 			        a.opis,
 			        a.dostupnost
-        order by a.naziv asc;
+        order by a.naziv asc
+        limit :pocetak, :brps
         
         ');
 
+        $izraz->bindValue('pocetak',$pocetak,PDO::PARAM_INT);
+        $izraz->bindValue('brps',$brps,PDO::PARAM_INT);
+        $izraz->bindParam('uvjet',$uvjet);
+
         $izraz->execute();
+
         return $izraz->fetchAll();
     }
 
@@ -41,6 +53,25 @@ class Proizvod
             'sifra'=>$sifra
         ]);
         return $izraz->fetch();
+    }
+
+    public static function ukupnoProizvoda($uvjet='')
+    {
+        $uvjet='%' . $uvjet . '%';
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select count(*)
+        from
+        proizvod
+        where concat(naziv, \' \', proizvodjac, \' \', ifnull(jedinicnacijena,\'\'))
+        like :uvjet
+
+        ');
+        $izraz->execute([
+            'uvjet'=>$uvjet
+        ]);
+        return $izraz->fetchColumn();
     }
 
     public static function create($parametri)

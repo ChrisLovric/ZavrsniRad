@@ -16,8 +16,30 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
+        if(isset($_GET['uvjet'])){
+            $uvjet=trim($_GET['uvjet']);
+        }else{
+            $uvjet='';
+        }
+
+        if(isset($_GET['stranica'])){
+            $stranica=(int)$_GET['stranica'];
+            if($stranica<1){
+                $stranica=1;
+            }
+        }else{
+            $stranica=1;
+        }
+
+        $up=Proizvod::ukupnoProizvoda($uvjet);
+
+        $zadnjastr=(int)ceil($up/App::config('brps'));
+
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Proizvod::read()),
+            'podaci'=>$this->prilagodiPodatke(Proizvod::read($uvjet,$stranica)),
+            'uvjet'=>$uvjet,
+            'stranica'=>$stranica,
+            'zadnjastr'=>$zadnjastr,
             'css'=>'proizvod.css'
         ]);
         
@@ -205,7 +227,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
 
     private function pozoviView($parametri)
     {
-        $this->view->render($this->viewPutanja . 'novi', $parametri);
+        
     }
 
     public function pripremiZaView()
