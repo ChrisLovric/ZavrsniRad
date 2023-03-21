@@ -1,0 +1,22 @@
+.fi-pencil{
+    margin-right: 15px;
+    font-size: 25px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    font-size: 25px;
+    color: darkred;
+}
+
+tbody > tr > td:nth-last-child(-n + 3){
+    text-align: right;
+}
+
+tbody > tr > td :nth-child(1),:nth-child(4){
+    text-align: center;
+}
+
+thead > tr > th{
+    text-align: center;
+}
