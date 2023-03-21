@@ -31,15 +31,16 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             $stranica=1;
         }
 
-        $up=Proizvod::ukupnoProizvoda($uvjet);
+        $ukupnostr=Proizvod::ukupnoProizvoda($uvjet);
 
-        $zadnjastr=(int)ceil($up/App::config('brps'));
+        $zadnjastr=(int)ceil($ukupnostr/App::config('brps'));
 
         $this->view->render($this->viewPutanja . 'index',[
             'podaci'=>$this->prilagodiPodatke(Proizvod::read($uvjet,$stranica)),
             'uvjet'=>$uvjet,
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
+            'ukupnostr'=>$ukupnostr,
             'css'=>'proizvod.css'
         ]);
         
