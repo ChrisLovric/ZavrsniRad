@@ -2,24 +2,14 @@
 Dodaj novog operatera
 </a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Ime</th>
-            <th>Prezime</th>
-            <th>Email</th>
-            <th>Uloga</th>
-            <th>Akcija</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($podaci as $red): ?>
-            <tr>
-                <td><?=$red->ime?></td>
-                <td><?=$red->prezime?></td>
-                <td><?=$red->email?></td>
-                <td><?=$red->uloga?></td>
-                <td>
+<div class="grid-x grid-padding-x">
+    <?php foreach($podaci as $red): ?>
+        <div class="large-3 medium-6 small-12 cell">
+            <br><div class="callout">
+                <img src="<?=App::config('url')?>public/img/nepoznato.png" 
+                alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
+
+                <hr><h3><?=$red->ime?> <?=$red->prezime?></h3><hr>
                 <a href="<?=App::config('url')?>operater/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
                 <?php if($red->email!=='admin@hardshop.hr' && $red->email!=='operater@hardshop.hr'): ?>
                         <a onclick="return confirm('Potvrdi za brisanje operatera <?=$red->ime?> <?=$red->prezime?>');"
@@ -28,9 +18,7 @@ Dodaj novog operatera
                         <i title="Nije moguće brisati admina"
                         class="fi-trash" style="color: gray"></i>
                     <?php endif; ?>
-                    
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+            </div>
+        </div>
+    <?php endforeach;?>
+</div>
