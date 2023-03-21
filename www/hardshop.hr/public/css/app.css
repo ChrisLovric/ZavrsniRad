@@ -33,7 +33,7 @@
 }
 
 body{
-    background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
+    background-image: url(../img/back.jpg);
     background-size: 120%;
     color: bisque;
 }
@@ -76,7 +76,7 @@ td{
 }
 
 #vertical-menu{
-    background-image: url(https://drive.google.com/uc?export=view&id=1zMBFOFztzuzMSQqTZJfdSth4uaEcCHKM);
+    background-image: url(../img/back.jpg);
     color: bisque;
     border-radius: 15px;
 }
