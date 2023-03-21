@@ -1,0 +1,18 @@
+.fi-pencil{
+    margin-right: 15px;
+    font-size: 25px;
+    color: darkgreen;
+}
+
+.fi-trash{
+    font-size: 25px;
+    color: darkred;
+}
+
+tbody > tr > td{
+    text-align: center;
+}
+
+thead > tr > th{
+    text-align: center;
+}
