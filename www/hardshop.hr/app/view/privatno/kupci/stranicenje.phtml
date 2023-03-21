@@ -1,0 +1,20 @@
+<nav aria-label="Pagination">
+        <ul class="pagination text-center">
+            <?php if($stranica===1): ?>
+            <li class="pagination-previous disabled">Prethodna <span class="show-for-sr">stranica</span></li>
+            <?php else: ?>
+                <li class="pagination-previous"><a href="<?=App::config('url')?>kupac/index?stranica=<?php echo $stranica-1; ?>&uvjet=<?=$uvjet?>" aria-label="Prethodno">Prethodna <span class="show-for-sr">stranica</span></a></li>
+                <?php endif;?>
+            <li class="current"><span class="show-for-sr">Trenutna</span> <?=$stranica?></li>
+            <?php if($stranica===$zadnjastr): ?>
+            <li class="pagination-next disabled">
+                Sljedeća <span class="show-for-sr">stranica</span>
+                </li>
+            <?php else: ?>
+                <li class="pagination-next">
+                <a href="<?=App::config('url')?>kupac/index?stranica=<?php echo $stranica+1; ?>&uvjet=<?=$uvjet?>" aria-label="Sljedeće">Sljedeća <span class="show-for-sr">stranica</span></a>        
+            </li>
+                <?php endif;?>
+        </ul>
+    </nav>
+

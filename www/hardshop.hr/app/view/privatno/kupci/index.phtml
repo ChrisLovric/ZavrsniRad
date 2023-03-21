@@ -1,35 +1,29 @@
-<a href="<?=App::config('url')?>kupac/novi" class="small button">
+<a href="<?=App::config('url')?>kupac/novi" 
+class="small button">
     Dodaj novog kupca
-</a>
+</a><br><br>
 
-<table>
-    <thead>
-        <tr>
-            <th>Ime</th>
-            <th>Prezime</th>
-            <th>Email</th>
-            <th>Adresa za račun</th>
-            <th>Adresa za dostavu</th>
-            <th>Broj telefona</th>
-            <th>Akcija</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($podaci as $red): ?>
-            <tr>
-                <td><?=$red->ime?></td>
-                <td><?=$red->prezime?></td>
-                <td><?=$red->email?></td>
-                <td><?=$red->adresazaracun?></td>
-                <td><?=$red->adresazadostavu?></td>
-                <td><?=$red->brojtelefona?></td>
-                <td>
-                <?php 
+<form action="" method="get">
+    <input type="text" name="uvjet" placeholder="Pretraži kupce"
+    value="<?=$uvjet?>" id="search">
+</form>
+
+<?php include 'stranicenje.phtml' ?>
+<div class="grid-x grid-padding-x">
+    <?php foreach($podaci as $red): ?>
+        <div class="large-3 medium-6 small-12 cell">
+            <br><div class="callout">
+                <img src="<?=App::config('url')?>public/img/nepoznato.png" 
+                alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
+
+                <hr><h3><?=$red->ime?> <?=$red->prezime?></h3><hr>
+                <?php
                 $par=['kupac', $red->ime . ' ' . $red->prezime, $red->narudzba==0];
                 include BP_APP . 'view/includes/promjenabrisanje.phtml';
                 ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-    </tbody>
-</table>
+            </div>
+        </div>
+    <?php endforeach;?>
+</div>
+
+<?php include 'stranicenje.phtml' ?>

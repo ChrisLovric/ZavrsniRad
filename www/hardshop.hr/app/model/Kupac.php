@@ -2,8 +2,12 @@
 
 class Kupac
 {
-    public static function read()
+    public static function read($uvjet='',$stranica=1)
     {
+        $uvjet='%' . $uvjet . '%';
+        $brps=App::config('brps');
+        $pocetak=($stranica * $brps) - $brps;
+
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
@@ -18,6 +22,8 @@ class Kupac
 		        count(b.sifra) as narudzba
         from kupac a
         left join narudzba b on a.sifra=b.kupac
+        where concat(a.ime, \' \', a.prezime, \' \', ifnull(a.adresazaracun,\'\'))
+        like :uvjet
         group by 	a.ime,
 		        	a.prezime,
 			        a.email,
@@ -25,11 +31,17 @@ class Kupac
 			        a.adresazaracun,
 			        a.adresazadostavu,
 			        a.brojtelefona
-        order by a.ime asc;
+        order by a.ime asc
+        limit :pocetak, :brps
         
         ');
 
+        $izraz->bindValue('pocetak',$pocetak,PDO::PARAM_INT);
+        $izraz->bindValue('brps',$brps,PDO::PARAM_INT);
+        $izraz->bindParam('uvjet',$uvjet);
+
         $izraz->execute();
+
         return $izraz->fetchAll();
     }
 
@@ -44,6 +56,25 @@ class Kupac
             'sifra'=>$sifra
         ]);
         return $izraz->fetch();
+    }
+
+    public static function ukupnoKupaca($uvjet='')
+    {
+        $uvjet='%' . $uvjet . '%';
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select count(*)
+        from
+        kupac
+        where concat(ime, \' \', prezime, \' \', ifnull(adresazadostavu,\'\'))
+        like :uvjet
+
+        ');
+        $izraz->execute([
+            'uvjet'=>$uvjet
+        ]);
+        return $izraz->fetchColumn();
     }
 
     public static function create($parametri)

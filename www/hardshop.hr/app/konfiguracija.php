@@ -8,6 +8,7 @@ return [
     'formatBroja'=>'###,##0.00',
     'url'=>'http://hardshop.hr/',
     'nazivApp'=>'Hardshop',
+    'brps'=>10,
     'baza'=>[
         'dsn'=>'mysql:host=localhost;dbname=webshop;charset=utf8mb4',
         'user'=>'root',
@@ -20,6 +21,7 @@ return [
     'formatBroja'=>'###,##0.00',
     'url'=>'http://polaznik37.edunova.hr/',
     'nazivApp'=>'Hardshop',
+    'brps'=>10,
     'baza'=>[
         'dsn'=>'mysql:host=localhost;dbname=eskulap_webshop;charset=utf8mb4',
         'user'=>'eskulap_edunova',

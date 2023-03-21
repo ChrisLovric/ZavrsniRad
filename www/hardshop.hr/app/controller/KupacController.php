@@ -8,8 +8,30 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
+        if(isset($_GET['uvjet'])){
+            $uvjet=trim($_GET['uvjet']);
+        }else{
+            $uvjet='';
+        }
+
+        if(isset($_GET['stranica'])){
+            $stranica=(int)$_GET['stranica'];
+            if($stranica<1){
+                $stranica=1;
+            }
+        }else{
+            $stranica=1;
+        }
+
+        $uk=Kupac::ukupnoKupaca($uvjet);
+
+        $zadnjastr=(int)ceil($uk/App::config('brps'));
+
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>Kupac::read(),
+            'podaci'=>Kupac::read($uvjet,$stranica),
+            'uvjet'=>$uvjet,
+            'stranica'=>$stranica,
+            'zadnjastr'=>$zadnjastr,
             'css'=>'kupac.css'
         ]);
         
@@ -209,10 +231,6 @@ class KupacController extends AutorizacijaController implements ViewSucelje
     private function kontrolaBrojTelefonaNovi()
     {
         $s=$this->e->brojtelefona;
-        if(strlen(trim($s))===0){
-            $this->poruka='Broj telefona obavezan';
-            throw new Exception();
-        }
 
         if(strlen(trim($s))>20){
             $this->poruka='Broj telefona ne smije imati više od 50 znakova';
@@ -228,10 +246,6 @@ class KupacController extends AutorizacijaController implements ViewSucelje
     private function kontrolaBrojTelefonaIsti()
     {
         $s=$this->e->brojtelefona;
-        if(strlen(trim($s))===0){
-            $this->poruka='Broj telefona obavezan';
-            throw new Exception();
-        }
 
         if(strlen(trim($s))>20){
             $this->poruka='Broj telefona ne smije imati više od 20 znakova';
