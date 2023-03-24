@@ -1,0 +1,45 @@
+<label for="brojnarudzbe">Broj narudžbe</label>
+<input type="text" id="brojnarudzbe" name="brojnarudzbe" value="<?=$e->brojnarudzbe?>">
+
+<label for="datumnarudzbe">Datum narudžbe</label>
+<input type="date" name="datumnarudzbe" id="datumnarudzbe"
+value="<?=$e->datumnarudzbe?>">
+
+<label for="datumisporuke">Datum isporuke</label>
+<input type="date" name="datumisporuke" id="datumisporuke"
+value="<?=$e->datumisporuke?>">
+
+<label for="datumplacanja">Datum plaćanja</label>
+<input type="date" name="datumplacanja" id="datumplacanja"
+value="<?=$e->datumplacanja?>"> 
+
+<label for="kupac">Kupac</label>
+<select name="kupac" id="kupac">
+    <?php foreach($kupci as $kupac): ?>
+        <option 
+        <?php if($kupac->sifra==$e->kupac){
+            echo ' selected="selected" ';
+        } ?>
+        value="<?=$kupac->sifra?>">
+            <?=$kupac->ime?> <?=$kupac->prezime?>
+        </option>
+    <?php endforeach;?>
+</select>
+
+
+<label for="placanje">Vrsta plaćanja</label>
+<select name="placanje" id="placanje">
+    <?php foreach($placanja as $placanje): ?>
+        <option 
+        <?php if($placanje->sifra==$e->placanje){
+            echo ' selected="selected" ';
+        } ?>
+        value="<?=$placanje->sifra?>">
+            <?=$placanje->vrstaplacanja?>
+        </option>
+    <?php endforeach;?>
+</select>
+
+
+
+

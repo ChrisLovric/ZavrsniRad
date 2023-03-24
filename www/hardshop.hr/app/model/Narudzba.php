@@ -13,7 +13,9 @@ class Narudzba
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime) as kupac,
         b.vrstaplacanja,
-        a.datumnarudzbe
+        a.datumnarudzbe,
+        a.datumisporuke,
+        a.datumplacanja
         from narudzba a 
         left join placanje b on a.placanje=b.sifra 
         left join kupac c on a.kupac=c.sifra 
@@ -22,7 +24,9 @@ class Narudzba
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime),
         b.vrstaplacanja,
-        a.datumnarudzbe
+        a.datumnarudzbe,
+        a.datumisporuke,
+        a.datumplacanja
         
         ');
 
@@ -35,12 +39,16 @@ class Narudzba
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        select * from narudzba where sifra=:sifra');
+        select * from narudzba where sifra=:sifra
         
+        ');
+
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        return $izraz->fetch();
+        $narudzba=$izraz->fetch();
+        return $narudzba;
+        
     }
 
     public static function create($parametri)
@@ -53,6 +61,7 @@ class Narudzba
         
         ');
         $izraz->execute($parametri);
+        return $veza->lastInsertId();
     }
 
     public static function update($parametri)

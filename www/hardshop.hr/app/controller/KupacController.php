@@ -8,6 +8,19 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
+        $poruka='';
+        if(isset($_GET['p'])){
+            switch ((int)$_GET['p']){
+                case 1:
+                    $poruka='Kreirajte kupca kako bi mogli kreirati narudžbu';
+                    break;
+
+                    default:
+                    $poruka='';
+                    break;
+            }
+        }
+
         if(isset($_GET['uvjet'])){
             $uvjet=trim($_GET['uvjet']);
         }else{
@@ -33,6 +46,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
             'ukupnostr'=>$ukupnostr,
+            'poruka'=>$poruka,
             'css'=>'kupac.css'
         ]);
         

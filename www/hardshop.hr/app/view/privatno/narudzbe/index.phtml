@@ -9,6 +9,8 @@
             <th>Kupac</th>
             <th>Vrsta plaćanja</th>
             <th>Datum narudžbe</th>
+            <th>Datum isporuke</th>
+            <th>Datum plaćanja</th>
             <th>Akcija</th>
         </tr>
     </thead>
@@ -19,6 +21,8 @@
                 <td><?=$red->kupac?></td>
                 <td><?=$red->vrstaplacanja?></td>
                 <td><?=$red->datumnarudzbe?></td>
+                <td><?=$red->datumisporuke?></td>
+                <td><?=$red->datumplacanja?></td>
                 <td>
                 <a href="<?=App::config('url')?>narudzba/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
                 <?php if($red->kupac==0): ?>

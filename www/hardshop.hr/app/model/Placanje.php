@@ -108,4 +108,18 @@ class Placanje
         $sifra=$izraz->fetchColumn();
         return $sifra==0;
     }
+
+    public static function prvoPlacanje()
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra from placanje
+        order by sifra limit 1
+        
+        ');
+        $izraz->execute();
+        $sifra=$izraz->fetchColumn();
+        return $sifra;
+    }
 }
