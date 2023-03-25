@@ -1,0 +1,34 @@
+<label for="narudzba">Broj narudžbe*</label>
+<select name="narudzba" id="input">
+    <?php foreach($narudzbe as $narudzba): ?>
+        <option 
+        <?php if($narudzba->sifra==$e->narudzba){
+            echo ' selected="selected" ';
+        } ?>
+        value="<?=$narudzba->sifra?>">
+            <?=$narudzba->brojnarudzbe?>
+        </option>
+    <?php endforeach;?>
+</select>
+
+<label for="proizvod">Proizvod*</label>
+<select name="proizvod" id="input">
+    <?php foreach($proizvodi as $proizvod): ?>
+        <option 
+        <?php if($proizvod->sifra==$e->proizvod){
+            echo ' selected="selected" ';
+        } ?>
+        value="<?=$proizvod->sifra?>">
+            <?=$proizvod->naziv?>
+        </option>
+    <?php endforeach;?>
+</select>
+
+<label for="kolicina">Količina proizvoda*</label>
+<input type="text" id="input" name="kolicina" value="<?=$e->kolicina?>">
+
+<label for="popust">Popust</label>
+<input type="text" id="input" name="popust" value="<?=$e->popust?>">
+
+<label for="cijena">Cijena*</label>
+<input type="text" id="input" name="cijena" value="<?=$e->cijena?>">        

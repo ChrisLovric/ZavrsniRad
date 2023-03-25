@@ -45,7 +45,8 @@ class Detaljinarudzbe
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        return $izraz->fetch();
+        $detaljinarudzbe=$izraz->fetch();
+        return $detaljinarudzbe;
     }
 
     public static function create($parametri)
@@ -58,6 +59,7 @@ class Detaljinarudzbe
         
         ');
         $izraz->execute($parametri);
+        return $veza->lastInsertId();
     }
 
     public static function update($parametri)

@@ -24,14 +24,103 @@ class DetaljinarudzbeController extends AutorizacijaController implements ViewSu
         
     }
 
-    public function novi()
+    private function prilagodiPodatke($detaljinarudzbe)
     {
-
+        foreach($detaljinarudzbe as $dn){
+            $dn->cijena=$this->formatIznosa($dn->cijena);
+            $dn->kolicina;
+            $dn->popust=$this->formatIznosa($dn->popust);
+            $dn->brojnarudzbe;
+            $dn->naziv;
+            if($dn->popust==null){
+                $dn->popust='Nije definirano';
+            }
+        }
+        return $detaljinarudzbe;
     }
 
-    public function promjena()
+    public function novi()
     {
+        $narudzbaSifra=Narudzba::prvaNarudzba();
+        if($narudzbaSifra==0){
+            header('location: ' . App::config('url') . 'narudzba?p=1');
+        }
 
+        $proizvodSifra=Proizvod::prviProizvod();
+        if($proizvodSifra==0){
+            header('location: ' . App::config('url') . 'proizvod?p=1');
+        }
+
+        $this->promjena(Detaljinarudzbe::create([
+            'cijena'=>'',
+            'kolicina'=>'',
+            'popust'=>null,
+            'narudzba'=>$narudzbaSifra,
+            'proizvod'=>$proizvodSifra
+        ]));
+    }
+
+    public function odustani($sifra='')
+    {
+        $e=Detaljinarudzbe::readOne($sifra);
+
+        if(
+        $e->popust==null){
+        Detaljinarudzbe::delete($e->sifra);
+        }
+        header('location: ' . App::config('url') . 'detaljinarudzbe');
+    }
+
+    public function promjena($sifra='')
+    {
+        if($_SERVER['REQUEST_METHOD']==='GET'){
+            $this->promjena_GET($sifra);
+            return;
+        }
+
+        $this->e=(object)$_POST;
+
+        try {
+            $this->e->sifra=$sifra;
+            $this->kontrola();
+            $this->pripremiZaBazu();
+            Detaljinarudzbe::update((array)$this->e);
+            header('location:' . App::config('url') . 'detaljinarudzbe');
+        } catch (\Exception $th) {
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'poruke'=>$this->poruke,
+                'e'=>$this->e
+            ]);
+        }
+    }
+
+    private function promjena_GET($sifra)
+    {
+        $this->e=Detaljinarudzbe::readOne($sifra);
+        $narudzbe=[];
+        $n=new stdClass();
+        $n->sifra=0;
+        $n->brojnarudzbe='Nije odabrano';
+        $narudzbe[]=$n;
+        foreach(Narudzba::read() as $narudzba){
+            $narudzbe[]=$narudzba;
+        }
+
+        $this->e=Detaljinarudzbe::readOne($sifra);
+        $proizvodi=[];
+        $p=new stdClass();
+        $p->sifra=0;
+        $p->naziv='Nije odabrano';
+        $proizvodi[]=$p;
+        foreach(Proizvod::read() as $proizvod){
+            $proizvodi[]=$proizvod;
+        }
+
+        $this->view->render($this->viewPutanja . 'detalji',[
+            'e'=>$this->e,
+            'narudzbe'=>$narudzbe,
+            'proizvodi'=>$proizvodi
+        ]);
     }
 
     public function brisanje($sifra=0)
@@ -45,6 +134,11 @@ class DetaljinarudzbeController extends AutorizacijaController implements ViewSu
         header('location: ' . App::config('url') . 'detaljinarudzbe/index');
     }
 
+    private function kontrola()
+    {
+
+    }
+
     public function pripremiZaView()
     {
 
@@ -52,7 +146,9 @@ class DetaljinarudzbeController extends AutorizacijaController implements ViewSu
 
     public function pripremiZaBazu()
     {
-        
+        if($this->e->popust==''){
+            $this->e->popust=null;
+        }
     }
 
     public function pocetniPodaci()
@@ -64,18 +160,6 @@ class DetaljinarudzbeController extends AutorizacijaController implements ViewSu
         $e->narudzba='';
         $e->proizvod='';
         return $e;
-    }
-
-    private function prilagodiPodatke($detaljinarudzbe)
-    {
-        foreach($detaljinarudzbe as $dn){
-            $dn->cijena=$this->formatIznosa($dn->cijena);
-            $dn->kolicina;
-            $dn->popust=$this->formatIznosa($dn->popust);
-            $dn->brojnarudzbe;
-            $dn->naziv;
-        }
-        return $detaljinarudzbe;
     }
 
     private function formatIznosa($broj)

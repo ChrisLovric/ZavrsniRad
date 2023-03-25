@@ -147,4 +147,18 @@ class Proizvod
         $sifra=$izraz->fetchColumn();
         return $sifra==0;
     }
+
+    public static function prviProizvod()
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra from proizvod
+        order by sifra limit 1
+        
+        ');
+        $izraz->execute();
+        $sifra=$izraz->fetchColumn();
+        return $sifra;
+    }
 }

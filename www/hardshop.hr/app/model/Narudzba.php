@@ -90,4 +90,18 @@ class Narudzba
         $izraz->execute();
     }
 
+    public static function prvaNarudzba()
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra from narudzba
+        order by sifra limit 1
+        
+        ');
+        $izraz->execute();
+        $sifra=$izraz->fetchColumn();
+        return $sifra;
+    }
+
 }

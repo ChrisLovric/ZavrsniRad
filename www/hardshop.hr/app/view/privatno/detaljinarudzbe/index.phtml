@@ -1,4 +1,4 @@
-<a href="<?=App::config('url')?>detaljinarudzba/novi" class="small button">
+<a href="<?=App::config('url')?>detaljinarudzbe/novi" class="small button">
     Dodaj nove detalje narudžbe
 </a>
 
@@ -24,10 +24,10 @@
                 <td><?=$red->popust?></td>
                 <td><?=$red->cijena?></td>
                 <td>
-                <a href="<?=App::config('url')?>detaljinarudzba/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
+                <a href="<?=App::config('url')?>detaljinarudzbe/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
                 <?php if($red->brojnarudzbe==0): ?>
                     <a onclick="return confirm('Sigurno obrisati detalje narudžbe <?=$red->brojnarudzbe?>?');"
-                    href="<?=App::config('url')?>detaljinarudzba/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
+                    href="<?=App::config('url')?>detaljinarudzbe/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
                 <?php else: ?>
                     <i title="Detalji narudžbe se ne mogu obrisati jer imaju postojeću narudžbu" 
                     class="fi-trash" style="color: gray"></i>
