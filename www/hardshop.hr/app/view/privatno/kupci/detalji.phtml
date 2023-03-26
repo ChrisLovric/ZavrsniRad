@@ -1,15 +1,24 @@
 <form action="" method="post">
     <fieldset class="fieldset">
-        <legend><?=$legend?></legend>
+        <legend><?=$legend?><br>(*obavezna polja)</legend>
 
-        <?php 
-        echo App::inputText('ime',$e->ime);
-        echo App::inputText('prezime',$e->prezime);
-        echo App::inputText('email',$e->email);
-        echo App::inputText('adresazaracun',$e->adresazaracun);
-        echo App::inputText('adresazadostavu',$e->adresazadostavu);
-        echo App::inputText('brojtelefona',$e->brojtelefona);
-        ?>
+        <label for="ime">Ime*</label>
+        <input type="text" id="input" name="ime" value="<?=$e->ime?>">
+
+        <label for="prezime">Prezime*</label>
+        <input type="text" id="input" name="prezime" value="<?=$e->prezime?>">
+
+        <label for="email">Email*</label>
+        <input type="text" id="input" name="email" value="<?=$e->email?>">
+
+        <label for="adresazaracun">Adresa za račun*</label>
+        <input type="text" id="input" name="adresazaracun" value="<?=$e->adresazaracun?>">
+
+        <label for="adresazadostavu">Adresa za dostavu*</label>
+        <input type="text" id="input" name="adresazadostavu" value="<?=$e->adresazadostavu?>">
+
+        <label for="brojtelefona">Broj telefona</label>
+        <input type="text" id="input" name="brojtelefona" value="<?=$e->brojtelefona?>">
 
         <hr>
         <h1><?=$poruka?></h1>

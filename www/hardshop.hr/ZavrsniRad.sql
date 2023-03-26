@@ -46,7 +46,7 @@ create table narudzba(
 
 create table proizvod(
     sifra int not null primary key auto_increment,
-    naziv varchar(50) not null,
+    naziv varchar(100) not null,
     proizvodjac varchar(50) not null,
     jedinicnacijena decimal(18,2) not null,
     opis text,

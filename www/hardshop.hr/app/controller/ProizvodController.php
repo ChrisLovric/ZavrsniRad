@@ -49,8 +49,9 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
     public function novi()
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            $this->view->render($this->viewPutanja . 'novi',[
-                'poruka'=>'Unesite sve obavezne podatke',
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Unos novog proizvoda',
+                'poruka'=>'',
                 'e'=>$this->pocetniPodaci()
             ]);
             return;
@@ -63,7 +64,8 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             Proizvod::create((array)$this->e);
             header('location:' . App::config('url') . 'proizvod');
         } catch (\Exception $th) {
-            $this->view->render($this->viewPutanja . 'novi',[
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Unos novog proizvoda',
                 'poruka'=>$this->poruka,
                 'e'=>$this->e
             ]);
@@ -82,8 +84,9 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
                 return;
             }
 
-            $this->view->render($this->viewPutanja . 'promjena',[
-                'poruka'=>'Izmijenite željene podatke',
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Izmjena podataka o proizvodu',
+                'poruka'=>'',
                 'e'=>$this->e
             ]);
         return;
@@ -98,7 +101,8 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
         Proizvod::update((array)$this->e);
         header('location:' . App::config('url') . 'proizvod');
     }catch (\Exception $th) {
-        $this->view->render($this->viewPutanja . 'promjena',[
+        $this->view->render($this->viewPutanja . 'detalji',[
+            'legend'=>'Izmjena podataka o proizvodu',
             'poruka'=>$this->poruka . ' ' . $th->getMessage(),
             'e'=>$this->e
         ]);
@@ -130,7 +134,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             throw new Exception();
         }
 
-        if(strlen(trim($s))>50){
+        if(strlen(trim($s))>100){
             $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
             throw new Exception();
         }
@@ -149,7 +153,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             throw new Exception();
         }
 
-        if(strlen(trim($s))>50){
+        if(strlen(trim($s))>100){
             $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
             throw new Exception();
         }

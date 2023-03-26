@@ -18,8 +18,9 @@ class PlacanjeController extends AutorizacijaController implements ViewSucelje
     public function novi()
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
-            $this->view->render($this->viewPutanja . 'novi',[
-                'poruka'=>'Unesite sve obavezne podatke',
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Unos nove vrste plaćanja',
+                'poruka'=>'',
                 'e'=>$this->pocetniPodaci()
             ]);
             return;
@@ -32,7 +33,8 @@ class PlacanjeController extends AutorizacijaController implements ViewSucelje
             Placanje::create((array)$this->e);
             header('location:' . App::config('url') . 'placanje');
         } catch (\Exception $th) {
-            $this->view->render($this->viewPutanja . 'novi',[
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Unos nove vrste plaćanja',
                 'poruka'=>$this->poruka,
                 'e'=>$this->e
             ]);
@@ -51,8 +53,9 @@ class PlacanjeController extends AutorizacijaController implements ViewSucelje
                 return;
             }
 
-            $this->view->render($this->viewPutanja . 'promjena',[
-                'poruka'=>'Izmijenite željene podatke',
+            $this->view->render($this->viewPutanja . 'detalji',[
+                'legend'=>'Izmjena vrste plaćanja',
+                'poruka'=>'',
                 'e'=>$this->e
             ]);
         return;
@@ -67,7 +70,8 @@ class PlacanjeController extends AutorizacijaController implements ViewSucelje
         Placanje::update((array)$this->e);
         header('location:' . App::config('url') . 'placanje');
     }catch (\Exception $th) {
-        $this->view->render($this->viewPutanja . 'promjena',[
+        $this->view->render($this->viewPutanja . 'detalji',[
+            'legend'=>'Izmjena vrste plaćanja',
             'poruka'=>$this->poruka . ' ' . $th->getMessage(),
             'e'=>$this->e
         ]);

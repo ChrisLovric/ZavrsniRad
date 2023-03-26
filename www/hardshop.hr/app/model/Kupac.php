@@ -67,7 +67,7 @@ class Kupac
         select count(*)
         from
         kupac
-        where concat(ime, \' \', prezime, \' \', ifnull(adresazadostavu,\'\'))
+        where concat(ime, \' \', prezime, \' \')
         like :uvjet
 
         ');

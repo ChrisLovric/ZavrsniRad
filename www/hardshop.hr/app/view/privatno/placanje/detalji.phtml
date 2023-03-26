@@ -1,9 +1,9 @@
 <form action="" method="post">
-    <fieldset>
-        <legend>Izmjena vrste plaćanja</legend>
+    <fieldset class="fieldset">
+        <legend><?=$legend?><br>(*obavezna polja)</legend>
 
-        <label for="vrstaplacanja">Vrsta plaćanja</label>
-        <input type="text" id="vrstaplacanja" name="vrstaplacanja" value="<?=$e->vrstaplacanja?>">
+        <label for="vrstaplacanja">Vrsta plaćanja*</label>
+        <input type="text" id="input" name="vrstaplacanja" value="<?=$e->vrstaplacanja?>">
 
         <hr>
         <h1><?=$poruka?></h1>
@@ -13,7 +13,7 @@
                 <a href="<?=App::config('url')?>placanje/index" class="button alert expanded">Odustani</a>
             </div>
             <div class="large-6 cell">
-                <input type="submit" class="button success expanded" value="Spremi izmjene">
+                <input type="submit" class="button success expanded" value="Spremi">
             </div>
         </div>
     </fieldset>

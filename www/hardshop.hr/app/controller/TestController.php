@@ -14,7 +14,7 @@ class TestController
 
     public function dodajkupce()
     {
-        for($i=0;$i<300;$i++){
+        for($i=0;$i<200;$i++){
             Kupac::create([
                 'ime'=>'Kupac ' . $i,
                 'prezime'=>'Prezime',

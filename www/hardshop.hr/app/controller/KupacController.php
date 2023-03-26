@@ -58,7 +58,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             $this->view->render($this->viewPutanja . 'detalji',[
                 'legend'=>'Unos novog kupca',
                 'akcija'=>'Spremi',
-                'poruka'=>'Unesite sve obavezne podatke',
+                'poruka'=>'',
                 'e'=>$this->pocetniPodaci()
             ]);
             return;
@@ -72,7 +72,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             header('location:' . App::config('url') . 'kupac');
         } catch (\Exception $th) {
             $this->view->render($this->viewPutanja . 'detalji',[
-                'legend'=>'Postoje greške kod unosa novog kupca',
+                'legend'=>'Unos novog kupca',
                 'akcija'=>'Spremi',
                 'poruka'=>$this->poruka,
                 'e'=>$this->e
@@ -95,7 +95,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             $this->view->render($this->viewPutanja . 'detalji',[
                 'legend'=>'Izmjena detalja kupca',
                 'akcija'=>'Spremi',
-                'poruka'=>'Izmijenite željene podatke',
+                'poruka'=>'',
                 'e'=>$this->e
             ]);
         return;
@@ -111,7 +111,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         header('location:' . App::config('url') . 'kupac');
     }catch (\Exception $th) {
         $this->view->render($this->viewPutanja . 'detalji',[
-            'legend'=>'Postoje greške kod izmjene detalja kupca',
+            'legend'=>'Izmjena detalja kupca',
             'akcija'=>'Spremi',
             'poruka'=>$this->poruka . ' ' . $th->getMessage(),
             'e'=>$this->e

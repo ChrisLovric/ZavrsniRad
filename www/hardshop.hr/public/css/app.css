@@ -96,7 +96,7 @@ legend{
 }
 
 h1{
-    color: bisque;
+    color: crimson; 
     font-size: 25px;
     text-align: center;
 }
@@ -138,7 +138,7 @@ input#ne{
     right: -1%
 }
 
-input#ime{
+select#input{
     background-color: lightgray;
     border-radius: 15px;
     width: 50%;
@@ -146,95 +146,7 @@ input#ime{
     left: 25%;
 }
 
-input#prezime{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#email{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#adresazaracun{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#adresazadostavu{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#brojtelefona{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#vrstaplacanja{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#naziv{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#proizvodjac{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#jedinicnacijena{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#opis{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#lozinka{
-    background-color: lightgray;
-    border-radius: 15px;
-    width: 50%;
-    position: relative;
-    left: 25%;
-}
-
-input#uloga{
+input#input{
     background-color: lightgray;
     border-radius: 15px;
     width: 50%;

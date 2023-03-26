@@ -23,7 +23,7 @@ class OperaterController extends AdminController implements ViewSucelje
     {
         if($_SERVER['REQUEST_METHOD']==='GET'){
             $this->view->render($this->viewPutanja . 'novi',[
-                'poruka'=>'Unesite sve obavezne podatke',
+                'poruka'=>'',
                 'e'=>$this->pocetniPodaci()
             ]);
             return;
@@ -56,7 +56,7 @@ class OperaterController extends AdminController implements ViewSucelje
             }
 
             $this->view->render($this->viewPutanja . 'promjena',[
-                'poruka'=>'Izmijenite željene podatke',
+                'poruka'=>'',
                 'e'=>$this->e
             ]);
         return;
