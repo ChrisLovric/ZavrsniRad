@@ -31,6 +31,6 @@ class View
 
     public function api($parametri){
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($parametri);
+        echo json_encode($parametri,JSON_NUMERIC_CHECK);
     }
 }

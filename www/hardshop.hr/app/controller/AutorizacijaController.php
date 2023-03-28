@@ -6,10 +6,13 @@ abstract class AutorizacijaController extends Controller
     {
         parent::__construct();
         if(!App::auth()){
+            /*
             $this->view->render('prijava',[
                 'poruka'=>'Prvo se prijavite',
                 'email'=>''
             ]);
+            */
+            header('location: ' . App::config('url') . 'index/prijava?poruka=Prvo se prijavite');
         }
     }
 }

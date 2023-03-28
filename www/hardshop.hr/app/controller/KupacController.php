@@ -313,4 +313,13 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         return $e;
     }
 
+    public function v1($ruta)
+    {
+        switch($ruta){
+            case 'read':
+                $this->view->api(Kupac::read());
+            break;
+        }
+    }
+
 }

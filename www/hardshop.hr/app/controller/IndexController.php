@@ -16,8 +16,8 @@ class IndexController extends Controller
         }
 
         $this->view->render('prijava',[
-            'poruka'=>'',
-            'email'=>''
+            'poruka'=>isset($_GET['poruka']) ? $_GET['poruka'] : '',
+            'email'=>'',
         ]);
     }
 
