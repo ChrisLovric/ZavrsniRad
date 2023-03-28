@@ -33,6 +33,11 @@ class IndexController extends Controller
         $this->view->render('kontakt');
     }
 
+    public function jsosnove()
+    {
+        $this->view->render('jsosnove');
+    }
+
     public function api()
     {
         $this->view->api([

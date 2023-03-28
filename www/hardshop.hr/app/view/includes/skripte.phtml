@@ -2,3 +2,7 @@
 <script src="<?= App::config('url') ?>public/js/vendor/what-input.js"></script>
 <script src="<?= App::config('url') ?>public/js/vendor/foundation.js"></script>
 <script src="<?= App::config('url') ?>public/js/app.js"></script>
+<?php if(isset($js)):
+    ?>
+    <script src="<?php echo App::config('url') . 'public/js/' . $js?>"></script>
+    <?php endif; ?>
