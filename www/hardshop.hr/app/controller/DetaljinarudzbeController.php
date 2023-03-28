@@ -18,8 +18,7 @@ class DetaljinarudzbeController extends AutorizacijaController implements ViewSu
     {
 
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Detaljinarudzbe::read()),
-            'css'=>'detaljinarudzbe.css'
+            'podaci'=>$this->prilagodiPodatke(Detaljinarudzbe::read())
         ]);
         
     }

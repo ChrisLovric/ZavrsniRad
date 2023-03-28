@@ -15,8 +15,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
     {
 
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Narudzba::read()),
-            'css'=>'narudzba.css'
+            'podaci'=>$this->prilagodiPodatke(Narudzba::read())
         ]);
         
     }

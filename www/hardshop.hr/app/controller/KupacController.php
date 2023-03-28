@@ -46,8 +46,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
             'ukupnostr'=>$ukupnostr,
-            'poruka'=>$poruka,
-            'css'=>'kupac.css'
+            'poruka'=>$poruka
         ]);
         
     }

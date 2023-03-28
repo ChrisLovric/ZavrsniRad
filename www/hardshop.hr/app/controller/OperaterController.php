@@ -14,8 +14,7 @@ class OperaterController extends AdminController implements ViewSucelje
         }
 
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Operater::read()),
-            'css'=>'operateri.css'
+            'podaci'=>$this->prilagodiPodatke(Operater::read())
         ]);
     }
 

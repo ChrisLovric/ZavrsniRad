@@ -40,8 +40,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             'uvjet'=>$uvjet,
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
-            'ukupnostr'=>$ukupnostr,
-            'css'=>'proizvod.css'
+            'ukupnostr'=>$ukupnostr
         ]);
         
     }

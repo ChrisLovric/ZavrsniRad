@@ -11,6 +11,12 @@ class View
 
     public function render($phtmlStranica,$parametri=[])
     {
+        $cssDatoteka=BP . 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 
+        $phtmlStranica . '.css';
+        if(file_exists($cssDatoteka)){
+            $css=str_replace('\\','/',$phtmlStranica) . '.css';
+        }
+
         $jsDatoteka=BP . 'public' . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 
         $phtmlStranica . '.js';
         if(file_exists($jsDatoteka)){

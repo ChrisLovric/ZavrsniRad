@@ -9,8 +9,7 @@ class PlacanjeController extends AutorizacijaController implements ViewSucelje
     public function index()    
     {
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>Placanje::read(),
-            'css'=>'placanje.css'
+            'podaci'=>Placanje::read()
         ]);
         
     }
