@@ -275,4 +275,8 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             return $this->nf->format($broj);
     }
 
+    public function ajaxSearch($uvjet){
+        $this->view->api(Proizvod::read($uvjet));
+    }
+
 }

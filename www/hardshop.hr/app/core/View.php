@@ -3,6 +3,8 @@
 class View
 {
     private $predlozak;
+    private $CSSdependency=null;
+    private $JSdependency=null;
 
     public function __construct($predlozak='predlozak')
     {
@@ -23,6 +25,14 @@ class View
             $js=str_replace('\\','/',$phtmlStranica) . '.js';
         }
 
+        if($this->CSSdependency!=null){
+            $cssdependency=$this->CSSdependency;
+        }
+
+        if($this->JSdependency!=null){
+            $jsdependency=$this->JSdependency;
+        }
+
         $viewDatoteka=BP_APP . 'view' . DIRECTORY_SEPARATOR . $phtmlStranica . '.phtml';
         ob_start();
         extract($parametri);
@@ -38,5 +48,13 @@ class View
     public function api($parametri){
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($parametri,JSON_NUMERIC_CHECK);
+    }
+
+    public function setCSSdependency($dep){
+        $this->CSSdependency=$dep;
+    }
+
+    public function setJSdependency($dep){
+        $this->JSdependency=$dep;
     }
 }

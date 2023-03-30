@@ -30,7 +30,7 @@ $('#jQuery1').click(function(){
     $.get( '/kupac/v1/read', function(podaci){
         for (const k in podaci){
             const s=podaci[k];
-            $('#lista').append('<li>' + s.ime + '</li>')
+            $('#lista').append('<li>' + s.ime + ' ' + s.prezime + '</li>')
         }
     });
     return false;

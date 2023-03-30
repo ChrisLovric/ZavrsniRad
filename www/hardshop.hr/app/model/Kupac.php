@@ -22,7 +22,7 @@ class Kupac
 		        count(b.sifra) as narudzba
         from kupac a
         left join narudzba b on a.sifra=b.kupac
-        where concat(a.ime, \' \', a.prezime, \' \', ifnull(a.adresazaracun,\'\'))
+        where concat(a.ime, \' \', a.prezime)
         like :uvjet
         group by 	a.ime,
 		        	a.prezime,
