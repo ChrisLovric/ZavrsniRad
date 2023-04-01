@@ -11,10 +11,10 @@ $('#uvjet').autocomplete({
     },
     minLength: 2,
     select:function(dogadjaj,ui){
-        spremi(ui.item);
+        //spremi(ui.item);
     }
 }).autocomplete('instance')._renderItem=function(ul, item){
     return $('<li>')
-    .append('<div>' + item.naziv + '</div>')
+    .append('<div>' + item.ime + ' ' + item.prezime + '</div>')
     .appendTo(ul);
 };

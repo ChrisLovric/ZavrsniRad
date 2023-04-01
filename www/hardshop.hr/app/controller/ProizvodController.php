@@ -16,6 +16,13 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script>
+                 let url=\'' . App::config('url') . '\';
+             </script>'
+         ]);
+
         if(isset($_GET['uvjet'])){
             $uvjet=trim($_GET['uvjet']);
         }else{
