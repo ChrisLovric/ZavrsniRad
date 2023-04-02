@@ -1,18 +1,6 @@
 <label for="brojnarudzbe">Broj narudžbe*</label>
 <input type="text" id="input" name="brojnarudzbe" value="<?=$e->brojnarudzbe?>">
 
-<label for="datumnarudzbe">Datum narudžbe*</label>
-<input type="date" name="datumnarudzbe" id="input"
-value="<?=$e->datumnarudzbe?>">
-
-<label for="datumisporuke">Datum isporuke</label>
-<input type="date" name="datumisporuke" id="input"
-value="<?=$e->datumisporuke?>">
-
-<label for="datumplacanja">Datum plaćanja</label>
-<input type="date" name="datumplacanja" id="input"
-value="<?=$e->datumplacanja?>"> 
-
 <label for="kupac">Kupac*</label>
 <select name="kupac" id="input">
     <?php foreach($kupci as $kupac): ?>
@@ -26,7 +14,6 @@ value="<?=$e->datumplacanja?>">
     <?php endforeach;?>
 </select>
 
-
 <label for="placanje">Vrsta plaćanja*</label>
 <select name="placanje" id="input">
     <?php foreach($placanja as $placanje): ?>
@@ -39,6 +26,23 @@ value="<?=$e->datumplacanja?>">
         </option>
     <?php endforeach;?>
 </select>
+
+<label for="datumnarudzbe">Datum narudžbe*</label>
+<input type="date" name="datumnarudzbe" id="input"
+value="<?=$e->datumnarudzbe?>">
+
+<label for="datumisporuke">Datum isporuke</label>
+<input type="date" name="datumisporuke" id="input"
+value="<?=$e->datumisporuke?>">
+
+<label for="datumplacanja">Datum plaćanja</label>
+<input type="date" name="datumplacanja" id="input"
+value="<?=$e->datumplacanja?>"> 
+
+
+
+
+
 
 
 

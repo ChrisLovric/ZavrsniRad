@@ -3,12 +3,15 @@
 class NarudzbaController extends AutorizacijaController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'narudzbe' . DIRECTORY_SEPARATOR;
+    private $nf;
     private $e;
     private $poruke=[];
 
     public function __construct()
     {
         parent::__construct();
+        $this->nf=new NumberFormatter('hr-HR',NumberFormatter::DECIMAL);
+        $this->nf->setPattern(App::config('formatBroja'));
     }
 
     public function index()    
@@ -22,7 +25,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     private function prilagodiPodatke($narudzbe)
     {
-        foreach($narudzbe as $n){
+        foreach($narudzbe as $n){            
             if($n->datumnarudzbe==null){
                 $n->datumnarudzbe='Nije definirano';
             }else{
@@ -84,12 +87,24 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     public function promjena($sifra='')
     {
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">'
+        ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script>
+                let url=\'' . App::config('url') . '\';
+                let narudzbasifra=' . $sifra . ';
+            </script>'
+        ]);
+
         if($_SERVER['REQUEST_METHOD']==='GET'){
             $this->promjena_GET($sifra);
             return;
         }
 
         $this->e=(object)$_POST;
+        $this->e->proizvodi=Narudzba::detaljiNarudzbe($sifra);
 
         try {
             $this->e->sifra=$sifra;
@@ -132,7 +147,6 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         foreach(Placanje::read() as $placanje){
             $placanja[]=$placanje;
         }
-
 
         if($this->e->datumnarudzbe!=null){
             $this->e->datumnarudzbe=date('Y-m-d',strtotime($this->e->datumnarudzbe));
@@ -193,6 +207,42 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         $e->kupac=null;
         $e->placanje=null;
         return $e;
+    }
+
+    private function formatIznosa($broj)
+    {
+        if($broj==null){
+            return $this->nf->format(0);
+        }
+            return $this->nf->format($broj);
+    }
+
+    public function dodajproizvod()
+    {
+        $res = new stdClass();
+        if(!Narudzba::postojiProizvodNarudzba($_GET['narudzba'],
+                    $_GET['proizvod'])){
+            Narudzba::dodajProizvodNarudzba($_GET['narudzba'],
+                    $_GET['proizvod']);
+            $res->error=false;
+            $res->description='Uspješno dodano';
+                    }else{
+                        $res->error=true;
+                        $res->description='Proizvod već postoji u narudžbi';
+                    }
+
+                    header('Content-Type: application/json; charset=utf-8');
+                    echo json_encode($res,JSON_NUMERIC_CHECK);
+    }
+
+    public function obrisiproizvod()
+    {
+        //prvo se trebala pozabaciti postoji li u $_GET
+        // traženi parametri
+
+        Narudzba::obrisiProizvodNarudzba($_GET['narudzba'],
+                    $_GET['proizvod']);
+               
     }
 
 }

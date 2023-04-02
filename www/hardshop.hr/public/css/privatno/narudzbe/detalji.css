@@ -1,0 +1,37 @@
+.popisproizvoda{
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.callout{
+    background-color: transparent;
+}
+
+input#uvjet{
+    background-color: lightgray;
+    border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
+
+#podaci{
+    color: bisque;
+    text-align: center;
+}
+
+.fi-trash{
+    margin-left: 5px;
+    font-size: 20px;
+    color: darkred;
+}
+
+#poruka{
+    color: darkred;
+    border-radius: 20px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}

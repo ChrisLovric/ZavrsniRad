@@ -2,19 +2,19 @@
     <fieldset class="fieldset">
         <legend><?=$legend?><br>(*obavezna polja)</legend>
 
-        <label for="naziv">Naziv</label>
+        <label for="naziv">Naziv*</label>
         <input type="text" id="input" name="naziv" value="<?=$e->naziv?>">
 
-        <label for="proizvodjac">Proizvođač</label>
+        <label for="proizvodjac">Proizvođač*</label>
         <input type="text" id="input" name="proizvodjac" value="<?=$e->proizvodjac?>">
 
-        <label for="jedinicnacijena">Jedinična cijena</label>
+        <label for="jedinicnacijena">Jedinična cijena*</label>
         <input type="text" id="input" name="jedinicnacijena" value="<?=$e->jedinicnacijena?>">
 
         <label for="opis">Opis</label>
         <input type="text" id="input" name="opis" value="<?=$e->opis?>">
 
-        <label for="dostupnost">Dostupnost</label>
+        <label for="dostupnost">Dostupnost*</label>
         <input type="radio" id="da" name="dostupnost" value="true"
         <?php if($e->dostupnost) echo 'checked="checked"'; ?>>
         <label for="da">DA</label>

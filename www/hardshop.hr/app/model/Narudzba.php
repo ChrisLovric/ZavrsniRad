@@ -1,5 +1,7 @@
 <?php
 
+use Narudzba as GlobalNarudzba;
+
 class Narudzba
 {
     public static function read()
@@ -7,23 +9,33 @@ class Narudzba
 
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
-        
+
         select
         a.sifra,
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime) as kupac,
+        e.naziv,
         b.vrstaplacanja,
+        d.kolicina,
+        d.popust,
+        d.cijena,
         a.datumnarudzbe,
         a.datumisporuke,
         a.datumplacanja
         from narudzba a 
         left join placanje b on a.placanje=b.sifra 
-        left join kupac c on a.kupac=c.sifra 
+        left join kupac c on a.kupac=c.sifra
+        left join detaljinarudzbe d on d.narudzba=a.sifra
+        left join proizvod e on d.proizvod=e.sifra
         group by 
         a.sifra,
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime),
+        e.naziv,
         b.vrstaplacanja,
+        d.kolicina,
+        d.popust,
+        d.cijena,
         a.datumnarudzbe,
         a.datumisporuke,
         a.datumplacanja
@@ -31,6 +43,28 @@ class Narudzba
         ');
 
         $izraz->execute();
+        $rez=$izraz->fetchAll();
+        foreach($rez as $r){
+            $r->proizvodi=Narudzba::detaljiNarudzbe($r->sifra);
+        }
+        return $rez;
+    }
+
+    public static function detaljiNarudzbe($sifra)
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select 
+        a.sifra, a.naziv
+        from proizvod a
+        inner join detaljinarudzbe b on a.sifra=b.proizvod
+        where b.narudzba=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra'=>$sifra
+        ]);
         return $izraz->fetchAll();
     }
 
@@ -47,6 +81,22 @@ class Narudzba
             'sifra'=>$sifra
         ]);
         $narudzba=$izraz->fetch();
+
+        $izraz=$veza->prepare('
+        
+        select 
+        a.sifra, a.naziv
+        from proizvod a
+        inner join detaljinarudzbe b on a.sifra=b.proizvod
+        where b.narudzba=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra'=>$sifra
+        ]);
+
+        $narudzba->proizvodi=$izraz->fetchAll();
+
         return $narudzba;
         
     }
@@ -56,7 +106,7 @@ class Narudzba
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        insert into narudzba(brojnarudzbe,datumnarudzbe,datumisporuke,datumplacanja,kupac,placanje)
+        insert into narudzba (brojnarudzbe,datumnarudzbe,datumisporuke,datumplacanja,kupac,placanje)
         values (:brojnarudzbe,:datumnarudzbe,:datumisporuke,:datumplacanja,:kupac,:placanje);
         
         ');
@@ -66,6 +116,7 @@ class Narudzba
 
     public static function update($parametri)
     {
+        unset($parametri['proizvodi']);
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
@@ -87,21 +138,53 @@ class Narudzba
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        $izraz->execute();
     }
 
-    public static function prvaNarudzba()
+    public static function dodajProizvodNarudzba($narudzba, $proizvod)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
-        select sifra from narudzba
-        order by sifra limit 1
+           insert into detaljinarudzbe (narudzba,proizvod)
+           values (:narudzba,:proizvod)
         
         ');
-        $izraz->execute();
-        $sifra=$izraz->fetchColumn();
-        return $sifra;
+        $izraz->execute([
+            'narudzba'=>$narudzba,
+            'proizvod'=>$proizvod
+        ]);
     }
 
+    public static function postojiProizvodNarudzba($narudzba, $proizvod)
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+           select count(*) as ukupno 
+           from detaljinarudzbe where narudzba=:narudzba 
+           and proizvod=:proizvod
+        
+        ');
+        $izraz->execute([
+            'narudzba'=>$narudzba,
+            'proizvod'=>$proizvod
+        ]);
+        $rez = (int)$izraz->fetchColumn();
+        return $rez>0;
+    }
+
+    public static function obrisiProizvodNarudzba($narudzba, $proizvod)
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+           delete from detaljinarudzbe where narudzba=:narudzba
+           and proizvod=:proizvod
+        
+        ');
+        $izraz->execute([
+            'narudzba'=>$narudzba,
+            'proizvod'=>$proizvod
+        ]);
+    }
 }

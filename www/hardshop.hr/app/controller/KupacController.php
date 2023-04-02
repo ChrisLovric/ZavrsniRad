@@ -257,11 +257,6 @@ class KupacController extends AutorizacijaController implements ViewSucelje
             $this->poruka='Broj telefona ne smije imati više od 50 znakova';
             throw new Exception();
         }
-
-        if(Kupac::postojiIstiBrojUBazi($s)){
-            $this->poruka='Broj telefona već postoji u bazi';
-            throw new Exception();
-        }
     }
 
     private function kontrolaBrojTelefonaIsti()
@@ -271,18 +266,6 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         if(strlen(trim($s))>20){
             $this->poruka='Broj telefona ne smije imati više od 20 znakova';
             throw new Exception();
-        }
-
-        if(isset($this->e->brojtelefona)){
-            if(!Kupac::postojiIstiBrojTelefona($this->e->brojtelefona,$this->e->sifra)){
-                $this->poruka='Uneseni broj telefona već postoji u bazi';
-                throw new Exception();
-            }
-        }else{
-            if(!Kupac::postojiIstiBrojTelefona($this->e->brojtelefona)){
-                $this->poruka='Uneseni broj telefona već postoji u bazi';
-                throw new Exception();
-            }
         }
     }
 
