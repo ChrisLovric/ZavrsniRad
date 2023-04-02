@@ -107,6 +107,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         $this->e->proizvodi=Narudzba::detaljiNarudzbe($sifra);
 
         try {
+            $odabraniKupac=Kupac::readOne($this->e->kupac);
             $this->e->sifra=$sifra;
             $this->kontrola();
             $this->pripremiZaBazu();
@@ -115,6 +116,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         } catch (\Exception $th) {
             $this->view->render($this->viewPutanja . 'detalji',[
                 'poruke'=>$this->poruke,
+                'kupac'=>$odabraniKupac,
                 'e'=>$this->e
             ]);
         }
@@ -127,17 +129,6 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     private function promjena_GET($sifra)
     {
-        $this->e=Narudzba::readOne($sifra);
-        $kupci=[];
-        $k=new stdClass();
-        $k->sifra=0;
-        $k->ime='Nije';
-        $k->prezime='Odabrano';
-        $kupci[]=$k;
-        foreach(Kupac::read() as $kupac){
-            $kupci[]=$kupac;
-        }
-
         $this->e=Narudzba::readOne($sifra);
         $placanja=[];
         $p=new stdClass();
@@ -160,7 +151,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
         $this->view->render($this->viewPutanja . 'detalji',[
             'e'=>$this->e,
-            'kupci'=>$kupci,
+            'kupac'=>Kupac::readOne($this->e->kupac),
             'placanja'=>$placanja
         ]);
     }
@@ -204,7 +195,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         $e->datumnarudzbe='';
         $e->datumisporuke=null;
         $e->datumplacanja=null;
-        $e->kupac=null;
+        $e->kupac=0;
         $e->placanje=null;
         return $e;
     }
@@ -237,12 +228,13 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     public function obrisiproizvod()
     {
-        //prvo se trebala pozabaciti postoji li u $_GET
-        // traženi parametri
-
         Narudzba::obrisiProizvodNarudzba($_GET['narudzba'],
                     $_GET['proizvod']);
                
+    }
+
+    public function ajaxSearch($uvjet){
+        $this->view->api(Kupac::read($uvjet));
     }
 
 }

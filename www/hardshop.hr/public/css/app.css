@@ -160,6 +160,14 @@ input#uvjet{
     width: 50%;
 }
 
+input#uvjetkupac{
+    background-color: lightgray;
+    border-radius: 15px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
+
 ul.pagination li a, ul.pagination li button {
     display: block;
     border-radius: 15px;
@@ -172,5 +180,10 @@ ul.pagination li a, ul.pagination li button {
     background-color: darkgreen;
     border-radius: 15px;
     color: bisque;
+}
+
+#kupacIme{
+    color: bisque;
+    text-align: center;
 }
 

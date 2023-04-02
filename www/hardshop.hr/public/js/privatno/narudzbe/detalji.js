@@ -87,3 +87,27 @@ definirajBrisanje();
 $('#poruka').fadeOut();
 
 $('#uvjet').focus();
+
+/// pretraga kupaca
+$( '#uvjetkupac' ).autocomplete({
+    source: function(req,res){
+       $.ajax({
+           url: url + 'kupac/ajaxSearch/' + req.term,
+           success:function(odgovor){
+            res(odgovor);
+            //console.log(odgovor);
+        }
+       }); 
+    },
+    minLength: 2,
+    select:function(dogadaj,ui){
+        $('#kupac').val(ui.item.sifra);
+
+        $('#kupacIme').html(ui.item.ime + ' ' + ui.item.prezime);
+
+    }
+}).autocomplete( 'instance' )._renderItem = function( ul, item ) {
+    return $( '<li>' )
+      .append( '<div> ' + item.ime + ' ' + item.prezime + '<div>')
+      .appendTo( ul );
+  };

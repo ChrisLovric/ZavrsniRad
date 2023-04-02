@@ -1,20 +1,22 @@
 <div class="popisproizvoda">
-<label for="proizvod">Proizvod*</label>
-<input type="text" id="uvjet" placeholder="Traži proizvod">    
-<div style="min-height: 20px;">
-<div style="font-size: 1rem;" id="poruka"></div>
-</div>
+    <hr><label for="proizvod">Proizvod*</label>
+    <input type="text" id="uvjet" placeholder="Traži proizvod">
+    <div style="min-height: 20px;">
+        <div style="font-size: 1rem;" id="poruka"></div>
+    </div>
 </div>
 <div class="callout">
-<div style="min-height: 20px;" id="podaci">
-<?php foreach($e->proizvodi as $p): ?>
+    <div id="podaci">
+        <?php foreach ($e->proizvodi as $p) : ?>
 
-                    <?=$p->naziv?>
+            <?= $p->naziv ?>
 
-                    <a href="#" class="odabraniProizvod" id="p_<?=$p->sifra?>">
-                    <i class="fi-trash"></i><br>
-                    </a>
+            <a href="#" class="odabraniProizvod" id="p_<?= $p->sifra ?>">
+                <i class="fi-trash"></i><br>
+            </a>
 
-            <?php endforeach; ?>
+        <?php endforeach; ?>
+
+    </div>
 </div>
-</div>
+<hr>
