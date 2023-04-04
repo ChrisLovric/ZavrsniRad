@@ -1,7 +1,5 @@
 <?php
 
-use Narudzba as GlobalNarudzba;
-
 class Narudzba
 {
     public static function read()
@@ -15,6 +13,7 @@ class Narudzba
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime) as kupac,
         e.naziv,
+        e.jedinicnacijena,
         b.vrstaplacanja,
         d.kolicina,
         d.popust,
@@ -32,6 +31,7 @@ class Narudzba
         a.brojnarudzbe,
         concat(c.ime, \' \', c.prezime),
         e.naziv,
+        e.jedinicnacijena,
         b.vrstaplacanja,
         d.kolicina,
         d.popust,
@@ -56,7 +56,7 @@ class Narudzba
         $izraz=$veza->prepare('
         
         select 
-        a.sifra, a.naziv
+        a.sifra, a.naziv, b.cijena, b.kolicina, b.popust
         from proizvod a
         inner join detaljinarudzbe b on a.sifra=b.proizvod
         where b.narudzba=:sifra
@@ -85,7 +85,7 @@ class Narudzba
         $izraz=$veza->prepare('
         
         select 
-        a.sifra, a.naziv
+        a.sifra, a.naziv, b.cijena, b.kolicina, b.popust
         from proizvod a
         inner join detaljinarudzbe b on a.sifra=b.proizvod
         where b.narudzba=:sifra

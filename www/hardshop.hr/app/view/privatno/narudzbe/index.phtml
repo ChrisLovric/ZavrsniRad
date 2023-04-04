@@ -8,13 +8,11 @@
             <th>Broj Narudžbe</th>
             <th>Kupac</th>
             <th>Naziv proizvoda</th>
-            <th>Vrsta plaćanja</th>
-            <th>Količina proizvoda</th>
-            <th>Popust (€)</th>
-            <th>Cijena (€)</th>
+            <th>Cijena proizvoda (€)</th>
             <th>Datum narudžbe</th>
             <th>Datum isporuke</th>
             <th>Datum plaćanja</th>
+            <th>Vrsta plaćanja</th>
             <th>Akcija</th>
         </tr>
     </thead>
@@ -24,13 +22,11 @@
                 <td><?=$red->brojnarudzbe?></td>
                 <td><?=$red->kupac?></td>
                 <td><?=$red->naziv?></td>
-                <td><?=$red->vrstaplacanja?></td>
-                <td><?=$red->kolicina?></td>
-                <td><?=$red->popust?></td>
-                <td><?=$red->cijena?></td>
+                <td><?=$red->jedinicnacijena?></td>
                 <td><?=$red->datumnarudzbe?></td>
                 <td><?=$red->datumisporuke?></td>
                 <td><?=$red->datumplacanja?></td>
+                <td><?=$red->vrstaplacanja?></td>
                 <td>
                 <a href="<?=App::config('url')?>narudzba/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
                 <?php if($red->kupac==0): ?>
