@@ -202,4 +202,18 @@ class Kupac
         $sifra=$izraz->fetchColumn();
         return $sifra;
     }
+
+    public static function traziKupca($uvjet)
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra, ime, prezime from kupac
+        where concat(ime, \' \', prezime)
+        like :uvjet
+        
+        ');
+        $izraz->execute(['uvjet'=>'%' . $uvjet . '%']);
+        return $izraz->fetchAll();
+    }
 }

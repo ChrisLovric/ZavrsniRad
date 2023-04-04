@@ -1,7 +1,8 @@
 $( '#uvjet' ).autocomplete({
     source: function(req,res){
+        uvjet=req.term;
        $.ajax({
-           url: url + 'proizvod/ajaxSearch/' + req.term,
+           url: url + 'proizvod/traziProizvod/' + req.term,
            success:function(odgovor){
             res(odgovor);
             //console.log(odgovor);
@@ -14,8 +15,15 @@ $( '#uvjet' ).autocomplete({
         spremi(ui.item);
     }
 }).autocomplete( 'instance' )._renderItem = function( ul, item ) {
+
+    let sadrzaj = item.naziv;
+    var querystr = uvjet;
+    var output = sadrzaj;
+    var reg = new RegExp(querystr, 'gi');
+    var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("Green")});
+
     return $( '<li>' )
-      .append( '<div>' + item.naziv + '<div>')
+      .append( '<div>' + final_str + '<div>')
       .appendTo( ul );
   };
 
@@ -27,7 +35,7 @@ $( '#uvjet' ).autocomplete({
              '&proizvod=' + proizvod.sifra,
         success:function(odgovor){
             if(odgovor.error){
-                $('#poruka').css('border','2px solid red','text-align center');
+                $('#poruka').css('text-align center');
                 $('#poruka').html(odgovor.description);
                 $('#poruka').fadeIn();
                 setTimeout(() => {
@@ -91,9 +99,12 @@ $('#uvjet').focus();
 /// pretraga kupaca
 $( '#uvjetkupac' ).autocomplete({
     source: function(req,res){
+        uvjet=req.term;
        $.ajax({
-           url: url + 'kupac/ajaxSearch/' + req.term,
+           url: url + 'kupac/traziKupca/' + req.term,
            success:function(odgovor){
+            
+
             res(odgovor);
             //console.log(odgovor);
         }
@@ -107,7 +118,14 @@ $( '#uvjetkupac' ).autocomplete({
 
     }
 }).autocomplete( 'instance' )._renderItem = function( ul, item ) {
+
+    let sadrzaj = item.ime + ' ' + item.prezime;
+    var querystr = uvjet;
+    var output = sadrzaj;
+    var reg = new RegExp(querystr, 'gi');
+    var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("Green")});
+
     return $( '<li>' )
-      .append( '<div> ' + item.ime + ' ' + item.prezime + '<div>')
+      .append( '<div> ' + final_str + '<div>')
       .appendTo( ul );
   };

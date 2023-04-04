@@ -314,12 +314,8 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         }
     }
 
-    public function ajaxSearch($uvjet){
-        $this->view->api(Kupac::read($uvjet));
-    }
-
     public function traziKupca($uvjet){
-        $rez=Kupac::read($uvjet);
+        $rez=Kupac::traziKupca($uvjet);
         $this->view->api($rez);
     }
 

@@ -161,4 +161,18 @@ class Proizvod
         $sifra=$izraz->fetchColumn();
         return $sifra;
     }
+
+    public static function traziProizvod($uvjet)
+    {
+        $veza=DB::getInstance();
+        $izraz=$veza->prepare('
+        
+        select sifra, naziv from proizvod
+        where naziv
+        like :uvjet
+        
+        ');
+        $izraz->execute(['uvjet'=>'%' . $uvjet . '%']);
+        return $izraz->fetchAll();
+    }
 }
