@@ -2,8 +2,9 @@ $('#uvjet').focus();
 
 $('#uvjet').autocomplete({
     source: function(req,res){
+        uvjet=req.term;
         $.ajax({
-            url: url + 'proizvod/ajaxSearch/' + req.term,
+            url: url + 'proizvod/traziProizvod/' + uvjet,
             success:function(odgovor){
                 res(odgovor);
             }
@@ -11,11 +12,18 @@ $('#uvjet').autocomplete({
     },
     minLength: 2,
     select:function(dogadjaj,ui){
-        spremi(ui.item);
+        window.location.href=url + 'proizvod/promjena/' + ui.item.sifra;
     }
 }).autocomplete('instance')._renderItem=function(ul, item){
-    return $('<li>')
-    .append('<div>' + item.naziv + '</div>')
-    .appendTo(ul);
-};
 
+    let sadrzaj = item.naziv;
+    var querystr = uvjet;
+    var output = sadrzaj;
+    var reg = new RegExp(querystr, 'gi');
+    var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("Green")});
+ 
+ 
+     return $( '<li>' )
+       .append( '<div>' + final_str + '<div>')
+       .appendTo( ul );
+};
