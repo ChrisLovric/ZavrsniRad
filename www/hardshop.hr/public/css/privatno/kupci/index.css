@@ -20,3 +20,20 @@
     position: relative;
     left: 32px;
 }
+
+.ui-autocomplete{
+    border-radius: 15px;
+    background-color: lightgray;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    color: bisque;
+    background-color: black;
+    border-radius: 15px;
+    border-color: transparent;
+}

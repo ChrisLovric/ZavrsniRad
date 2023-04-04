@@ -8,6 +8,9 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
+         ]);
         parent::setJSdependency([
             '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
             '<script>
@@ -313,6 +316,11 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
     public function ajaxSearch($uvjet){
         $this->view->api(Kupac::read($uvjet));
+    }
+
+    public function traziKupca($uvjet){
+        $rez=Kupac::read($uvjet);
+        $this->view->api($rez);
     }
 
 }
