@@ -76,9 +76,21 @@ td{
 }
 
 #vertical-menu{
-    background-image: url(../img/back.jpg);
+    background-color: black;
     color: bisque;
     border-radius: 15px;
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after{
+    border-color: bisque transparent transparent;
+}
+
+::marker{
+    color: transparent;
+}
+
+.dropdown.menu > li.is-active > a{
+    color: bisque;
 }
 
 #vertical-menu li:hover a{
@@ -155,8 +167,9 @@ input#input{
 }
 
 input#uvjet{
-    background-color: ghostwhite;
+    background-color:dimgray;
     border-radius: 15px;
+    border-color: transparent;
     width: 50%;
 }
 
