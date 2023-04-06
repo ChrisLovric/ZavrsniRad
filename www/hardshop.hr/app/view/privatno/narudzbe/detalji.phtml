@@ -1,11 +1,13 @@
 <form action="<?php echo App::config('url') ?>narudzba/promjena/<?=$e->sifra?>" method="post">
 
 <fieldset class="fieldset">
-<legend><br>(*obavezna polja)</legend>
+<legend><?=$legend?><br>(*obavezna polja)</legend>
 
     <?php include_once 'osnovniPodaci.phtml'?>
 
     <?php include_once 'popisProizvoda.phtml'?>
+
+    <h1><?=$poruka?></h1>
 
     <div class="grid-x grid-padding-x">
         <div class="large-6 cell">

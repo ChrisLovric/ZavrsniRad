@@ -5,7 +5,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'narudzbe' . DIRECTORY_SEPARATOR;
     private $nf;
     private $e;
-    private $poruke=[];
+    private $poruka='';
 
     public function __construct()
     {
@@ -115,16 +115,44 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
             header('location:' . App::config('url') . 'narudzba');
         } catch (\Exception $th) {
             $this->view->render($this->viewPutanja . 'detalji',[
-                'poruke'=>$this->poruke,
+                'legend'=>'Unos nove narudzbe',
+                'poruka'=>$this->poruka,
                 'kupac'=>$odabraniKupac,
                 'e'=>$this->e
             ]);
         }
     }
 
-    private function kontrola()
+    public function kontrola()
     {
+        $this->kontrolaBrojNarudzbe();
+        $this->kontrolaDatumNarudzbe();
+    }
 
+    private function kontrolaBrojNarudzbe()
+    {
+        $s=$this->e->brojnarudzbe;
+
+        if(strlen(trim($s))===0){
+            $this->poruka='Broj narudžbe obavezan';
+            throw new Exception();
+        }
+
+        $brojnarudzbe=$this->nf->parse($this->e->brojnarudzbe);
+        if($brojnarudzbe<=0){
+            $this->poruka='Broj narudžbe mora biti veći od 0';
+            throw new Exception();
+        }
+    }
+
+    private function kontrolaDatumNarudzbe()
+    {
+        $s=$this->e->datumnarudzbe;
+
+        if(strlen(trim($s))===0){
+            $this->poruka='Datum narudžbe obavezan';
+            throw new Exception();
+        }
     }
 
     private function promjena_GET($sifra)
@@ -152,7 +180,9 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         $this->view->render($this->viewPutanja . 'detalji',[
             'e'=>$this->e,
             'kupac'=>Kupac::readOne($this->e->kupac),
-            'placanja'=>$placanja
+            'placanja'=>$placanja,
+            'legend'=>'',
+            'poruka'=>$this->poruka
         ]);
     }
 
