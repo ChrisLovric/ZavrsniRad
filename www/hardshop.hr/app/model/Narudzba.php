@@ -187,4 +187,36 @@ class Narudzba
             'proizvod'=>$proizvod
         ]);
     }
+
+    public static function brojKupacaSaNarudzbom()
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        concat(a.ime, \' \', a.prezime) as name, count(b.kupac) as y
+        from kupac a
+        inner join narudzba b on a.sifra=b.kupac
+        group by a.ime order by y desc
+        
+        ');
+        $izraz->execute();
+        $rez = $izraz->fetchAll();
+        return $rez;
+    }
+
+    public static function brojNarudzbi()
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        count(brojnarudzbe) as y
+        from narudzba
+        
+        ');
+        $izraz->execute();
+        $rez = $izraz->fetchAll();
+        return $rez;
+    }
 }

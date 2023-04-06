@@ -216,4 +216,19 @@ class Kupac
         $izraz->execute(['uvjet'=>'%' . $uvjet . '%']);
         return $izraz->fetchAll();
     }
+
+    public static function brojKupaca()
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        count(sifra) as y
+        from kupac
+        
+        ');
+        $izraz->execute();
+        $rez = $izraz->fetchAll();
+        return $rez;
+    }
 }

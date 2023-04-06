@@ -28,3 +28,113 @@ $( '#uvjet' ).autocomplete({
 
 $('#uvjet').focus();
 
+
+
+/////Highcharts
+
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Kupci sa narudžbom',
+        align: 'center'
+    },
+    subtitle: {
+        align: 'center',
+        text: 'Poveznica: <a href="http://polaznik37.edunova.hr/kupac/index" target="_blank">Kupci</a>'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y}'
+            }
+        }
+    },
+    series: [{
+        name: 'Broj narudžbi',
+        colorByPoint: true,
+        data: podaci
+    }]
+});
+
+
+
+///////Highcharts 2
+
+Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        align: 'center',
+        text: 'Pregled narudžbi, kupaca i proizvoda'
+    },
+    subtitle: {
+        align: 'center',
+        text: 'Poveznice:<br><a href="http://polaznik37.edunova.hr/narudzba/index" target="_blank">Narudžbe</a><br><a href="http://polaznik37.edunova.hr/proizvod/index" target="_blank">Proizvodi</a><br><a href="http://polaznik37.edunova.hr/kupac/index" target="_blank">Kupci</a>'
+    },
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: ''
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y}'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+    },
+
+    series: [
+        {
+            name: 'Ukupan broj narudžbi',
+            colorByPoint: true,
+            data: podaci2
+            },
+        {
+            name: 'Ukupan broj kupaca',
+            colorByPoint: true,
+            data: podaci3
+            },
+        {
+            name: 'Ukupan broj proizvoda',
+            colorByPoint: true,
+            data: podaci4
+            }
+        ]
+});

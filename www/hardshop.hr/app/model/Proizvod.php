@@ -175,4 +175,19 @@ class Proizvod
         $izraz->execute(['uvjet'=>'%' . $uvjet . '%']);
         return $izraz->fetchAll();
     }
+
+    public static function brojProizvoda()
+    {   
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        count(sifra) as y
+        from proizvod
+        
+        ');
+        $izraz->execute();
+        $rez = $izraz->fetchAll();
+        return $rez;
+    }
 }
