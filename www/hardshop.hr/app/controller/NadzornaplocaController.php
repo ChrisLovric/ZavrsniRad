@@ -35,7 +35,22 @@ class NadzornaplocaController extends AutorizacijaController
     public function pretraga($uvjet)
     {
         $rez=NadzornaPloca::pretraga($uvjet);
+
+        foreach($rez as $r){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'proizvodi' . 
+            DIRECTORY_SEPARATOR . $r->sifra . '.png')){
+                $r->slika=App::config('url') . 'public/img/proizvodi/' . $r->sifra . '.png';
+            }
+            elseif(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'kupci' . 
+            DIRECTORY_SEPARATOR . $r->sifra . '.png')){
+                $r->slika=App::config('url') . 'public/img/kupci/' . $r->sifra . '.png';
+            }else{
+                $r->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+        }
+
         usort($rez, function($a, $b) {return strcmp($a->tekst, $b->tekst);});
+
         $this->view->api($rez);
     }
 }
