@@ -8,16 +8,6 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
-        parent::setCSSdependency([
-            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
-         ]);
-        parent::setJSdependency([
-            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
-            '<script>
-                 let url=\'' . App::config('url') . '\';
-             </script>'
-         ]);
-
         $poruka='';
         if(isset($_GET['p'])){
             switch ((int)$_GET['p']){
@@ -50,8 +40,31 @@ class KupacController extends AutorizacijaController implements ViewSucelje
 
         $zadnjastr=(int)ceil($ukupnostr/App::config('brps'));
 
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">'
+         ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/cropper.js"></script>',
+            '<script>
+                 let url=\'' . App::config('url') . '\';
+             </script>'
+         ]);
+
+         $kupci=Kupac::read($uvjet,$stranica);
+         foreach($kupci as $k){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'kupci' . 
+            DIRECTORY_SEPARATOR . $k->sifra . '.png')){
+                $k->slika=App::config('url') . 'public/img/kupci/' . $k->sifra . '.png';
+            }else{
+                $k->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+         }
+
+
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>Kupac::read($uvjet,$stranica),
+            'podaci'=>$kupci,
             'uvjet'=>$uvjet,
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
@@ -314,9 +327,37 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         }
     }
 
-    public function traziKupca($uvjet){
-        $rez=Kupac::traziKupca($uvjet);
-        $this->view->api($rez);
+    public function traziKupca($uvjet)
+    {
+        $kupci=Kupac::traziKupca($uvjet);
+
+        foreach($kupci as $k){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'kupci' . 
+            DIRECTORY_SEPARATOR . $k->sifra . '.png')){
+                $k->slika=App::config('url') . 'public/img/kupci/' . $k->sifra . '.png';
+            }else{
+                $k->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+        }
+        $this->view->api($kupci);
+    }
+
+    public function spremiSliku()
+    {
+        $slika=$_POST['slika'];
+        $slika=str_replace('data:image/png;base64,','',$slika);
+        $slika=str_replace(' ','+',$slika);
+        $data=base64_decode($slika);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . 
+        DIRECTORY_SEPARATOR . 'kupci' . DIRECTORY_SEPARATOR . $_POST['id'] . 
+        '.png', $data);
+
+        $res=new stdClass();
+        $res->error=false;
+        $res->description='Uspješno spremljeno';
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($res);
     }
 
 }

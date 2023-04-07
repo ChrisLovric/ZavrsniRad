@@ -14,7 +14,8 @@ class="small button">
     <?php foreach($podaci as $red): ?>
         <div class="large-3 medium-6 small-12 cell">
             <br><div class="callout">
-                <img src="<?=App::config('url')?>public/img/nepoznato.png" 
+                <img class="slika" id="p_<?=$red->sifra?>"
+                src="<?=$red->slika?>"
                 alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
 
                 <hr><h3><?=$red->ime?> <?=$red->prezime?></h3><hr>
@@ -28,4 +29,17 @@ class="small button">
 </div>
 
 <br><?php include 'stranicenje.phtml' ?>
+
+<div class="reveal" id="slikaModal" data-reveal>
+    <div style="max-height: 300px; overflow: auto;">
+        <img id="image" src="" alt="" />
+    </div>
+  
+  <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+  <a href="#" id="spremi">Spremi</a>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <?=$poruka?>
