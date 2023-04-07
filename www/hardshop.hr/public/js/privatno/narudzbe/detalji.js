@@ -23,8 +23,8 @@ $( '#uvjet' ).autocomplete({
     var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("Green")});
 
     return $( '<li>' )
-      .append( '<div>' + final_str + '<div>')
-      .appendTo( ul );
+    .append( '<div> <img style="height: 30px; width: 30px;" src="' + item.slika + '" />' + final_str + '<div>')
+    .appendTo( ul );
   };
 
 
@@ -126,6 +126,6 @@ $( '#uvjetkupac' ).autocomplete({
     var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("Green")});
 
     return $( '<li>' )
-      .append( '<div> ' + final_str + '<div>')
+      .append( '<div> <img style="height: 30px; width: 30px;" src="' + item.slika + '" />' + final_str + '<div>')
       .appendTo( ul );
   };
