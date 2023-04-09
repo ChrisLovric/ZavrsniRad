@@ -8,13 +8,31 @@ class OperaterController extends AdminController implements ViewSucelje
 
     public function index()
     {
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">'
+         ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/cropper.js"></script>',
+            '<script>
+                 let url=\'' . App::config('url') . '\';
+             </script>'
+         ]);
+
         $operateri=Operater::read();
         foreach($operateri as $o){
             unset($o->lozinka);
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'operateri' . 
+            DIRECTORY_SEPARATOR . $o->sifra . '.png')){
+                $o->slika=App::config('url') . 'public/img/operateri/' . $o->sifra . '.png';
+            }else{
+                $o->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
         }
 
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Operater::read())
+            'podaci'=>$operateri
         ]);
     }
 
@@ -224,5 +242,38 @@ class OperaterController extends AdminController implements ViewSucelje
             }
         }
         return $operateri;
+    }
+
+    public function ajaxSearch()
+    {
+        $operateri=Kupac::read();
+
+        foreach($operateri as $o){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'operateri' . 
+            DIRECTORY_SEPARATOR . $o->sifra . '.png')){
+                $o->slika=App::config('url') . 'public/img/operateri/' . $o->sifra . '.png';
+            }else{
+                $o->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+        }
+        $this->view->api($operateri);
+    }
+
+    public function spremiSliku()
+    {
+        $slika=$_POST['slika'];
+        $slika=str_replace('data:image/png;base64,','',$slika);
+        $slika=str_replace(' ','+',$slika);
+        $data=base64_decode($slika);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . 
+        DIRECTORY_SEPARATOR . 'operateri' . DIRECTORY_SEPARATOR . $_POST['id'] . 
+        '.png', $data);
+
+        $res=new stdClass();
+        $res->error=false;
+        $res->description='Uspješno spremljeno';
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($res);
     }
 }
