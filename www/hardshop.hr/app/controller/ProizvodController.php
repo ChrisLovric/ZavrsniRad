@@ -16,16 +16,6 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
 
     public function index()    
     {
-        parent::setCSSdependency([
-            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
-         ]);
-        parent::setJSdependency([
-            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
-            '<script>
-                 let url=\'' . App::config('url') . '\';
-             </script>'
-         ]);
-
         if(isset($_GET['uvjet'])){
             $uvjet=trim($_GET['uvjet']);
         }else{
@@ -45,8 +35,30 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
 
         $zadnjastr=(int)ceil($ukupnostr/App::config('brps'));
 
+        parent::setCSSdependency([
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/jquery-ui.css">',
+            '<link rel="stylesheet" href="' . App::config('url') . 'public/css/dependency/cropper.css">'
+         ]);
+        parent::setJSdependency([
+            '<script src="' . App::config('url') . 'public/js/dependency/jquery-ui.js"></script>',
+            '<script src="' . App::config('url') . 'public/js/dependency/cropper.js"></script>',
+            '<script>
+                 let url=\'' . App::config('url') . '\';
+             </script>'
+         ]);
+
+         $proizvodi=Proizvod::read($uvjet,$stranica);
+         foreach($proizvodi as $p){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'proizvodi' . 
+            DIRECTORY_SEPARATOR . $p->sifra . '.png')){
+                $p->slika=App::config('url') . 'public/img/proizvodi/' . $p->sifra . '.png';
+            }else{
+                $p->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+         }
+
         $this->view->render($this->viewPutanja . 'index',[
-            'podaci'=>$this->prilagodiPodatke(Proizvod::read($uvjet,$stranica)),
+            'podaci'=>$proizvodi,
             'uvjet'=>$uvjet,
             'stranica'=>$stranica,
             'zadnjastr'=>$zadnjastr,
@@ -144,7 +156,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
         }
 
         if(strlen(trim($s))>100){
-            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
+            $this->poruka='Naziv proizvoda ne smije imati više od 100 znakova';
             throw new Exception();
         }
 
@@ -163,7 +175,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
         }
 
         if(strlen(trim($s))>100){
-            $this->poruka='Naziv proizvoda ne smije imati više od 50 znakova';
+            $this->poruka='Naziv proizvoda ne smije imati više od 100 znakova';
             throw new Exception();
         }
 
@@ -209,7 +221,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
         }
 
         if($jedinicnacijena<0){
-            $this->poruka='Jedinična cijena morat biti veća od 0,00';
+            $this->poruka='Jedinična cijena mora biti veća od 0,00';
             throw new Exception();
         }
 
@@ -286,8 +298,36 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
     }
 
     public function traziProizvod($uvjet){
-        $rez=Proizvod::traziProizvod($uvjet);
-        $this->view->api($rez);
+        $proizvodi=Proizvod::traziProizvod($uvjet);
+
+        foreach($proizvodi as $p){
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'proizvodi' . 
+            DIRECTORY_SEPARATOR . $p->sifra . '.png')){
+                $p->slika=App::config('url') . 'public/img/proizvodi/' . $p->sifra . '.png';
+            }else{
+                $p->slika=App::config('url') . 'public/img/nepoznato.png';
+            }
+        }
+
+        $this->view->api($proizvodi);
+    }
+
+    public function spremiSliku()
+    {
+        $slika=$_POST['slika'];
+        $slika=str_replace('data:image/png;base64,','',$slika);
+        $slika=str_replace(' ','+',$slika);
+        $data=base64_decode($slika);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . 
+        DIRECTORY_SEPARATOR . 'proizvodi' . DIRECTORY_SEPARATOR . $_POST['id'] . 
+        '.png', $data);
+
+        $res=new stdClass();
+        $res->error=false;
+        $res->description='Uspješno spremljeno';
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($res);
     }
 
 }
