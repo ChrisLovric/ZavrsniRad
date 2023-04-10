@@ -86,7 +86,7 @@ Highcharts.chart('container2', {
     },
     subtitle: {
         align: 'center',
-        text: 'Poveznice:<br><a href="http://polaznik37.edunova.hr/narudzba/index" target="_blank">Narudžbe</a><br><a href="http://polaznik37.edunova.hr/proizvod/index" target="_blank">Proizvodi</a><br><a href="http://polaznik37.edunova.hr/kupac/index" target="_blank">Kupci</a>'
+        text: 'Poveznice:<br><a href="http://polaznik37.edunova.hr/narudzba/index" target="_blank">Narudžbe</a><br><a href="http://polaznik37.edunova.hr/kupac/index" target="_blank">Kupci</a><br><a href="http://polaznik37.edunova.hr/proizvod/index" target="_blank">Proizvodi</a>'
     },
     accessibility: {
         announceNewData: {

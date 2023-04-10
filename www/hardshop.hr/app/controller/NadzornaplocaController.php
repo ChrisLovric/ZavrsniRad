@@ -40,8 +40,10 @@ class NadzornaplocaController extends AutorizacijaController
             if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'proizvodi' . 
             DIRECTORY_SEPARATOR . $r->sifra . '.png')){
                 $r->slika=App::config('url') . 'public/img/proizvodi/' . $r->sifra . '.png';
+            }else{
+                $r->slika=App::config('url') . 'public/img/nepoznato2.png';
             }
-            elseif(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'kupci' . 
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'kupci' . 
             DIRECTORY_SEPARATOR . $r->sifra . '.png')){
                 $r->slika=App::config('url') . 'public/img/kupci/' . $r->sifra . '.png';
             }else{
