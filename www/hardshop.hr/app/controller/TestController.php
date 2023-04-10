@@ -61,13 +61,13 @@ class TestController
     {
         $faker=Faker\Factory::create('hr_HR');
 
-        for($i=0;$i<200;$i++){
+        for($i=0;$i<100;$i++){
             Proizvod::create([
                 'naziv'=>$faker->bothify('Proizvod ##??????#####'),
                 'proizvodjac'=>ucfirst($faker->unique()->word()),
                 'jedinicnacijena'=>$faker->unique()->numberBetween(100, 2000),
                 'opis'=>$faker->realText(),
-                'dostupnost'=>0
+                'dostupnost'=>$faker->boolean(false)
             ]);
         }
     }
