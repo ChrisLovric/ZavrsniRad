@@ -31,6 +31,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             $stranica=1;
         }
 
+
         $ukupnostr=Proizvod::ukupnoProizvoda($uvjet);
 
         $zadnjastr=(int)ceil($ukupnostr/App::config('brps'));
@@ -53,8 +54,9 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             DIRECTORY_SEPARATOR . $p->sifra . '.png')){
                 $p->slika=App::config('url') . 'public/img/proizvodi/' . $p->sifra . '.png';
             }else{
-                $p->slika=App::config('url') . 'public/img/nepoznato.png';
+                $p->slika=App::config('url') . 'public/img/nepoznato2.png';
             }
+            $p->dostupnost=$p->dostupnost ? 'checkbox' : 'minus';
          }
 
         $this->view->render($this->viewPutanja . 'index',[
@@ -305,7 +307,7 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
             DIRECTORY_SEPARATOR . $p->sifra . '.png')){
                 $p->slika=App::config('url') . 'public/img/proizvodi/' . $p->sifra . '.png';
             }else{
-                $p->slika=App::config('url') . 'public/img/nepoznato.png';
+                $p->slika=App::config('url') . 'public/img/nepoznato2.png';
             }
         }
 

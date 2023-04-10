@@ -9,13 +9,13 @@ tbody > tr > td:nth-child(3){
 .fi-checkbox{
     font-size: 30px;
     color: darkgreen;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .fi-minus{
     font-size: 25px;
     color: darkred;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .fi-pencil{
