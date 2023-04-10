@@ -40,4 +40,35 @@ class TestController
             echo $i . '<br>';
         }
     }
+
+    public function fakerKupci()
+    {
+        $faker=Faker\Factory::create('hr_HR');
+
+        for($i=0;$i<200;$i++){
+            Kupac::create([
+                'ime'=>$faker->firstname(),
+                'prezime'=>$faker->lastname(),
+                'email'=>$faker->unique()->email,
+                'adresazaracun'=>$faker->address(),
+                'adresazadostavu'=>$faker->address(),
+                'brojtelefona'=>$faker->phoneNumber()
+            ]);
+        }
+    }
+
+    public function fakerProizvodi()
+    {
+        $faker=Faker\Factory::create('hr_HR');
+
+        for($i=0;$i<200;$i++){
+            Proizvod::create([
+                'naziv'=>$faker->bothify('Proizvod ##??????#####'),
+                'proizvodjac'=>ucfirst($faker->unique()->word()),
+                'jedinicnacijena'=>$faker->unique()->numberBetween(100, 2000),
+                'opis'=>$faker->realText(),
+                'dostupnost'=>0
+            ]);
+        }
+    }
 }

@@ -27,4 +27,6 @@ spl_autoload_register(function($klasa){
     }
 });
 
+require_once 'vendor/autoload.php';
+
 App::start();
