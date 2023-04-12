@@ -57,7 +57,7 @@ class TestController
         }
     }
 
-    public function fakerProizvodi()
+    public function fakerProizvodiFalse()
     {
         $faker=Faker\Factory::create('hr_HR');
 
@@ -68,6 +68,21 @@ class TestController
                 'jedinicnacijena'=>$faker->unique()->numberBetween(100, 2000),
                 'opis'=>$faker->realText(),
                 'dostupnost'=>$faker->boolean(false)
+            ]);
+        }
+    }
+
+    public function fakerProizvodiTrue()
+    {
+        $faker=Faker\Factory::create('hr_HR');
+
+        for($i=0;$i<100;$i++){
+            Proizvod::create([
+                'naziv'=>$faker->bothify('Proizvod ##??????#####'),
+                'proizvodjac'=>ucfirst($faker->unique()->word()),
+                'jedinicnacijena'=>$faker->unique()->numberBetween(100, 2000),
+                'opis'=>$faker->realText(),
+                'dostupnost'=>$faker->boolean(true)
             ]);
         }
     }
