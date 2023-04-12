@@ -32,6 +32,11 @@
     left: 520px;
 }
 
+#git{
+    height: 110px;
+    width: 110px;
+}
+
 body{
     background-image: url(../img/back.jpg);
     background-size: 120%;
