@@ -143,6 +143,11 @@ h5{
     font-size: 35px;
 }
 
+p{
+    text-align: center;
+    font-size: 35px;
+}
+
 input#da{
     position: relative;
     width: 45%;
