@@ -21,6 +21,11 @@ class IndexController extends Controller
         ]);
     }
 
+    public function registracija()
+    {
+        $this->view->render('registracija');
+    }
+
     public function odjava()
     {
         unset($_SESSION['auth']);

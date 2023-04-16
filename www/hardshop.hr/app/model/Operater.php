@@ -20,7 +20,7 @@ class Operater
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        select * from operater where email=:email
+        select * from operater where email=:email and sessionid is null
         
         ');
 
@@ -62,11 +62,23 @@ class Operater
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        insert into operater(ime,prezime,email,uloga)
-        values (:ime,:prezime,:email,:uloga);
+        insert into operater (ime,prezime,email,lozinka,uloga,sessionid)
+        values (:ime,:prezime,:email,:lozinka,:uloga,:sessionid);
 
         ');
         $izraz->execute($parametri);
+    }
+
+    public static function potvrdi($id)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            update operater set sessionid=null
+            where sessionid=:id
+        
+        ');
+       return $izraz->execute(['id'=>$id]);
     }
 
     public static function update($parametri)

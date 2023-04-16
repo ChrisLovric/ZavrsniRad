@@ -10,7 +10,8 @@ create table operater(
     prezime varchar(50) not null,
     email varchar(50) not null,
     lozinka char(61) not null,
-    uloga varchar(20) not null
+    uloga varchar(20) not null,
+    sessionid varchar(255)
 );
 
 insert into operater (ime,prezime,email,lozinka,uloga)
