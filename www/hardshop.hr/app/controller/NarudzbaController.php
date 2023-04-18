@@ -1,5 +1,8 @@
 <?php
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class NarudzbaController extends AutorizacijaController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'narudzbe' . DIRECTORY_SEPARATOR;
@@ -286,6 +289,69 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         Narudzba::obrisiProizvodNarudzba($_GET['narudzba'],
                     $_GET['proizvod']);
                
+    }
+
+    public function excel()
+    {
+
+    // (B) CREATE A NEW SPREADSHEET
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setTitle("Sve narudžbe");
+
+    // (C) SET CELL VALUE
+
+    $sheet->setCellValue('A1', 'Broj narudžbe');
+    $sheet->setCellValue('B1', 'Kupac');
+    $sheet->setCellValue('C1', 'Naziv proizvoda');
+    $sheet->setCellValue('D1', 'Cijena proizvoda');
+    $sheet->setCellValue('E1', 'Datum narudžbe');
+    $sheet->setCellValue('F1', 'Vrsta plaćanja');
+
+    $spreadsheet->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold( true );
+
+    $redniBroj=2;
+
+     foreach(Narudzba::readExcel() as $red){
+         $sheet->setCellValue('A' . $redniBroj, $red->brojnarudzbe);
+         $sheet->setCellValue('B' . $redniBroj, $red->kupac);
+         $sheet->setCellValue('C' . $redniBroj, $red->naziv);
+         $sheet->setCellValue('D' . $redniBroj, $red->cijena);
+         $sheet->setCellValue('E' . $redniBroj, $red->datumnarudzbe=date('d.m.Y.'));
+         $sheet->setCellValue('F' . $redniBroj, $red->vrstaplacanja);
+         $redniBroj++;
+     }
+     $sheet->setCellValue('D' . $redniBroj, '=sum(D2:D' . ($redniBroj-1) . ')');
+
+     foreach ($sheet->getColumnIterator() as $column) {
+        $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
+     }
+
+     $spreadsheet->getActiveSheet()
+     ->getStyle('D2:D'. $redniBroj)
+     ->getNumberFormat()
+     ->setFormatCode(PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_EUR);
+     $spreadsheet->getActiveSheet()
+    ->getStyle('A1:F' . $redniBroj)
+    ->getBorders()
+    ->getOutline()
+    ->setBorderStyle(PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
+    
+
+    // (D) SEND DOWNLOAD HEADERS
+    // ob_clean();
+    // ob_start();
+    $writer = new Xlsx($spreadsheet);
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="Narudžbe.xlsx"');
+    header('Cache-Control: max-age=0');
+    header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+    header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
+    header('Cache-Control: cache, must-revalidate');
+    header('Pragma: public');
+    $writer->save('php://output');
+    // ob_end_flush();
+
     }
 
 }

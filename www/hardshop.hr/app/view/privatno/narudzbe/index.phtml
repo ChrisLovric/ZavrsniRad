@@ -42,3 +42,5 @@
         <?php endforeach;?>
     </tbody>
 </table>
+<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
+    href="<?=App::config('url')?>narudzba/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>

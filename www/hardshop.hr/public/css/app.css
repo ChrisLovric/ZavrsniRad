@@ -211,3 +211,13 @@ ul.pagination li a, ul.pagination li button {
     text-align: center;
 }
 
+.fi-page-export{
+    color: green;
+    font-size: 30px;
+}
+
+#excel{
+    color: green;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
+    border-radius: 15px;
+}

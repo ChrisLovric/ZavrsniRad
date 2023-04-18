@@ -241,4 +241,27 @@ class Narudzba
         $sifra=$izraz->fetchColumn();
         return $sifra==0;
     }
+
+    public static function readExcel()
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        a.brojnarudzbe,
+        concat(c.ime, \' \', c.prezime) as kupac,
+        e.naziv,
+        e.jedinicnacijena as cijena,
+        b.vrstaplacanja,
+        a.datumnarudzbe
+        from narudzba a 
+        inner join placanje b on a.placanje=b.sifra 
+        inner join kupac c on a.kupac=c.sifra
+        inner join detaljinarudzbe d on d.narudzba=a.sifra
+        inner join proizvod e on d.proizvod=e.sifra
+        
+        ');
+        $izraz->execute();
+        return $izraz->fetchAll();
+    }
 }
