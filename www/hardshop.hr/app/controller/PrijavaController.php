@@ -47,19 +47,19 @@ class PrijavaController extends Controller
         $p->sessionid=uniqid();
         $p->uloga='Operater';
 
-        Log::info($p);
+   //     Log::info($p);
         if(Operater::create((array)$p)){
             $mail = new PHPMailer(false);
 
             try {
                 //Server settings
                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-               // $mail->isSMTP();                                            //Send using SMTP
+                $mail->isSMTP();                                              //Send using SMTP
                 $mail->Host       = 'mail.polaznik37.edunova.hr';             //Set the SMTP server to send through
-              //  $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->SMTPAuth   = true;                                     //Enable SMTP authentication
                 $mail->Username   = '_mainaccount@polaznik37.edunova.hr';     //SMTP username
                 $mail->Password   = 'Eskulap09854';                           //SMTP password
-               // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;              //Enable implicit TLS encryption
                 $mail->Port       = 465;                                      //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             
                 //Recipients
@@ -76,11 +76,13 @@ class PrijavaController extends Controller
                 echo App::config('url') . 'prijava/potvrda?i=' . $p->sessionid;
                 
                 $mail->send();
-                echo 'Message has been sent';
+                
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }else{
+            echo 'Registracija uspješna. Potvrdite podatke putem linka u mailu kako bi se mogli prijaviti.<br><br>';
+            echo 'Klik za povratak u aplikaciju na <a href="' . App::config('url') . 'index/prijava ">prijavu.</a>';
         }
     }
 
