@@ -219,4 +219,26 @@ class Narudzba
         $rez = $izraz->fetchAll();
         return $rez;
     }
+
+    public static function postojiIstiBrojNarudzbe($brojnarudzbe,$sifra=0)
+    {
+        $veza=DB::getInstance();
+        if($sifra>0){
+            $izraz=$veza->prepare('
+        
+            select sifra from narudzba where brojnarudzbe=:brojnarudzbe 
+            and sifra!=:sifra
+            
+            ');
+        }
+        $parametri=[];
+        $parametri['brojnarudzbe']=$brojnarudzbe;
+
+        if($sifra>0){
+            $parametri['sifra']=$sifra;
+        }
+        $izraz->execute($parametri);
+        $sifra=$izraz->fetchColumn();
+        return $sifra==0;
+    }
 }

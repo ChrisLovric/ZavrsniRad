@@ -270,7 +270,7 @@ class KupacController extends AutorizacijaController implements ViewSucelje
         $s=$this->e->brojtelefona;
 
         if(strlen(trim($s))>20){
-            $this->poruka='Broj telefona ne smije imati više od 50 znakova';
+            $this->poruka='Broj telefona ne smije imati više od 20 znakova';
             throw new Exception();
         }
     }

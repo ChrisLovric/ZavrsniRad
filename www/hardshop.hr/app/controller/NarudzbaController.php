@@ -79,7 +79,8 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
         if(
         $e->datumisporuke==null &&
-        $e->datumplacanja==null){
+        $e->datumplacanja==null &&
+        $e->proizvod=Narudzba::detaljiNarudzbe($sifra)==null){
         Narudzba::delete($e->sifra);
         }
         header('location: ' . App::config('url') . 'narudzba');
@@ -118,7 +119,8 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
                 'legend'=>'Unos nove narudzbe',
                 'poruka'=>$this->poruka,
                 'kupac'=>$odabraniKupac,
-                'e'=>$this->e
+                'e'=>$this->e,
+                'placanja'=>Placanje::read()
             ]);
         }
     }
@@ -127,6 +129,17 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
     {
         $this->kontrolaBrojNarudzbe();
         $this->kontrolaDatumNarudzbe();
+        $this->kontrolaProizvod();
+    }
+
+    private function kontrolaProizvod($sifra='')
+    {
+        $this->e->proizvodi=Narudzba::detaljiNarudzbe($sifra);
+
+        if(strlen(trim($sifra))===0){
+            $this->poruka='Proizvod obavezan';
+            throw new Exception();
+        }
     }
 
     private function kontrolaBrojNarudzbe()
@@ -142,6 +155,18 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
         if($brojnarudzbe<=0){
             $this->poruka='Broj narudžbe mora biti veći od 0';
             throw new Exception();
+        }
+
+        if(isset($this->e->sifra)){
+            if(!Narudzba::postojiIstiBrojNarudzbe($this->e->brojnarudzbe,$this->e->sifra)){
+                $this->poruka='Broj narudžbe već postoji u bazi';
+                throw new Exception();
+            }
+        }else{
+            if(!Narudzba::postojiIstiBrojNarudzbe($this->e->brojnarudzbe)){
+                $this->poruka='Broj narudžbe već postoji u bazi';
+                throw new Exception();
+            }
         }
     }
 
