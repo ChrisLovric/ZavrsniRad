@@ -2,3 +2,4 @@
 www/hardshop.hr/composer.lock
 www/hardshop.hr/vendor
 www/hardshop.hr/app/controller/PrijavaController.php
+www/hardshop.hr/app/konfiguracija.php
