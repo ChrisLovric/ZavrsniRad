@@ -132,17 +132,6 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
     {
         $this->kontrolaBrojNarudzbe();
         $this->kontrolaDatumNarudzbe();
-        $this->kontrolaProizvod();
-    }
-
-    private function kontrolaProizvod($sifra='')
-    {
-        $this->e->proizvodi=Narudzba::detaljiNarudzbe($sifra);
-
-        if(strlen(trim($sifra))===0){
-            $this->poruka='Proizvod obavezan';
-            throw new Exception();
-        }
     }
 
     private function kontrolaBrojNarudzbe()
