@@ -1,5 +1,5 @@
 <a href="<?=App::config('url')?>proizvod/novi" class="small button">
-    Dodaj novi proizvod
+    Unesi novi proizvod
 </a><br><br>
 
 <form action="" method="get">
@@ -17,8 +17,8 @@
                 src="<?=$red->slika?>"
                 alt="<?=$red->jedinicnacijena?>" id="img">
 
-                <hr><h3><?=$red->proizvodjac?><br><?=$red->naziv?> <br> <br><?=$red->jedinicnacijena . ' €'?><br><br>
-                Stanje:<i class="fi-<?=$red->dostupnost?>"></i></h3><hr>
+                <hr><?=$red->proizvodjac?><br><?=$red->naziv?> <br> <br><?=$red->jedinicnacijena . ' €'?><br><br>
+                Stanje:<i class="fi-<?=$red->dostupnost?>"></i><hr>
                 <?php
                     $par=['proizvod', $red->naziv . ' ' . $red->proizvodjac, $red->detaljinarudzbe==0];
                 include BP_APP . 'view/includes/promjenabrisanje.phtml';

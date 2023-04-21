@@ -19,7 +19,6 @@ tbody > tr > td:nth-child(3){
 }
 
 .fi-pencil{
-    margin-left: 90px;
     font-size: 25px;
     color: darkgreen;
 }
@@ -34,6 +33,11 @@ tbody > tr > td:nth-child(3){
     background-image: url(../../../img/back.jpg);
     border-radius: 25px;
     border: transparent;
+    min-height: 630px;
+    color: bisque;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
 }
 
 #img{

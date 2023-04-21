@@ -1,5 +1,4 @@
 .fi-pencil{
-    margin-left: 90px;
     font-size: 25px;
     color: darkgreen;
 }
@@ -14,6 +13,10 @@
     background-image: url(../../../img/back.jpg);
     border-radius: 25px;
     border: transparent;
+    color: bisque;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
 }
 
 #img{

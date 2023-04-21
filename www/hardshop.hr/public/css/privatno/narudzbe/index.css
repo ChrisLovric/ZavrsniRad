@@ -16,3 +16,25 @@ tbody > tr > td{
 thead > tr > th{
     text-align: center;
 }
+
+table{
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead{
+    background-color: transparent;
+    color: bisque;
+    font-size: 22px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+td{
+    background-color: rgb(30, 30, 30);
+    color: bisque;
+}
+
+th, td {
+    border: 1px solid gray;
+    border-radius: 8px;
+}

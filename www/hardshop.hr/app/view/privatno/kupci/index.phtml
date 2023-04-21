@@ -1,6 +1,6 @@
 <a href="<?=App::config('url')?>kupac/novi" 
 class="small button">
-    Dodaj novog kupca
+    Unesi novog kupca
 </a><br><br>
 
 <form action="" method="get">
@@ -18,7 +18,7 @@ class="small button">
                 src="<?=$red->slika?>"
                 alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
 
-                <hr><h3><?=$red->ime?> <?=$red->prezime?></h3><hr>
+                <hr><?=$red->ime?> <?=$red->prezime?><hr>
                 <?php
                 $par=['kupac', $red->ime . ' ' . $red->prezime, $red->narudzba==0];
                 include BP_APP . 'view/includes/promjenabrisanje.phtml';

@@ -1,6 +1,11 @@
 <a href="<?=App::config('url')?>narudzba/novi" class="small button">
-    Dodaj novu narudžbu
+    Unesi novu narudžbu
 </a>
+
+<div class="grid-x grid-padding-x">
+<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
+    href="<?=App::config('url')?>narudzba/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
+</div><br>
 
 <table>
     <thead>
@@ -13,12 +18,12 @@
             <th>Datum isporuke</th>
             <th>Datum plaćanja</th>
             <th>Vrsta plaćanja</th>
-            <th>Akcija</th>
+            <th>Opcije</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($podaci as $red): ?>
-            <tr>
+            <tr>    
                 <td><?=$red->brojnarudzbe?></td>
                 <td><?=$red->kupac?></td>
                 <td><?=$red->naziv?></td>
@@ -36,11 +41,8 @@
                     <i title="Narudžba se ne može obrisati jer ima unesene kupce" 
                     class="fi-trash" style="color: gray"></i>
                 <?php endif; ?>
-
             </td>
             </tr>
         <?php endforeach;?>
     </tbody>
 </table>
-<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
-    href="<?=App::config('url')?>narudzba/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
