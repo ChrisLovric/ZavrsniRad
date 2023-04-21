@@ -56,9 +56,6 @@ create table proizvod(
 
 create table detaljinarudzbe(
     sifra int not null primary key auto_increment,
-    cijena decimal(18,2) not null,
-    kolicina int not null,
-    popust decimal(18,2),
     narudzba int not null,
     proizvod int not null
 );
@@ -118,7 +115,7 @@ values
 (2,'2022-12-05 08:11:52','2022-12-08 09:45:12','2022-12-05 08:13:47',2,2);
 
 
-insert into detaljinarudzbe (cijena,kolicina,popust,narudzba,proizvod)
+insert into detaljinarudzbe (narudzba,proizvod)
 values
-(464.99,1,null,1,1),
-(1499.99,2,100.00,2,2);
+(1,1),
+(2,2);

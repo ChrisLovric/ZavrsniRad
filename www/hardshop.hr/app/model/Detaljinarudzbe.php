@@ -12,10 +12,7 @@ class Detaljinarudzbe
         a.sifra,
         b.brojnarudzbe,
         concat(d.ime, \' \',d.prezime) as kupac,
-		c.naziv,
-		a.kolicina,
-		a.popust,
-        a.cijena
+		c.naziv
         from detaljinarudzbe a 
         left join narudzba b on a.narudzba=b.sifra 
         left join proizvod c on a.proizvod=c.sifra
@@ -24,10 +21,7 @@ class Detaljinarudzbe
         a.sifra,
         b.brojnarudzbe,
         concat(d.ime, \' \',d.prezime),
-		c.naziv,
-		a.kolicina,
-		a.popust,
-        a.cijena
+		c.naziv
         
         ');
 
@@ -54,8 +48,8 @@ class Detaljinarudzbe
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        insert into detaljinarudzbe(cijena,kolicina,popust,narudzba,proizvod)
-        values (:cijena,:kolicina,:popust,:narudzba,:proizvod);
+        insert into detaljinarudzbe(narudzba,proizvod)
+        values (:narudzba,:proizvod);
         
         ');
         $izraz->execute($parametri);
@@ -67,7 +61,7 @@ class Detaljinarudzbe
         $veza=DB::getInstance();
         $izraz=$veza->prepare('
         
-        update detaljinarudzbe set cijena=:cijena,kolicina=:kolicina,popust=:popust,narudzba=:narudzba,
+        update detaljinarudzbe set narudzba=:narudzba,
         proizvod=:proizvod where sifra=:sifra
         
         ');

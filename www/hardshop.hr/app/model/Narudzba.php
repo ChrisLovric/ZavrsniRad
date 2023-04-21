@@ -15,9 +15,6 @@ class Narudzba
         e.naziv,
         e.jedinicnacijena,
         b.vrstaplacanja,
-        d.kolicina,
-        d.popust,
-        d.cijena,
         a.datumnarudzbe,
         a.datumisporuke,
         a.datumplacanja
@@ -33,9 +30,6 @@ class Narudzba
         e.naziv,
         e.jedinicnacijena,
         b.vrstaplacanja,
-        d.kolicina,
-        d.popust,
-        d.cijena,
         a.datumnarudzbe,
         a.datumisporuke,
         a.datumplacanja
@@ -56,7 +50,7 @@ class Narudzba
         $izraz=$veza->prepare('
         
         select 
-        a.sifra, a.naziv, b.cijena, b.kolicina, b.popust
+        a.sifra, a.naziv
         from proizvod a
         inner join detaljinarudzbe b on a.sifra=b.proizvod
         where b.narudzba=:sifra
@@ -85,7 +79,7 @@ class Narudzba
         $izraz=$veza->prepare('
         
         select 
-        a.sifra, a.naziv, b.cijena, b.kolicina, b.popust
+        a.sifra, a.naziv
         from proizvod a
         inner join detaljinarudzbe b on a.sifra=b.proizvod
         where b.narudzba=:sifra
