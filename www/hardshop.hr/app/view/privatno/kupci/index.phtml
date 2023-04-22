@@ -3,6 +3,11 @@ class="small button">
     Unesi novog kupca
 </a><br><br>
 
+<div class="grid-x grid-padding-x">
+<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
+    href="<?=App::config('url')?>kupac/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
+</div><br>
+
 <form action="" method="get">
     <input type="text" name="uvjet" placeholder="Pretraži kupce"
     value="<?=$uvjet?>" id="uvjet">

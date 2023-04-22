@@ -231,4 +231,18 @@ class Kupac
         $rez = $izraz->fetchAll();
         return $rez;
     }
+
+    public static function readExcelKupac()
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        ime,prezime,email,adresazaracun,adresazadostavu,brojtelefona
+        from kupac
+        
+        ');
+        $izraz->execute();
+        return $izraz->fetchAll();
+    }
 }
