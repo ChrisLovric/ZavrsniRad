@@ -190,4 +190,18 @@ class Proizvod
         $rez = $izraz->fetchAll();
         return $rez;
     }
+
+    public static function readExcelProizvod()
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select
+        naziv,proizvodjac,jedinicnacijena,opis,dostupnost
+        from proizvod
+        
+        ');
+        $izraz->execute();
+        return $izraz->fetchAll();
+    }
 }

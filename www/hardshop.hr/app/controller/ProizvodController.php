@@ -1,5 +1,8 @@
 <?php
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class ProizvodController extends AutorizacijaController implements ViewSucelje
 {
     private $viewPutanja='privatno' . DIRECTORY_SEPARATOR . 'proizvodi' . DIRECTORY_SEPARATOR;
@@ -330,6 +333,66 @@ class ProizvodController extends AutorizacijaController implements ViewSucelje
         $res->description='Uspješno spremljeno';
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($res);
+    }
+
+    public function excel()
+    {
+
+    // (B) CREATE A NEW SPREADSHEET
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setTitle("Sve narudžbe");
+
+    // (C) SET CELL VALUE
+
+    $sheet->setCellValue('A1', 'Naziv proizvoda');
+    $sheet->setCellValue('B1', 'Proizvođač');
+    $sheet->setCellValue('C1', 'Cijena proizvoda');
+    $sheet->setCellValue('D1', 'Opis');
+    $sheet->setCellValue('E1', 'Dostupnost');
+
+    $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold( true );
+
+    $redniBroj=2;
+
+     foreach(Proizvod::readExcelProizvod() as $red){
+         $sheet->setCellValue('A' . $redniBroj, $red->naziv);
+         $sheet->setCellValue('B' . $redniBroj, $red->proizvodjac);
+         $sheet->setCellValue('C' . $redniBroj, $red->jedinicnacijena);
+         $sheet->setCellValue('D' . $redniBroj, $red->opis);
+         $sheet->setCellValue('E' . $redniBroj, $red->dostupnost);
+         $redniBroj++;
+     }
+
+     foreach ($sheet->getColumnIterator() as $column) {
+        $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
+     }
+
+     $spreadsheet->getActiveSheet()
+     ->getStyle('C2:C'. $redniBroj)
+     ->getNumberFormat()
+     ->setFormatCode(PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_EUR);
+     $spreadsheet->getActiveSheet()
+    ->getStyle('A1:E' . $redniBroj)
+    ->getBorders()
+    ->getOutline()
+    ->setBorderStyle(PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
+    
+
+    // (D) SEND DOWNLOAD HEADERS
+    // ob_clean();
+    // ob_start();
+    $writer = new Xlsx($spreadsheet);
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="Proizvodi.xlsx"');
+    header('Cache-Control: max-age=0');
+    header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+    header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
+    header('Cache-Control: cache, must-revalidate');
+    header('Pragma: public');
+    $writer->save('php://output');
+    // ob_end_flush();
+
     }
 
 }

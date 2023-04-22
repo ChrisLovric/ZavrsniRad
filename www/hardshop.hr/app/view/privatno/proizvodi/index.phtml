@@ -2,6 +2,11 @@
     Unesi novi proizvod
 </a><br><br>
 
+<div class="grid-x grid-padding-x">
+<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
+    href="<?=App::config('url')?>proizvod/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
+</div><br>
+
 <form action="" method="get">
     <input type="text" name="uvjet" placeholder="Pretraži proizvode"
     value="<?=$uvjet?>" id="uvjet">
