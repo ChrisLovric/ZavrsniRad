@@ -236,7 +236,7 @@ class Narudzba
         return $sifra==0;
     }
 
-    public static function readExcel()
+    public static function readExcelNarudzba()
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('

@@ -301,7 +301,7 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     $redniBroj=2;
 
-     foreach(Narudzba::readExcel() as $red){
+     foreach(Narudzba::readExcelNarudzba() as $red){
          $sheet->setCellValue('A' . $redniBroj, $red->brojnarudzbe);
          $sheet->setCellValue('B' . $redniBroj, $red->kupac);
          $sheet->setCellValue('C' . $redniBroj, $red->naziv);
