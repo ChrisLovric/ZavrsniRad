@@ -22,7 +22,7 @@ $( '#uvjet' ).autocomplete({
 
 
     return $( '<li>' )
-      .append( '<div><img style="height: 30px; width: 30px;" src="' + item.slika + '" />' + final_str + ' (' + item.vrsta + ')<div>')
+      .append( '<div>' + final_str + ' (' + item.vrsta + ')<div>')
       .appendTo( ul );
   };
 
