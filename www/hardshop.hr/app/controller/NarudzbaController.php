@@ -292,10 +292,11 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
 
     $sheet->setCellValue('A1', 'Broj narudžbe');
     $sheet->setCellValue('B1', 'Kupac');
-    $sheet->setCellValue('C1', 'Naziv proizvoda');
-    $sheet->setCellValue('D1', 'Cijena proizvoda');
-    $sheet->setCellValue('E1', 'Datum narudžbe');
-    $sheet->setCellValue('F1', 'Vrsta plaćanja');
+    $sheet->setCellValue('C1', 'Datum narudžbe');
+    $sheet->setCellValue('D1', 'Vrsta plaćanja');
+    $sheet->setCellValue('E1', 'Naziv proizvoda');
+    $sheet->setCellValue('F1', 'Cijena proizvoda');
+
 
     $spreadsheet->getActiveSheet()->getStyle('A1:F1')->getFont()->setBold( true );
 
@@ -304,20 +305,21 @@ class NarudzbaController extends AutorizacijaController implements ViewSucelje
      foreach(Narudzba::readExcelNarudzba() as $red){
          $sheet->setCellValue('A' . $redniBroj, $red->brojnarudzbe);
          $sheet->setCellValue('B' . $redniBroj, $red->kupac);
-         $sheet->setCellValue('C' . $redniBroj, $red->naziv);
-         $sheet->setCellValue('D' . $redniBroj, $red->cijena);
-         $sheet->setCellValue('E' . $redniBroj, $red->datumnarudzbe=date('d.m.Y.'));
-         $sheet->setCellValue('F' . $redniBroj, $red->vrstaplacanja);
+         $sheet->setCellValue('C' . $redniBroj, $red->datumnarudzbe=date('d.m.Y.'));
+         $sheet->setCellValue('D' . $redniBroj, $red->vrstaplacanja);
+         $sheet->setCellValue('E' . $redniBroj, $red->naziv);
+         $sheet->setCellValue('F' . $redniBroj, $red->cijena);
+
          $redniBroj++;
      }
-     $sheet->setCellValue('D' . $redniBroj, '=sum(D2:D' . ($redniBroj-1) . ')');
+     $sheet->setCellValue('F' . $redniBroj, '=sum(F2:F' . ($redniBroj-1) . ')');
 
      foreach ($sheet->getColumnIterator() as $column) {
         $sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
      }
 
      $spreadsheet->getActiveSheet()
-     ->getStyle('D2:D'. $redniBroj)
+     ->getStyle('F2:F'. $redniBroj)
      ->getNumberFormat()
      ->setFormatCode(PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_EUR);
      $spreadsheet->getActiveSheet()
