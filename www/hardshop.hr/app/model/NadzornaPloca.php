@@ -4,8 +4,8 @@ class NadzornaPloca
 {
     public static function pretraga($uvjet)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         select sifra, \'Kupac\' as vrsta,
         concat(ime, \' \', prezime) as tekst from kupac
@@ -20,7 +20,7 @@ class NadzornaPloca
         where brojnarudzbe like :uvjet
         
         ');
-        $izraz->execute(['uvjet'=>'%' . $uvjet . '%']);
+        $izraz->execute(['uvjet' => '%' . $uvjet . '%']);
         return $izraz->fetchAll();
     }
 }

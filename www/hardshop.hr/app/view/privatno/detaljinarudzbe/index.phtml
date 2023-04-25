@@ -1,4 +1,4 @@
-<a href="<?=App::config('url')?>detaljinarudzbe/novi" class="small button">
+<a href="<?= App::config('url') ?>detaljinarudzbe/novi" class="small button">
     Dodaj nove detalje narudžbe
 </a>
 
@@ -15,26 +15,24 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($podaci as $red): ?>
+        <?php foreach ($podaci as $red) : ?>
             <tr>
-                <td><?=$red->brojnarudzbe?></td>
-                <td><?=$red->kupac?></td>
-                <td><?=$red->naziv?></td>
-                <td><?=$red->kolicina?></td>
-                <td><?=$red->popust?></td>
-                <td><?=$red->cijena?></td>
+                <td><?= $red->brojnarudzbe ?></td>
+                <td><?= $red->kupac ?></td>
+                <td><?= $red->naziv ?></td>
+                <td><?= $red->kolicina ?></td>
+                <td><?= $red->popust ?></td>
+                <td><?= $red->cijena ?></td>
                 <td>
-                <a href="<?=App::config('url')?>detaljinarudzbe/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
-                <?php if($red->brojnarudzbe==0): ?>
-                    <a onclick="return confirm('Sigurno obrisati detalje narudžbe <?=$red->brojnarudzbe?>?');"
-                    href="<?=App::config('url')?>detaljinarudzbe/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
-                <?php else: ?>
-                    <i title="Detalji narudžbe se ne mogu obrisati jer imaju postojeću narudžbu" 
-                    class="fi-trash" style="color: gray"></i>
-                <?php endif; ?>
+                    <a href="<?= App::config('url') ?>detaljinarudzbe/promjena/<?= $red->sifra ?>"><i class="fi-pencil"></i></a>
+                    <?php if ($red->brojnarudzbe == 0) : ?>
+                        <a onclick="return confirm('Sigurno obrisati detalje narudžbe <?= $red->brojnarudzbe ?>?');" href="<?= App::config('url') ?>detaljinarudzbe/brisanje/<?= $red->sifra ?>"><i class="fi-trash"></i></a>
+                    <?php else : ?>
+                        <i title="Detalji narudžbe se ne mogu obrisati jer imaju postojeću narudžbu" class="fi-trash" style="color: gray"></i>
+                    <?php endif; ?>
 
-            </td>
+                </td>
             </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </tbody>
 </table>

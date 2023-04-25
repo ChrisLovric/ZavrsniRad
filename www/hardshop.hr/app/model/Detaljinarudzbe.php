@@ -5,8 +5,8 @@ class Detaljinarudzbe
     public static function read()
     {
 
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         select
         a.sifra,
@@ -31,22 +31,22 @@ class Detaljinarudzbe
 
     public static function readOne($sifra)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         select * from detaljinarudzbe where sifra=:sifra');
-        
+
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
-        $detaljinarudzbe=$izraz->fetch();
+        $detaljinarudzbe = $izraz->fetch();
         return $detaljinarudzbe;
     }
 
     public static function create($parametri)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         insert into detaljinarudzbe(narudzba,proizvod)
         values (:narudzba,:proizvod);
@@ -58,8 +58,8 @@ class Detaljinarudzbe
 
     public static function update($parametri)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         update detaljinarudzbe set narudzba=:narudzba,
         proizvod=:proizvod where sifra=:sifra
@@ -70,16 +70,15 @@ class Detaljinarudzbe
 
     public static function delete($sifra)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         delete from detaljinarudzbe where sifra=:sifra
         
         ');
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
         $izraz->execute();
     }
-
 }

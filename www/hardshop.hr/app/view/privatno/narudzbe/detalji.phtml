@@ -1,21 +1,21 @@
-<form action="<?php echo App::config('url') ?>narudzba/promjena/<?=$e->sifra?>" method="post">
+<form action="<?php echo App::config('url') ?>narudzba/promjena/<?= $e->sifra ?>" method="post">
 
-<fieldset class="fieldset">
-<legend><?=$legend?><br>(*obavezna polja)</legend>
+    <fieldset class="fieldset">
+        <legend><?= $legend ?><br>(*obavezna polja)</legend>
 
-    <?php include_once 'osnovniPodaci.phtml'?>
+        <?php include_once 'osnovniPodaci.phtml' ?>
 
-    <?php include_once 'popisProizvoda.phtml'?>
+        <?php include_once 'popisProizvoda.phtml' ?>
 
-    <h1><?=$poruka?></h1>
+        <h1><?= $poruka ?></h1>
 
-    <div class="grid-x grid-padding-x">
-        <div class="large-6 cell">
-            <a href="<?= App::config('url') ?>narudzba/odustani/<?= $e->sifra ?>" class="button alert expanded">Odustani</a>
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?= App::config('url') ?>narudzba/odustani/<?= $e->sifra ?>" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="Spremi">
+            </div>
         </div>
-        <div class="large-6 cell">
-            <input type="submit" class="button success expanded" value="Spremi">
-        </div>
-    </div>
 </form>
 </fieldset>

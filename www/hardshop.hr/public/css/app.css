@@ -1,20 +1,20 @@
-#program{
+#program {
     min-height: 400px;
 }
 
-.success.button.expanded{
+.success.button.expanded {
     background-color: darkgreen;
     color: bisque;
     border-radius: 15px;
 }
 
-.alert.button.expanded{
+.alert.button.expanded {
     background-color: darkred;
     color: bisque;
     border-radius: 15px;
 }
 
-.small.button{
+.small.button {
     background-color: darkgreen;
     color: bisque;
     border-radius: 15px;
@@ -23,7 +23,7 @@
     left: 500px;
 }
 
-.large.button{
+.large.button {
     background-color: darkgreen;
     color: bisque;
     border-radius: 15px;
@@ -32,119 +32,119 @@
     left: 520px;
 }
 
-#git{
+#git {
     height: 110px;
     width: 110px;
 }
 
-body{
+body {
     background-image: url(../img/back.jpg);
     background-size: 120%;
     color: bisque;
 }
 
-#example-menu{
+#example-menu {
     background-color: transparent;
 }
 
-.top-bar ul{
+.top-bar ul {
     background-color: transparent;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.top-bar a{
+.top-bar a {
     color: bisque;
     font-size: 25px;
 }
 
-#dropdown-menu li:hover a{
+#dropdown-menu li:hover a {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0 transparent;
     color: bisque;
     border-radius: 15px;
 }
 
-#vertical-menu{
+#vertical-menu {
     background-color: black;
     color: bisque;
     border-radius: 15px;
 }
 
-.dropdown.menu > li.is-dropdown-submenu-parent > a::after{
+.dropdown.menu>li.is-dropdown-submenu-parent>a::after {
     border-color: bisque transparent transparent;
 }
 
-::marker{
+::marker {
     color: transparent;
 }
 
-.dropdown.menu > li.is-active > a{
+.dropdown.menu>li.is-active>a {
     color: bisque;
 }
 
-#vertical-menu li:hover a{
+#vertical-menu li:hover a {
     color: darkgreen;
 }
 
-label{
+label {
     color: bisque;
     text-align: center;
 }
 
-legend{
+legend {
     color: bisque;
     text-align: center;
 }
 
-h1{
-    color: crimson; 
+h1 {
+    color: crimson;
     font-size: 25px;
     text-align: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0 transparent;
 }
 
-h2{
+h2 {
     color: bisque;
     font-size: 15px;
     text-align: center;
 }
 
-h3{
+h3 {
     color: bisque;
     font-size: 20px;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-h4{
+h4 {
     color: bisque;
     font-size: 35px;
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-h5{
+h5 {
     text-align: center;
     font-size: 35px;
 }
 
-p{
+p {
     text-align: center;
     font-size: 35px;
 }
 
-input#da{
+input#da {
     position: relative;
     width: 45%;
     left: 22%;
 }
 
-input#ne{
+input#ne {
     position: relative;
     width: 3%;
     right: -1%
 }
 
-select#input{
+select#input {
     background-color: lightgray;
     border-radius: 15px;
     width: 50%;
@@ -152,7 +152,7 @@ select#input{
     left: 25%;
 }
 
-input#input{
+input#input {
     background-color: lightgray;
     border-radius: 15px;
     width: 50%;
@@ -160,14 +160,14 @@ input#input{
     left: 25%;
 }
 
-input#uvjet{
-    background-color:dimgray;
+input#uvjet {
+    background-color: dimgray;
     border-radius: 15px;
     border-color: transparent;
     width: 50%;
 }
 
-input#uvjetkupac{
+input#uvjetkupac {
     background-color: lightgray;
     border-radius: 15px;
     width: 50%;
@@ -175,7 +175,8 @@ input#uvjetkupac{
     left: 25%;
 }
 
-ul.pagination li a, ul.pagination li button {
+ul.pagination li a,
+ul.pagination li button {
     display: block;
     border-radius: 15px;
     color: bisque;
@@ -183,23 +184,23 @@ ul.pagination li a, ul.pagination li button {
     transition: background-color 300ms ease-out;
 }
 
-#current{
+#current {
     background-color: darkgreen;
     border-radius: 15px;
     color: bisque;
 }
 
-#kupacIme{
+#kupacIme {
     color: bisque;
     text-align: center;
 }
 
-.fi-page-export{
+.fi-page-export {
     color: green;
     font-size: 30px;
 }
 
-#excel{
+#excel {
     color: green;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
     border-radius: 15px;

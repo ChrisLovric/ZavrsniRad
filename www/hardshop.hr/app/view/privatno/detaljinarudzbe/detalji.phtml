@@ -1,17 +1,17 @@
 <form action="<?php echo App::config('url') ?>detaljinarudzbe/promjena/<?= $e->sifra ?>" method="post">
 
-<fieldset class="fieldset">
-    <legend><br>(*obavezna polja)</legend>
+    <fieldset class="fieldset">
+        <legend><br>(*obavezna polja)</legend>
 
-    <?php include_once 'osnovniPodaci.phtml' ?>
+        <?php include_once 'osnovniPodaci.phtml' ?>
 
-    <div class="grid-x grid-padding-x">
-        <div class="large-6 cell">
-            <a href="<?= App::config('url') ?>detaljinarudzbe/odustani/<?= $e->sifra ?>" class="button alert expanded">Odustani</a>
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?= App::config('url') ?>detaljinarudzbe/odustani/<?= $e->sifra ?>" class="button alert expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+                <input type="submit" class="button success expanded" value="Spremi">
+            </div>
         </div>
-        <div class="large-6 cell">
-            <input type="submit" class="button success expanded" value="Spremi">
-        </div>
-    </div>
 </form>
 </fieldset>

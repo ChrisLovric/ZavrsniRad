@@ -1,37 +1,36 @@
-<a href="<?=App::config('url')?>operater/novi" class="small button">
-Unesi novog operatera
+<a href="<?= App::config('url') ?>operater/novi" class="small button">
+    Unesi novog operatera
 </a>
 
 <div class="grid-x grid-padding-x">
-    <?php foreach($podaci as $red): ?>
+    <?php foreach ($podaci as $red) : ?>
         <div class="large-3 medium-6 small-12 cell">
-            <br><div class="callout">
-            <img class="slika" id="p_<?=$red->sifra?>"
-                src="<?=$red->slika?>"
-                alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
+            <br>
+            <div class="callout">
+                <img class="slika" id="p_<?= $red->sifra ?>" src="<?= $red->slika ?>" alt="<?= $red->ime ?> <?= $red->prezime ?>" id="img">
 
-                <hr><h3><?=$red->ime?> <?=$red->prezime?></h3><hr>
-                <a href="<?=App::config('url')?>operater/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>
-                <?php if($red->email!=='admin@hardshop.hr' && $red->email!=='operater@hardshop.hr'): ?>
-                        <a onclick="return confirm('Potvrdi za brisanje operatera <?=$red->ime?> <?=$red->prezime?>');"
-                        href="<?=App::config('url')?>operater/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
-                    <?php else: ?>
-                        <i title="Nije moguće brisati admina"
-                        class="fi-trash" style="color: gray"></i>
-                    <?php endif; ?>
+                <hr>
+                <h3><?= $red->ime ?> <?= $red->prezime ?></h3>
+                <hr>
+                <a href="<?= App::config('url') ?>operater/promjena/<?= $red->sifra ?>"><i class="fi-pencil"></i></a>
+                <?php if ($red->email !== 'admin@hardshop.hr' && $red->email !== 'operater@hardshop.hr') : ?>
+                    <a onclick="return confirm('Potvrdi za brisanje operatera <?= $red->ime ?> <?= $red->prezime ?>');" href="<?= App::config('url') ?>operater/brisanje/<?= $red->sifra ?>"><i class="fi-trash"></i></a>
+                <?php else : ?>
+                    <i title="Nije moguće brisati admina" class="fi-trash" style="color: gray"></i>
+                <?php endif; ?>
             </div>
         </div>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 </div>
 
 <div class="reveal" id="slikaModal" data-reveal>
     <div style="max-height: 300px; overflow: auto;">
         <img id="image" src="" alt="" />
     </div>
-  
-  <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
-  <a href="#" id="spremi">Spremi</a>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
+
+    <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+    <a href="#" id="spremi">Spremi</a>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>

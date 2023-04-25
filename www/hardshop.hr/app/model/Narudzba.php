@@ -5,8 +5,8 @@ class Narudzba
     public static function read()
     {
 
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
 
         select
         a.sifra,
@@ -37,17 +37,17 @@ class Narudzba
         ');
 
         $izraz->execute();
-        $rez=$izraz->fetchAll();
-        foreach($rez as $r){
-            $r->proizvodi=Narudzba::detaljiNarudzbe($r->sifra);
+        $rez = $izraz->fetchAll();
+        foreach ($rez as $r) {
+            $r->proizvodi = Narudzba::detaljiNarudzbe($r->sifra);
         }
         return $rez;
     }
 
     public static function detaljiNarudzbe($sifra)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         select 
         a.sifra, a.naziv
@@ -57,26 +57,26 @@ class Narudzba
         
         ');
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
         return $izraz->fetchAll();
     }
 
     public static function readOne($sifra)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         select * from narudzba where sifra=:sifra
         
         ');
 
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
-        $narudzba=$izraz->fetch();
+        $narudzba = $izraz->fetch();
 
-        $izraz=$veza->prepare('
+        $izraz = $veza->prepare('
         
         select 
         a.sifra, a.naziv
@@ -86,19 +86,18 @@ class Narudzba
         
         ');
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
 
-        $narudzba->proizvodi=$izraz->fetchAll();
+        $narudzba->proizvodi = $izraz->fetchAll();
 
         return $narudzba;
-        
     }
 
     public static function create($parametri)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         insert into narudzba (brojnarudzbe,datumnarudzbe,datumisporuke,datumplacanja,kupac,placanje)
         values (:brojnarudzbe,:datumnarudzbe,:datumisporuke,:datumplacanja,:kupac,:placanje);
@@ -111,8 +110,8 @@ class Narudzba
     public static function update($parametri)
     {
         unset($parametri['proizvodi']);
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         update narudzba set brojnarudzbe=:brojnarudzbe,datumnarudzbe=:datumnarudzbe,datumisporuke=:datumisporuke,datumplacanja=:datumplacanja,
         kupac=:kupac,placanje=:placanje where sifra=:sifra
@@ -123,14 +122,14 @@ class Narudzba
 
     public static function delete($sifra)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
         delete from narudzba where sifra=:sifra
         
         ');
         $izraz->execute([
-            'sifra'=>$sifra
+            'sifra' => $sifra
         ]);
     }
 
@@ -144,13 +143,13 @@ class Narudzba
         
         ');
         $izraz->execute([
-            'narudzba'=>$narudzba,
-            'proizvod'=>$proizvod
+            'narudzba' => $narudzba,
+            'proizvod' => $proizvod
         ]);
     }
 
     public static function postojiProizvodNarudzba($narudzba, $proizvod)
-    {   
+    {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
@@ -160,15 +159,15 @@ class Narudzba
         
         ');
         $izraz->execute([
-            'narudzba'=>$narudzba,
-            'proizvod'=>$proizvod
+            'narudzba' => $narudzba,
+            'proizvod' => $proizvod
         ]);
         $rez = (int)$izraz->fetchColumn();
-        return $rez>0;
+        return $rez > 0;
     }
 
     public static function obrisiProizvodNarudzba($narudzba, $proizvod)
-    {   
+    {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
@@ -177,13 +176,13 @@ class Narudzba
         
         ');
         $izraz->execute([
-            'narudzba'=>$narudzba,
-            'proizvod'=>$proizvod
+            'narudzba' => $narudzba,
+            'proizvod' => $proizvod
         ]);
     }
 
     public static function brojKupacaSaNarudzbom()
-    {   
+    {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
@@ -200,7 +199,7 @@ class Narudzba
     }
 
     public static function brojNarudzbi()
-    {   
+    {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
@@ -214,26 +213,26 @@ class Narudzba
         return $rez;
     }
 
-    public static function postojiIstiBrojNarudzbe($brojnarudzbe,$sifra=0)
+    public static function postojiIstiBrojNarudzbe($brojnarudzbe, $sifra = 0)
     {
-        $veza=DB::getInstance();
-        if($sifra>0){
-            $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        if ($sifra > 0) {
+            $izraz = $veza->prepare('
         
             select sifra from narudzba where brojnarudzbe=:brojnarudzbe 
             and sifra!=:sifra
             
             ');
         }
-        $parametri=[];
-        $parametri['brojnarudzbe']=$brojnarudzbe;
+        $parametri = [];
+        $parametri['brojnarudzbe'] = $brojnarudzbe;
 
-        if($sifra>0){
-            $parametri['sifra']=$sifra;
+        if ($sifra > 0) {
+            $parametri['sifra'] = $sifra;
         }
         $izraz->execute($parametri);
-        $sifra=$izraz->fetchColumn();
-        return $sifra==0;
+        $sifra = $izraz->fetchColumn();
+        return $sifra == 0;
     }
 
     public static function readExcelNarudzba()
@@ -253,6 +252,7 @@ class Narudzba
         inner join kupac c on a.kupac=c.sifra
         inner join detaljinarudzbe d on d.narudzba=a.sifra
         inner join proizvod e on d.proizvod=e.sifra
+        order by a.datumnarudzbe desc
         
         ');
         $izraz->execute();

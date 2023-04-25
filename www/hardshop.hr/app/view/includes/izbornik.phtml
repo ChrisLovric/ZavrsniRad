@@ -2,37 +2,37 @@
   <button class="menu-icon" type="button" data-toggle="example-menu"></button>
   <div class="title-bar-title">Izbornik</div>
 </div>
-<a href="<?=App::config('url');?>">
-      <img src="<?=App::config('url')?>public/img/logo.png" alt="logo"></a>
+<a href="<?= App::config('url'); ?>">
+  <img src="<?= App::config('url') ?>public/img/logo.png" alt="logo"></a>
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu id="dropdown-menu">
 
-    <?php if(App::auth()): ?>
-        <li><a href="<?=App::config('url');?>nadzornaploca/index">Nadzorna ploča</a></li>
-        <?php if(App::admin()): ?>
-          <li><a href="<?=App::config('url');?>operater/index">Operateri</a></li>
-          <?php else: ?>
-            <li>
-              <a href="#">Podaci o kupovini</a>
-              <ul class="vertical menu" id="vertical-menu">
-                  <li><a href="<?=App::config('url')?>kupac/index">Kupci</a></li>
-                  <li><a href="<?=App::config('url')?>proizvod/index">Proizvodi</a></li>
-                  <li><a href="<?=App::config('url')?>narudzba/index">Narudžbe</a></li>
-              </ul>
-            </li>
-          <?php endif; ?>
+      <?php if (App::auth()) : ?>
+        <li><a href="<?= App::config('url'); ?>nadzornaploca/index">Nadzorna ploča</a></li>
+        <?php if (App::admin()) : ?>
+          <li><a href="<?= App::config('url'); ?>operater/index">Operateri</a></li>
+        <?php else : ?>
+          <li>
+            <a href="#">Podaci o kupovini</a>
+            <ul class="vertical menu" id="vertical-menu">
+              <li><a href="<?= App::config('url') ?>kupac/index">Kupci</a></li>
+              <li><a href="<?= App::config('url') ?>proizvod/index">Proizvodi</a></li>
+              <li><a href="<?= App::config('url') ?>narudzba/index">Narudžbe</a></li>
+            </ul>
+          </li>
+        <?php endif; ?>
       <?php endif; ?>
-    <li><a href="<?=App::config('url');?>index/kontakt">Kontakt</a></li>
+      <li><a href="<?= App::config('url'); ?>index/kontakt">Kontakt</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <?php if(!App::auth()): ?>
-        <li><a href="<?=App::config('url');?>index/prijava">Prijava</a></li>
-        <li><a href="<?=App::config('url');?>index/registracija">Registracija</a></li>
-        <?php else: ?>
-          <li><a href="<?=App::config('url');?>index/odjava">Odjava <?php echo App::operater() ?></a></li>
+      <?php if (!App::auth()) : ?>
+        <li><a href="<?= App::config('url'); ?>index/prijava">Prijava</a></li>
+        <li><a href="<?= App::config('url'); ?>index/registracija">Registracija</a></li>
+      <?php else : ?>
+        <li><a href="<?= App::config('url'); ?>index/odjava">Odjava <?php echo App::operater() ?></a></li>
       <?php endif; ?>
     </ul>
   </div>

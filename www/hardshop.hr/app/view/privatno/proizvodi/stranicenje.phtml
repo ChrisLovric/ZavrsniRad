@@ -1,45 +1,45 @@
 <nav aria-label="Pagination">
-        <ul class="pagination text-center">
-            <?php if($stranica===1): ?>
+    <ul class="pagination text-center">
+        <?php if ($stranica === 1) : ?>
             <li class="pagination-previous disabled">Prethodna <span class="show-for-sr">stranica</span></li>
-            <?php else: ?>
-                <li class="pagination-previous"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica-1; ?>&uvjet=<?=$uvjet?>" aria-label="Prethodno">Prethodna <span class="show-for-sr">stranica</span></a></li>
-                <?php endif;?>
+        <?php else : ?>
+            <li class="pagination-previous"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica - 1; ?>&uvjet=<?= $uvjet ?>" aria-label="Prethodno">Prethodna <span class="show-for-sr">stranica</span></a></li>
+        <?php endif; ?>
 
-                <?php if ($stranica > 3): ?>
-	            <li class="start"><a href="<?=App::config('url')?>proizvod/index?stranica=1&uvjet=<?=$uvjet?>">1</a></li>
-	            <li class="dots">...</li>
-	            <?php endif; ?>
+        <?php if ($stranica > 3) : ?>
+            <li class="start"><a href="<?= App::config('url') ?>proizvod/index?stranica=1&uvjet=<?= $uvjet ?>">1</a></li>
+            <li class="dots">...</li>
+        <?php endif; ?>
 
-                <?php if ($stranica-2 > 0): ?>
-                <li class="stranica"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica-2 ?>&uvjet=<?=$uvjet?>"><?php echo $stranica-2 ?></a></li>
-                <?php endif; ?>
-	            <?php if ($stranica-1 > 0): ?>
-                <li class="stranica"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica-1 ?>&uvjet=<?=$uvjet?>"><?php echo $stranica-1 ?></a></li>
-                <?php endif; ?>
+        <?php if ($stranica - 2 > 0) : ?>
+            <li class="stranica"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica - 2 ?>&uvjet=<?= $uvjet ?>"><?php echo $stranica - 2 ?></a></li>
+        <?php endif; ?>
+        <?php if ($stranica - 1 > 0) : ?>
+            <li class="stranica"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica - 1 ?>&uvjet=<?= $uvjet ?>"><?php echo $stranica - 1 ?></a></li>
+        <?php endif; ?>
 
-            <li class="current" id="current"><span class="show-for-sr">Trenutna</span> <?=$stranica?></li>
+        <li class="current" id="current"><span class="show-for-sr">Trenutna</span> <?= $stranica ?></li>
 
-                <?php if ($stranica+1 < ceil($ukupnostr / App::config('brps'))+1): ?>
-                <li class="stranica"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica+1 ?>&uvjet=<?=$uvjet?>"><?php echo $stranica+1 ?></a></li>
-                <?php endif; ?>
-	            <?php if ($stranica+2 < ceil($ukupnostr / App::config('brps'))+1): ?>
-                <li class="stranica"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica+2 ?>&uvjet=<?=$uvjet?>"><?php echo $stranica+2 ?></a></li>
-                <?php endif; ?>
+        <?php if ($stranica + 1 < ceil($ukupnostr / App::config('brps')) + 1) : ?>
+            <li class="stranica"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica + 1 ?>&uvjet=<?= $uvjet ?>"><?php echo $stranica + 1 ?></a></li>
+        <?php endif; ?>
+        <?php if ($stranica + 2 < ceil($ukupnostr / App::config('brps')) + 1) : ?>
+            <li class="stranica"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica + 2 ?>&uvjet=<?= $uvjet ?>"><?php echo $stranica + 2 ?></a></li>
+        <?php endif; ?>
 
-                <?php if ($stranica < ceil($ukupnostr / App::config('brps'))-2): ?>
-	            <li class="dots">...</li>
-	            <li class="end"><a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo ceil($ukupnostr / App::config('brps')) ?>&uvjet=<?=$uvjet?>"><?php echo ceil($ukupnostr / App::config('brps')) ?></a></li>
-	            <?php endif; ?>
+        <?php if ($stranica < ceil($ukupnostr / App::config('brps')) - 2) : ?>
+            <li class="dots">...</li>
+            <li class="end"><a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo ceil($ukupnostr / App::config('brps')) ?>&uvjet=<?= $uvjet ?>"><?php echo ceil($ukupnostr / App::config('brps')) ?></a></li>
+        <?php endif; ?>
 
-            <?php if($stranica===$zadnjastr): ?>
+        <?php if ($stranica === $zadnjastr) : ?>
             <li class="pagination-next disabled">
                 Sljedeća <span class="show-for-sr">stranica</span>
-                </li>
-            <?php else: ?>
-                <li class="pagination-next">
-                <a href="<?=App::config('url')?>proizvod/index?stranica=<?php echo $stranica+1; ?>&uvjet=<?=$uvjet?>" aria-label="Sljedeće">Sljedeća <span class="show-for-sr">stranica</span></a>        
             </li>
-                <?php endif;?>
-        </ul>
-    </nav>
+        <?php else : ?>
+            <li class="pagination-next">
+                <a href="<?= App::config('url') ?>proizvod/index?stranica=<?php echo $stranica + 1; ?>&uvjet=<?= $uvjet ?>" aria-label="Sljedeće">Sljedeća <span class="show-for-sr">stranica</span></a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</nav>

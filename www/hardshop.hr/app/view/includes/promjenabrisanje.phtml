@@ -1,11 +1,8 @@
-<a href="<?=App::config('url')?><?=$par[0]?>/promjena/<?=$red->sifra?>">
-<i class="fi-pencil"></i></a>
-<?php if($par[2]): ?>
-    <a
-    onclick="return confirm('Potvrdite brisanje za <?=$par[1]?>');"
-    href="<?=App::config('url')?><?=$par[0]?>/brisanje/<?=$red->sifra?>">
-    <i class="fi-trash"></i></a>
-<?php else: ?>
-    <i title="<?= ucfirst($par[0]) ?> se ne može brisati"
-    class="fi-trash" style="color: gray"></i>
+<a href="<?= App::config('url') ?><?= $par[0] ?>/promjena/<?= $red->sifra ?>">
+    <i class="fi-pencil"></i></a>
+<?php if ($par[2]) : ?>
+    <a onclick="return confirm('Potvrdite brisanje za <?= $par[1] ?>');" href="<?= App::config('url') ?><?= $par[0] ?>/brisanje/<?= $red->sifra ?>">
+        <i class="fi-trash"></i></a>
+<?php else : ?>
+    <i title="<?= ucfirst($par[0]) ?> se ne može brisati" class="fi-trash" style="color: gray"></i>
 <?php endif; ?>

@@ -1,30 +1,30 @@
-let uvjet='';
-$( '#uvjet' ).autocomplete({
-    source: function(req,res){
+let uvjet = '';
+$('#uvjet').autocomplete({
+    source: function (req, res) {
         uvjet = req.term;
-       $.ajax({
-           url: url + 'nadzornaploca/pretraga/' + uvjet,
-           success:function(odgovor){
-            res(odgovor);
-        }
-       }); 
+        $.ajax({
+            url: url + 'nadzornaploca/pretraga/' + uvjet,
+            success: function (odgovor) {
+                res(odgovor);
+            }
+        });
     },
     minLength: 2,
-    select:function(dogadaj,ui){
-       window.location.href = url + ui.item.vrsta + '/promjena/' + ui.item.sifra;
+    select: function (dogadaj, ui) {
+        window.location.href = url + ui.item.vrsta + '/promjena/' + ui.item.sifra;
     }
-}).autocomplete( 'instance' )._renderItem = function( ul, item ) {
+}).autocomplete('instance')._renderItem = function (ul, item) {
     let sadrzaj = item.tekst;
     var querystr = uvjet;
     var output = sadrzaj;
     var reg = new RegExp(querystr, 'gi');
-    var final_str = output.replace(reg, function(str) {return str.bold().fontcolor("green")});
+    var final_str = output.replace(reg, function (str) { return str.bold().fontcolor("green") });
 
 
-    return $( '<li>' )
-      .append( '<div>' + final_str + ' (' + item.vrsta + ')<div>')
-      .appendTo( ul );
-  };
+    return $('<li>')
+        .append('<div>' + final_str + ' (' + item.vrsta + ')<div>')
+        .appendTo(ul);
+};
 
 $('#uvjet').focus();
 
@@ -125,16 +125,16 @@ Highcharts.chart('container2', {
             name: 'Ukupan broj narudžbi',
             colorByPoint: true,
             data: podaci2
-            },
+        },
         {
             name: 'Ukupan broj kupaca',
             colorByPoint: true,
             data: podaci3
-            },
+        },
         {
             name: 'Ukupan broj proizvoda',
             colorByPoint: true,
             data: podaci4
-            }
-        ]
+        }
+    ]
 });

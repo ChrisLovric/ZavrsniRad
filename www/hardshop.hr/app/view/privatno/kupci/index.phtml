@@ -1,36 +1,33 @@
-<a href="<?=App::config('url')?>kupac/novi" 
-class="small button">
+<a href="<?= App::config('url') ?>kupac/novi" class="small button">
     Unesi novog kupca
 </a><br><br>
 
 <div class="grid-x grid-padding-x">
-<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
-    href="<?=App::config('url')?>kupac/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
+    <a onclick="return confirm('Izvoz podataka u excel datoteku?');" href="<?= App::config('url') ?>kupac/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
 </div><br>
 
 <form action="" method="get">
-    <input type="text" name="uvjet" placeholder="Pretraži kupce"
-    value="<?=$uvjet?>" id="uvjet">
+    <input type="text" name="uvjet" placeholder="Pretraži kupce" value="<?= $uvjet ?>" id="uvjet">
 </form>
 
 <br><?php include 'stranicenje.phtml' ?>
 
 <div class="grid-x grid-padding-x">
-    <?php foreach($podaci as $red): ?>
+    <?php foreach ($podaci as $red) : ?>
         <div class="large-3 medium-6 small-12 cell">
-            <br><div class="callout">
-                <img class="slika" id="p_<?=$red->sifra?>"
-                src="<?=$red->slika?>"
-                alt="<?=$red->ime?> <?=$red->prezime?>" id="img">
+            <br>
+            <div class="callout">
+                <img class="slika" id="p_<?= $red->sifra ?>" src="<?= $red->slika ?>" alt="<?= $red->ime ?> <?= $red->prezime ?>" id="img">
 
-                <hr><?=$red->ime?> <?=$red->prezime?><hr>
+                <hr><?= $red->ime ?> <?= $red->prezime ?>
+                <hr>
                 <?php
-                $par=['kupac', $red->ime . ' ' . $red->prezime, $red->narudzba==0];
+                $par = ['kupac', $red->ime . ' ' . $red->prezime, $red->narudzba == 0];
                 include BP_APP . 'view/includes/promjenabrisanje.phtml';
                 ?>
             </div>
         </div>
-    <?php endforeach;?>
+    <?php endforeach; ?>
 </div>
 
 <br><?php include 'stranicenje.phtml' ?>
@@ -39,12 +36,12 @@ class="small button">
     <div style="max-height: 300px; overflow: auto;">
         <img id="image" src="" alt="" />
     </div>
-  
-  <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
-  <a href="#" id="spremi">Spremi</a>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
+
+    <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+    <a href="#" id="spremi">Spremi</a>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
-<?=$poruka?>
+<?= $poruka ?>

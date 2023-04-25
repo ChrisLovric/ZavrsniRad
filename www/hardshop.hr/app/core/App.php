@@ -6,56 +6,56 @@ class App
     public static function start()
     {
 
-        $ruta=Request::getRuta();
-        $dijelovi=explode('/',substr($ruta,1));
-        $controller='';
-        if(!isset($dijelovi[0]) || $dijelovi[0]===''){
-            $controller='IndexController';
-        }else{
-            $controller=ucfirst($dijelovi[0]) . 'Controller';
+        $ruta = Request::getRuta();
+        $dijelovi = explode('/', substr($ruta, 1));
+        $controller = '';
+        if (!isset($dijelovi[0]) || $dijelovi[0] === '') {
+            $controller = 'IndexController';
+        } else {
+            $controller = ucfirst($dijelovi[0]) . 'Controller';
         }
-        $metoda='';
-        if(!isset($dijelovi[1]) || $dijelovi[1]===''){
-            $metoda='index';
-        }else{
-            $metoda=$dijelovi[1];
-        }
-
-        $parametar='';
-        if(!isset($dijelovi[2]) || $dijelovi[2]===''){
-            $parametar='';
-        }else{
-            $parametar=$dijelovi[2];
+        $metoda = '';
+        if (!isset($dijelovi[1]) || $dijelovi[1] === '') {
+            $metoda = 'index';
+        } else {
+            $metoda = $dijelovi[1];
         }
 
-        if(!(class_exists($controller) && method_exists($controller,$metoda))){
+        $parametar = '';
+        if (!isset($dijelovi[2]) || $dijelovi[2] === '') {
+            $parametar = '';
+        } else {
+            $parametar = $dijelovi[2];
+        }
+
+        if (!(class_exists($controller) && method_exists($controller, $metoda))) {
             //echo 'Ne postoji ' . $controller . '-&gt;' . $metoda;
-            $v=new View();
-            $v->render('notFoundController',[
-                'poruka'=>'Ne postoji ' . $controller . '-&gt;' . $metoda
+            $v = new View();
+            $v->render('notFoundController', [
+                'poruka' => 'Ne postoji ' . $controller . '-&gt;' . $metoda
             ]);
             return;
         }
 
-            $instanca=new $controller();
-            if(strlen($parametar)>0){
-                $instanca->$metoda($parametar);
-            }else{
-                $instanca->$metoda();
-            }
+        $instanca = new $controller();
+        if (strlen($parametar) > 0) {
+            $instanca->$metoda($parametar);
+        } else {
+            $instanca->$metoda();
+        }
     }
 
     public static function config($kljuc)
     {
-        $configFile=BP_APP . 'konfiguracija.php';
+        $configFile = BP_APP . 'konfiguracija.php';
 
-        if(!file_exists($configFile)){
+        if (!file_exists($configFile)) {
             return 'Konfiguracijska datoteka ne postoji';
         }
 
-        $config=require $configFile;
+        $config = require $configFile;
 
-        if(!isset($config[$kljuc])){
+        if (!isset($config[$kljuc])) {
             return 'Kljuc ' . $kljuc . ' nije postavljen u konfiguraciji';
         }
 
@@ -74,7 +74,7 @@ class App
 
     public static function admin()
     {
-        return $_SESSION['auth']->uloga==='Admin';
+        return $_SESSION['auth']->uloga === 'Admin';
     }
 
     public static function dev()
@@ -82,12 +82,12 @@ class App
         return App::config('dev');
     }
 
-    public static function inputText($naziv,$vrijednost)
+    public static function inputText($naziv, $vrijednost)
     {
         return '
         <label for="' . $naziv . '">' . ucfirst($naziv) . '</label>
-        <input type="text" id="' . $naziv . '" name="' . $naziv . '"value="' . 
-        $vrijednost . '">
+        <input type="text" id="' . $naziv . '" name="' . $naziv . '"value="' .
+            $vrijednost . '">
         ';
     }
 }

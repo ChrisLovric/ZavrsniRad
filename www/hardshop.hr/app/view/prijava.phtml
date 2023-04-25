@@ -1,11 +1,11 @@
-<form class="log-in-form" method="post" action="<?=App::config('url');?>prijava/autorizacija">
+<form class="log-in-form" method="post" action="<?= App::config('url'); ?>prijava/autorizacija">
     <h4 class="text-center">Unesite pristupne podatke</h4>
     <label>Email (operater/admin@hardshop.hr)
-        <input type="email" name="email" value="operater@hardshop.hr" id="input"> 
+        <input type="email" name="email" value="operater@hardshop.hr" id="input">
     </label>
     <label>Lozinka (password)
-    <input type="password" name="password" id="input" value="password">
+        <input type="password" name="password" id="input" value="password">
     </label>
     <input type="submit" class="button large" value="Prijava"></input><br>
-    <h1><?=$poruka?></h1>
+    <h1><?= $poruka ?></h1>
 </form>

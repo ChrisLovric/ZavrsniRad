@@ -1,10 +1,9 @@
-<a href="<?=App::config('url')?>narudzba/novi" class="small button">
+<a href="<?= App::config('url') ?>narudzba/novi" class="small button">
     Unesi novu narudžbu
 </a>
 
 <div class="grid-x grid-padding-x">
-<a onclick="return confirm('Izvoz podataka u excel datoteku?');"
-    href="<?=App::config('url')?>narudzba/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
+    <a onclick="return confirm('Izvoz podataka u excel datoteku?');" href="<?= App::config('url') ?>narudzba/excel/" id="excel">Excel export <i class="fi-page-export"></i></a>
 </div><br>
 
 <table>
@@ -22,27 +21,25 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($podaci as $red): ?>
-            <tr>    
-                <td><?=$red->brojnarudzbe?></td>
-                <td><?=$red->kupac?></td>
-                <td><?=$red->naziv?></td>
-                <td><?=$red->jedinicnacijena?></td>
-                <td><?=$red->datumnarudzbe?></td>
-                <td><?=$red->datumisporuke?></td>
-                <td><?=$red->datumplacanja?></td>
-                <td><?=$red->vrstaplacanja?></td>
+        <?php foreach ($podaci as $red) : ?>
+            <tr>
+                <td><?= $red->brojnarudzbe ?></td>
+                <td><?= $red->kupac ?></td>
+                <td><?= $red->naziv ?></td>
+                <td><?= $red->jedinicnacijena ?></td>
+                <td><?= $red->datumnarudzbe ?></td>
+                <td><?= $red->datumisporuke ?></td>
+                <td><?= $red->datumplacanja ?></td>
+                <td><?= $red->vrstaplacanja ?></td>
                 <td>
-                <a href="<?=App::config('url')?>narudzba/promjena/<?=$red->sifra?>"><i class="fi-pencil"></i></a>    
-                <?php if($red->kupac==0): ?>
-                    <a onclick="return confirm('Sigurno obrisati narudžbu <?=$red->brojnarudzbe?>?');"
-                    href="<?=App::config('url')?>narudzba/brisanje/<?=$red->sifra?>"><i class="fi-trash"></i></a>
-                <?php else: ?>
-                    <i title="Narudžba se ne može obrisati jer ima unesene kupce" 
-                    class="fi-trash" style="color: gray"></i>
-                <?php endif; ?>
-            </td>
+                    <a href="<?= App::config('url') ?>narudzba/promjena/<?= $red->sifra ?>"><i class="fi-pencil"></i></a>
+                    <?php if ($red->kupac == 0) : ?>
+                        <a onclick="return confirm('Sigurno obrisati narudžbu <?= $red->brojnarudzbe ?>?');" href="<?= App::config('url') ?>narudzba/brisanje/<?= $red->sifra ?>"><i class="fi-trash"></i></a>
+                    <?php else : ?>
+                        <i title="Narudžba se ne može obrisati jer ima unesene kupce" class="fi-trash" style="color: gray"></i>
+                    <?php endif; ?>
+                </td>
             </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </tbody>
 </table>
